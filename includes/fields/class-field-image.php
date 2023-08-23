@@ -34,7 +34,7 @@ class Field_Image extends Contactum_Field {
                         </a> -->
                         <a type="button" id="<?php echo esc_attr( $unique_id ); ?>-pickfiles" data-form_id="<?php echo esc_attr( $form_id ); ?>"
                             class="button btn-image file-selector <?php echo esc_attr( $field_settings['name'] ) . '_' . esc_attr($form_id); ?>"
-                            href="#"><?php echo esc_attr ( $field_settings['button_label'] ); ?>
+                            href="#" data-field-name="<?php echo esc_attr($field_settings['name']); ?>"><?php echo esc_attr ( $field_settings['button_label'] ); ?>
                         </a>
                         <ul class="attachment-list thumbnails"></ul>
                     </div>
@@ -130,6 +130,6 @@ class Field_Image extends Contactum_Field {
     }
 
     public function prepare_entry( $field, $post_data = [] ) {
-        return isset( $post_data['contactum_files'][$field['name']] ) ? $post_data['contactum_files'][$field['name']] : [];
+        return isset( $post_data[$field['name']] ) ? $post_data[$field['name']] : '';
     }
 }

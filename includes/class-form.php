@@ -107,15 +107,16 @@ class Form {
         $form_fields = $this->getFields();
         $entry_fields = [];
 
-        foreach ( $form_fields as $field ) {
+        foreach ( $form_fields as $key => $field ) {
             if ( !array_key_exists( $field['template'], $fields ) ) {
                 continue;
             }
 
             $field_class = $fields[ $field['template'] ];
             $entry_fields[ $field['name'] ] = $field_class->prepare_entry( $field, $post_data );
+            $form_fields[$key][ 'value' ] = $field_class->prepare_entry( $field, $post_data );
         }
 
-        return $entry_fields;
+        return $form_fields;
     }
 }

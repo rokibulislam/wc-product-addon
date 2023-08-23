@@ -79,6 +79,7 @@ class Ajax {
 
         $post_data = wp_unslash( $_POST );
         $form_id = isset( $post_data['form_id'] ) ? intval( sanitize_text_field( wp_unslash( $post_data['form_id'] ) ) ) : false;
+        $field_name =  isset( $post_data['field_name'] ) ? $post_data['field_name'] : '';
 
         if ( !$form_id ) {
             die( 'error' );
@@ -100,7 +101,7 @@ class Ajax {
 
         if ( $attach['success'] ) {
             $response         = [ 'success' => true ];
-            $response['html'] = $this->attach_html( $attach['attach_id'] );
+            $response['html'] = $this->attach_html( $attach['attach_id'], $field_name );
             echo $response['html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         } else {
             echo 'error'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -134,7 +135,7 @@ class Ajax {
         return ['success' => false, 'error' => $uploaded_file['error']];
     }
 
-    public static function attach_html( $attach_id, $type = NULL ) {
+    public static function attach_html( $attach_id, $field_name, $type = NULL ) {
         if ( ! $type ) {
             $type = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : 'image';
         }
@@ -155,7 +156,7 @@ class Ajax {
         // $html = '<li class="ui-state-default image-wrap thumbnail">';
         $html = '<li class="image-wrap thumbnail">';
         $html .= sprintf( '<div class="attachment-name"><img src="%s" alt="%s" /></div>', $image, esc_attr( $attachment->post_title ) );
-        $html .= sprintf( '<input type="hidden" name="contactum_files[%s][]" value="%d">', $type, $attach_id );
+        $html .= sprintf( '<input type="hidden" name="%s" value="%d">', $field_name, $attach_id );
         $html .= '<div class="caption">';
         $html .= sprintf( '<a href="#" class="attachment-delete" data-attach_id="%d"> <img src="%s" /> </a>', $attach_id,
             CONTACTUM_ASSETS . '/images/del-img.png');
@@ -180,30 +181,6 @@ class Ajax {
 
         echo 'success';
         exit;
-    }
-
-
-    public function import_form() {
-        // check_ajax_referer( 'contactum' );
-        $the_file = isset( $_FILES['importFile'] ) ? $_FILES['importFile'] : false; // phpcs:ignore
-
-        if ( !$the_file ) {
-            wp_send_json_error( __( 'No file found to import.', 'contactum' ) );
-        }
-
-        $file_ext  = pathinfo( $the_file['name'], PATHINFO_EXTENSION );
-
-        if ( ( $file_ext == 'json' ) && ( $the_file['size'] < 500000 ) ) {
-            $status = Tools::import_json_file( $the_file['tmp_name'] );
-
-            if ( $status ) {
-                wp_send_json_success( __( 'The forms have been imported successfully!', 'contactum' ) );
-            } else {
-                wp_send_json_error( __( 'Something went wrong importing the file.', 'contactum' ) );
-            }
-        } else {
-            wp_send_json_error( __( 'Invalid file or file size too big.', 'contactum' ) );
-        }
     }
 
     public function contactum_frontend_submit() {
@@ -276,16 +253,6 @@ class Ajax {
             'form_id'      => $form_id,
             'entry_id'     => $entry_id,
         ] );
-
-        $notification = new Contactum_Notification([
-            'form_id'  => $form_id,
-            'page_id'  => $page_id,
-            'entry_id' => $entry_id,
-        ]);
-
-        $notification->sendNotifications();
-        
-        // $notification->sendNotification();
 
         wp_send_json( $response );
     }

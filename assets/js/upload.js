@@ -30,7 +30,8 @@ jQuery(document).ready(function($) {
             multipart_params: {
                 action: 'upload_file',
                 'nonce' : frontend.nonce,
-                form_id: $( '#' + browse_button ).data('form_id')
+                form_id: $( '#' + browse_button ).data('form_id'),
+                field_name: $('#' + browse_button ).data('field-name')
             },
             max_file_count : 2,
             multiple_queues: false,

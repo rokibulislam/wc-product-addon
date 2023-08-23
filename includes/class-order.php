@@ -25,24 +25,34 @@ class Order {
     }
 
     public function checkout_create_order_line_item( $item, $cart_item_key, $values, $order ) {
-        echo "<pre>";
-        print_r($values);
+        
+        $meta = new MetaDisplay();
 
-        if( isset( $values['text'] ) ) {
-            $item->add_meta_data(
-                __( 'Text', 'plugin-republic' ),
-                $values['text'],
-                true
-            );
+        if( isset( $values['post_data'] )  ) {
+            foreach ( $values['post_data'] as $key => $field ) {
+                $item->add_meta_data(   
+                    __( $field['name'], 'plugin-republic' ),
+                    $meta->display($field),
+                    true
+                );
+            }
         }
 
-        if( isset( $values['email'] ) ) {
-            $item->add_meta_data(
-                __( 'form_id', 'plugin-republic' ),
-                $values['form_id'],
-                true
-            );
-        }
+        // if( isset( $values['text'] ) ) {
+        //     $item->add_meta_data(
+        //         __( 'Text', 'plugin-republic' ),
+        //         $values['text'],
+        //         true
+        //     );
+        // }
+
+        // if( isset( $values['email'] ) ) {
+        //     $item->add_meta_data(
+        //         __( 'form_id', 'plugin-republic' ),
+        //         $values['form_id'],
+        //         true
+        //     );
+        // }
     }
 
     public function checkout_order_processed( $order_id ) {

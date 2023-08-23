@@ -43,7 +43,6 @@ import field_text_meta from "../field-template/text-meta.vue";
 import field_textarea from "../field-template/textarea.vue";
 import field_select from "../field-template/select.vue";
 import field_radio from "../field-template/radio.vue";
-import field_name from "../field-template/name.vue";
 import field_multiselect from "../field-template/multiselect.vue";
 import field_checkbox from "../field-template/checkbox.vue";
 import field_option_data from "../field-template/option-data.vue";
@@ -55,15 +54,10 @@ import field_html_help_text from "../field-template/html-help-text.vue";
 import field_color from "../field-template/color.vue";
 import field_selectbtnstyle from '../field-template/selectbtnstyle.vue'
 
-import field_address from "../pro/field-template/address.vue";
-import field_country_list from "../pro/field-template/country-list.vue";
 import field_linear from "../pro/field-template/linear.vue";
-import field_multiple_product from "../pro/field-template/multiple-product.vue";
 import field_quantity from "../pro/field-template/quantity.vue";
 import field_product_data from "../pro/field-template/product-data.vue";
 import field_price from "../pro/field-template/price.vue";
-import field_payment_method from "../pro/field-template/payment-method.vue";
-import field_gmap_position from "../pro/field-template/gmap-position.vue";
 import field_repeatsettings from "../pro/field-template/repeatsettings.vue";
 import field_range from "../pro/field-template/range.vue";
 
@@ -75,21 +69,15 @@ export default {
     field_textarea,
     field_select,
     field_radio,
-    field_name,
     field_multiselect,
     field_checkbox,
     field_option_data,
     field_conditional_logic,
     field_dynamic,
-    field_address,
-    field_country_list,
-    field_multiple_product,
     field_linear,
     field_quantity,
     field_product_data,
     field_price,
-    field_payment_method,
-    field_gmap_position,
     field_text_with_tag,
     field_required,
     field_html_help_text,

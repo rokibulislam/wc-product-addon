@@ -18,8 +18,14 @@ class Process {
             $id =  $post_data['form_id'];
 
             $form = contactum()->forms->get( $id );
-            
+            $fields = $form->getFields();
             $entry_fields  = $form->prepare_entries( $post_data );
+            // echo "<pre>";
+            // print_r( $fields );
+            // print_r( $entry_fields );
+            // print_r( $post_data );
+
+            // exit;
 
             foreach ( $entry_fields as $key => $value ) {
                 $cart_item_data[$key] = sanitize_text_field( $value );

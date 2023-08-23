@@ -79,6 +79,7 @@ final class Chi {
         require_once CONTACTUM_INCLUDES . '/class-order.php';
         require_once CONTACTUM_INCLUDES . '/class-process.php';
         require_once CONTACTUM_INCLUDES . '/class-frontend.php';
+        require_once CONTACTUM_INCLUDES . '/class-meta-display.php';
     }
 
     public function activate() {

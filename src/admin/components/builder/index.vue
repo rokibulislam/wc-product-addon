@@ -189,8 +189,6 @@ import field_options from "../field-options/index.vue";
 
 import form_text_field from "../form-templates/text.vue";
 import form_textarea_field from "../form-templates/textarea.vue";
-import form_url_field from "../form-templates/url.vue";
-import form_name_field from "../form-templates/name.vue";
 import form_email_field from "../form-templates/email.vue";
 import form_checkbox_field from "../form-templates/checkbox.vue";
 import form_radio_field from "../form-templates/radio.vue";
@@ -202,29 +200,13 @@ import form_html_field from "../form-templates/html.vue";
 import form_hidden_field from "../form-templates/hidden.vue";
 import form_section_break from "../form-templates/section.vue";
 import form_number_field from "../form-templates/number.vue";
-import form_recaptcha from "../form-templates/recaptcha.vue";
-import form_math_captcha from "../form-templates/math-captcha.vue";
-import form_submit_field from "../form-templates/submit.vue";
-import form_password_field from "../form-templates/password.vue";
 
-import form_phone_field from "../pro/form-template/phone.vue";
-import form_address_field from "../pro/form-template/address.vue";
-import form_country_field from "../pro/form-template/country.vue";
+
 import form_file_field from "../pro/form-template/file.vue";
-import form_gmap_field from "../pro/form-template/gmap.vue";
-import form_shortcode_field from "../pro/form-template/shortcode.vue";
-import form_hook_field from "../pro/form-template/hook.vue";
-import form_step_field from "../pro/form-template/multistep.vue";
 import form_checkbox_grid from "../pro/form-template/checkbox-grid.vue";
 import form_multiple_choice_grid from "../pro/form-template/multiple-choice-grid.vue";
 import form_linear_scale from "../pro/form-template/linear.vue";
-import form_toc from "../pro/form-template/terms.vue";
 import form_signature_field from "../pro/form-template/signature.vue";
-import form_total from "../pro/form-template/total.vue";
-import form_single_product from "../pro/form-template/single-product.vue";
-import form_multiple_product from "../pro/form-template/multiple-product.vue";
-import form_payment_method from "../pro/form-template/payment-method.vue";
-import form_rating_field from "../pro/form-template/rating.vue";
 import form_repeat_field from "../pro/form-template/repeat.vue";
 import form_column_field from "../pro/form-template/column.vue";
 
@@ -242,8 +224,6 @@ export default {
     form_settings,
     form_text_field,
     form_textarea_field,
-    form_url_field,
-    form_name_field,
     form_email_field,
     form_checkbox_field,
     form_radio_field,
@@ -255,33 +235,16 @@ export default {
     form_hidden_field,
     form_section_break,
     form_number_field,
-    form_recaptcha,
     field_options,
     form_fields,
     Form_settings,
-    form_phone_field,
-    form_address_field,
-    form_country_field,
     form_file_field,
-    form_gmap_field,
-    form_shortcode_field,
-    form_hook_field,
-    form_step_field,
     form_checkbox_grid,
     form_multiple_choice_grid,
     form_linear_scale,
-    form_toc,
     form_signature_field,
-    form_total,
-    form_single_product,
-    form_multiple_product,
-    form_payment_method,
-    form_rating_field,
-    form_math_captcha,
-    form_submit_field,
     form_repeat_field,
     form_column_field,
-    form_password_field
   },
   data() {
     return {

@@ -31,7 +31,7 @@ class Field_File extends  Contactum_Field {
                 <div id="<?php echo $unique_id; ?>-upload-container">
                     <div class="attachment-upload-filelist" data-type="file" data-required="<?php echo $field_settings['required']; ?>">
                         <!-- <a id="<?php echo $unique_id; ?>-pickfiles" data-form_id="<?php echo $form_id; ?>" class="button  file-selector <?php echo $field_settings['name'].'_'.$form_id; ?>" href="#"><?php _e( 'Select File(s)', '' ); ?></a> -->
-                        <a id="<?php echo $unique_id; ?>-pickfiles" data-form_id="<?php echo $form_id; ?>" class="button btn-image file-selector <?php echo $field_settings['name'].'_'.$form_id; ?>" href="#"><?php _e( 'Select File(s)', '' ); ?></a>
+                        <a id="<?php echo $unique_id; ?>-pickfiles" data-form_id="<?php echo $form_id; ?>" class="button btn-image file-selector <?php echo $field_settings['name'].'_'.$form_id; ?>" href="#" data-field-name="<?php echo esc_attr($field_settings['name']); ?>" ><?php _e( 'Select File(s)', '' ); ?></a>
                         <ul class="attachment-list thumbnails"></ul>
                     </div>
                 </div><!-- .container -->
@@ -122,6 +122,6 @@ class Field_File extends  Contactum_Field {
     }
 
     public function prepare_entry( $field, $post_data = [] ) {
-        return isset( $post_data['contactum_files'][$field['name']] ) ? $post_data['contactum_files'][$field['name']] : [];
+        return isset( $post_data[$field['name']] ) ? $post_data[$field['name']] : '';
     }
 }
