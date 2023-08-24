@@ -4,15 +4,32 @@ namespace Contactum\Fields;
 use Contactum\Fields\Contactum_Field;
 use Contactum\Fields\Traits\Textoption;
 
+/**
+ * Field Text class
+ * 
+ * @package MultiStoreX
+ */ 
+
 class Field_Text extends Contactum_Field {
     use Textoption;
-
+   
+    /**
+     * constructor
+     */ 
 	public function __construct() {
         $this->name       = __( 'Text', 'contactum' );
         $this->input_type = 'text_field';
         $this->icon       = 'text-width';
     }
 
+    /**
+     * render field
+     * 
+     * @param $field_settings array
+     * @param $form_id int
+     * 
+     * @return void
+     */ 
     public function render( $field_settings, $form_id ) {
         $value = $field_settings['default']; ?>
         <li <?php $this->print_list_attributes( $field_settings ); ?>>
@@ -34,7 +51,12 @@ class Field_Text extends Contactum_Field {
             ?>
         </li>
     <?php }
-
+    
+    /**
+     * get field option settings
+     * 
+     * @return array
+     */ 
     public function get_options_settings() {
         $default_options      = $this->get_default_option_settings();
         $default_text_options = $this->get_default_text_option_settings( false );
@@ -56,6 +78,11 @@ class Field_Text extends Contactum_Field {
         return array_merge( $default_options, $default_text_options, $check_duplicate );
     }
 
+    /**
+     * get field properties
+     * 
+     * @return array
+     */ 
     public function get_field_props() {
         $defaults = $this->default_attributes();
         $props = [

@@ -3,14 +3,31 @@
 namespace Contactum\Fields;
 use Contactum\Fields\Contactum_Field;
 
+/**
+ * Field SectionBreak class
+ * 
+ * @package MultiStoreX
+ */ 
+
 class Field_SectionBreak extends Contactum_Field {
 
+    /**
+     * constructor
+     */ 
 	public function __construct() {
         $this->name       = __( 'Section Break', '' );
         $this->input_type = 'section_break';
         $this->icon       = 'text-width';
     }
 
+    /**
+     * render field
+     * 
+     * @param $field_settings array
+     * @param $form_id int
+     * 
+     * @return void
+     */ 
     public function render( $field_settings, $form_id ) {
         $description = isset( $field_settings['description'] ) ? $field_settings['description'] : '';
         $name        = isset( $field_settings['name'] ) ? $field_settings['name'] : '';
@@ -25,6 +42,11 @@ class Field_SectionBreak extends Contactum_Field {
         <?php
     }
 
+    /**
+     * get field option settings
+     * 
+     * @return array
+     */ 
     public function get_options_settings() {
         $settings = [
             [
@@ -56,6 +78,11 @@ class Field_SectionBreak extends Contactum_Field {
         return $settings;
     }
 
+    /**
+     * get field properties
+     * 
+     * @return array
+     */ 
     public function get_field_props() {
         $props = [
             'template'     => $this->get_type(),
@@ -69,6 +96,11 @@ class Field_SectionBreak extends Contactum_Field {
     	return $props;
     }
 
+    /**
+     * set full width
+     * 
+     * @return boolean
+     */ 
     public function is_full_width() {
         return false;
     }

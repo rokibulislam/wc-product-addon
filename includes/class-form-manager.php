@@ -4,12 +4,28 @@ namespace Contactum;
 use Contactum\Form;
 use WP_Query;
 
+/**
+ * FormManager class
+ * 
+ * @package MultiStoreX
+ */ 
+
 class FormManager {
 
+    /**
+     *  getAll Forms Page
+     * 
+     * @return array
+     */ 
     public function all() {
         return $this->getForms( [ 'posts_per_page' => -1 ] );
     }
 
+    /**
+     * getAll Forms Page
+     * 
+     * @return array
+     */ 
     public function getForms( $args = [] ) {
         $forms_array = [
             'forms' => [],
@@ -42,10 +58,25 @@ class FormManager {
         return $forms_array;
     }
 
+    /**
+     * getAll Forms Page
+     * 
+     * @param $form string
+     * 
+     * @return object
+     */ 
     public function get( $form ) {
         return new Form( $form );
     }
 
+    /**
+     * create form
+     * 
+     * @param $form_name string
+     * @param $fields array
+     * 
+     * @return int
+     */ 
     public function create( $form_name, $fields = [] ) {
         $author = get_current_user_id();
 
@@ -79,6 +110,14 @@ class FormManager {
         return $form_id;
     }
 
+    /**
+     * delete form
+     * 
+     * @param $form_id string
+     * @param $force boolean
+     * 
+     * @return void
+     */ 
     public function delete( $form_id, $force = true  ) {
         global $wpdb;
         wp_delete_post( $form_id, $force );
@@ -91,7 +130,13 @@ class FormManager {
         );
     }
 
-
+    /**
+     * save form
+     * 
+     * @param $data array
+     * 
+     * @return array
+     */ 
     public function save( $data ) {
         $saved_fields  = [];
         $new_fields = [];
@@ -144,6 +189,13 @@ class FormManager {
         return $saved_fields;
     }
 
+    /**
+     * duplicate form
+     * 
+     * @param $id int
+     * 
+     * @return int
+     */ 
     public function duplicate( $id ) {
         $form = $this->get( $id);
 
@@ -158,7 +210,6 @@ class FormManager {
             'post_title'    => sanitize_text_field( $form->name ) . ' (#' . $form_id . ')',
             'form_fields'   => $this->get( $form_id )->getFields(),
             'form_settings' => $form->getSettings(),
-            'notifications' => $form->getNotifications()
         ];
 
         $form_fields = $this->save( $data );

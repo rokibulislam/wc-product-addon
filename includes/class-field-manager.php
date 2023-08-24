@@ -16,10 +16,27 @@ use Contactum\Fields\Field_SectionBreak;
 use Contactum\Fields\Field_Hidden;
 use Contactum\Fields\Field_File;
 
+/**
+ * FieldManager class
+ * 
+ * @package MultiStoreX
+ */
+
+
 class FieldManager {
 
+    /**
+     *  store fields
+     * 
+     * @var array 
+     */
 	private $fields = [];
 
+    /**
+     * get Fields
+     * 
+     * @return array
+     */ 
 	public function getFields() {
         if ( !empty( $this->fields ) ) {
             return $this->fields;
@@ -30,6 +47,13 @@ class FieldManager {
         return $this->fields;
     }
 
+    /**
+     * get field
+     * 
+     * @param $field_type string 
+     * 
+     * @return void
+     */ 
 	public function getField( $field_type ) {
 		$fields = $this->getFields();
 
@@ -40,6 +64,11 @@ class FieldManager {
         return false;
 	}
 
+    /**
+     * register field types
+     * 
+     * @return array
+     */ 
 	private function register_field_types() {
         $fields = [
             'email_field'    => new Field_Email(),
@@ -56,12 +85,16 @@ class FieldManager {
             'section_break'  => new Field_SectionBreak(),
             'hidden_field'   => new Field_Hidden(),
             'file_field'     => new Field_File(),
-
         ];
 
         $this->fields = apply_filters( 'contactum-form-fields', $fields );
 	}
 
+    /**
+     * get field groups
+     * 
+     * @return void
+     */ 
 	public function get_field_groups() {
         $before_custom_fields = apply_filters( 'contactum-form-fields-section-before', [] );
         $groups               = array_merge( $before_custom_fields, $this->get_custom_fields() );
@@ -71,6 +104,11 @@ class FieldManager {
         return $groups;
     }
 
+    /**
+     * get custom fields
+     * 
+     * @return array
+     */
     private function get_custom_fields() {
         $fields = apply_filters( 'contactum-form-fields-custom-fields', [
                 'text_field',
@@ -100,6 +138,11 @@ class FieldManager {
         ];
     }
 
+    /**
+     * get settings
+     * 
+     * @return array
+     */
     public function get_js_settings() {
         $fields   = $this->getFields();
 
@@ -116,6 +159,15 @@ class FieldManager {
         return $js_array;
     }
 
+    /**
+     * render fields
+     * 
+     * @param $fields array
+     * @param $form_id int
+     * @param $atts array
+     * 
+     * @return void
+     */
     public function render_fields( $fields, $form_id, $atts = [] ) {
         if ( empty( $fields ) ) {
             return;

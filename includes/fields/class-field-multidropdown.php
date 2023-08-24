@@ -2,8 +2,17 @@
 namespace Contactum\Fields;
 use Contactum\Fields\Contactum_Field;
 
+/**
+ * Field MultiDropdown class
+ * 
+ * @package MultiStoreX
+ */
+
 class Field_MultiDropdown extends Field_Dropdown {
 
+    /**
+     * constructor
+     */ 
 	public function __construct() {
         $this->name       = __( 'Multi Select', 'contactum' );
         $this->input_type = 'multiple_select';
@@ -11,6 +20,14 @@ class Field_MultiDropdown extends Field_Dropdown {
         $this->multiple   = false;
     }
 
+    /**
+     * render field
+     * 
+     * @param $field_settings array
+     * @param $form_id int
+     * 
+     * @return void
+     */ 
     public function render( $field_settings, $form_id ) {
         $selected = isset( $field_settings['selected'] ) ? $field_settings['selected'] : '';
         $selected = is_array( $selected ) ? $selected : [ $selected ];
@@ -54,6 +71,11 @@ class Field_MultiDropdown extends Field_Dropdown {
         ?>
     <?php }
 
+    /**
+     * get field properties
+     * 
+     * @return array
+     */ 
     public function get_field_props() {
         $defaults = $this->default_attributes();
         $props    = [
@@ -85,6 +107,14 @@ class Field_MultiDropdown extends Field_Dropdown {
     	return array_merge( $defaults, $props );
     }
 
+    /**
+     * prepare entry
+     * 
+     * @param $field array
+     * @param $post_data array
+     * 
+     * @return string
+     */ 
     public function prepare_entry( $field, $post_data = [] ) {
         $entry_value = ( is_array( $post_data[$field['name']] ) && $post_data[$field['name']] ) ? $post_data[$field['name']] : array();
 

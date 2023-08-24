@@ -3,14 +3,31 @@
 namespace Contactum\Fields;
 use Contactum\Fields\Contactum_Field;
 
+/**
+ * Field Hidden class
+ * 
+ * @package MultiStoreX
+ */
+
 class Field_Hidden extends Contactum_Field {
 
+    /**
+     * constructor
+     */ 
 	public function __construct() {
         $this->name       = __( 'Hidden', 'contactum' );
         $this->input_type = 'hidden_field';
         $this->icon       = 'eye-slash';
     }
 
+    /**
+     * render field
+     * 
+     * @param $field_settings array
+     * @param $form_id int
+     * 
+     * @return void
+     */ 
     public function render( $field_settings, $form_id ) {
         $value = $field_settings['meta_value'];
     ?>
@@ -21,6 +38,11 @@ class Field_Hidden extends Contactum_Field {
     </li>
    <?php }
 
+    /**
+     * get field option settings
+     * 
+     * @return array
+     */ 
     public function get_options_settings() {
         $settings = [
             [
@@ -52,6 +74,11 @@ class Field_Hidden extends Contactum_Field {
         return $settings;
     }
 
+    /**
+     * get field properties
+     * 
+     * @return array
+     */ 
     public function get_field_props() {
         $props = [
             'template'      => $this->get_type(),

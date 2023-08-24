@@ -3,14 +3,31 @@
 namespace Contactum\Fields;
 use Contactum\Fields\Contactum_Field;
 
+/**
+ * Field Number class
+ * 
+ * @package MultiStoreX
+ */
+
 class Field_Number extends  Contactum_Field {
 
+    /**
+     * constructor
+     */ 
 	public function __construct() {
         $this->name       = __( 'Numeric', '' );
         $this->input_type = 'number_field';
         $this->icon       = 'hashtag';
     }
 
+    /**
+     * render field
+     * 
+     * @param $field_settings array
+     * @param $form_id int
+     * 
+     * @return void
+     */ 
     public function render( $field_settings, $form_id ) {
         $value = $field_settings['default'];
         ?>
@@ -49,6 +66,11 @@ class Field_Number extends  Contactum_Field {
         </li>
     <?php }
 
+    /**
+     * get field option settings
+     * 
+     * @return array
+     */ 
     public function get_options_settings() {
         $default_options = $this->get_default_option_settings();
 
@@ -101,6 +123,11 @@ class Field_Number extends  Contactum_Field {
         return array_merge( $default_options, $settings );
     }
 
+    /**
+     * get field properties
+     * 
+     * @return array
+     */ 
     public function get_field_props() {
         $defaults = $this->default_attributes();
 

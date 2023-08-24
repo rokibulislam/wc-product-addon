@@ -6,8 +6,17 @@ if( ! class_exists( 'WP_List_Table' ) ) {
     require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 
+/**
+ * Form List Table class
+ * 
+ * @package MultiStoreX
+ */ 
+
 class Forms_List_Table extends \WP_List_Table {
 
+    /**
+     * constructor
+     */
     public function __construct() {
 
         global $status, $page, $page_status;
@@ -19,7 +28,11 @@ class Forms_List_Table extends \WP_List_Table {
         ] );
     }
 
-
+    /**
+     * get fields
+     * 
+     * @return array
+     */ 
 	public function get_columns() {
         $columns = [
             'cb'        => '<input type="checkbox" />',
@@ -32,6 +45,11 @@ class Forms_List_Table extends \WP_List_Table {
 		return $columns;
 	}
 
+    /**
+     * prepare items
+     * 
+     * @return void
+     */
 	public function prepare_items() {
         $columns               = $this->get_columns();
         $hidden                = [];
@@ -77,6 +95,13 @@ class Forms_List_Table extends \WP_List_Table {
 
 	}
 
+    /**
+     * get fields
+     * 
+     * @params $args array
+     * 
+     * @return array
+     */ 
     public function item_query( $args ) {
         $defauls = [
             'post_status' => 'any',
@@ -122,10 +147,24 @@ class Forms_List_Table extends \WP_List_Table {
         ];
     }
 
+    /**
+     * get column cb
+     * 
+     * @param $item array
+     * 
+     * @return string
+     */
     public function column_cb( $item ) {
         return sprintf( '<input type="checkbox" name="id[]" value="%1$s" />', esc_attr( $item['ID'] ) );
     }
 
+    /**
+     * get column name
+     * 
+     * @param $item array
+     * 
+     * @return string
+     */
     public function column_name( $item ) {
         $request_data = wp_unslash( $_REQUEST );
         $title = '<strong>' . $item['name'] . '</strong>';
@@ -172,6 +211,13 @@ class Forms_List_Table extends \WP_List_Table {
         return $title . $this->row_actions( $actions );
     }
 
+    /**
+     * get column author
+     * 
+     * @param $item array
+     * 
+     * @return string
+     */
     public function column_author( $item ) {
         $user = get_user_by( 'id', $item['author'] );
 
@@ -195,6 +241,13 @@ class Forms_List_Table extends \WP_List_Table {
         return esc_html( $user_name );
     }
 
+    /**
+     * get column date
+     * 
+     * @param $item array
+     * 
+     * @return string
+     */ 
     public function column_date( $item ) {
         $t_time = mysql2date(
             __( 'Y/m/d g:i:s A', 'contactum' ),
@@ -219,6 +272,11 @@ class Forms_List_Table extends \WP_List_Table {
         return '<abbr title="' . $t_time . '">' . $h_time . '</abbr>';
     }
 
+    /**
+     * Column default
+     * 
+     * @return void
+     */ 
 	public function  column_default( $item, $column_name ) {
 		switch ( $column_name) {
 			case 'ID':
@@ -232,6 +290,11 @@ class Forms_List_Table extends \WP_List_Table {
 		}
 	}
 
+    /**
+     * process bulk action
+     * 
+     * @return void
+     */ 
     public function process_bulk_action() {
         $request_data =  wp_unslash( $_REQUEST );
         $action = $this->current_action();
@@ -270,6 +333,11 @@ class Forms_List_Table extends \WP_List_Table {
         }
     }
 
+    /**
+     * get sortable columns
+     * 
+     * @return array
+     */ 
     public function get_sortable_columns() {
         $sortable_columns = array(
             'name'   => array( 'name', true ),
@@ -280,12 +348,22 @@ class Forms_List_Table extends \WP_List_Table {
         return $sortable_columns;
     }
 
+    /**
+     * bulk actions
+     * 
+     * @return array
+     */ 
     public function get_bulk_actions() {
         $actions['bulk-delete']      = __( 'Delete Permanently', 'contactum' );
 
         return $actions;
     }
 
+    /**
+     * current action
+     * 
+     * @return void
+     */ 
     public function current_action() {
 
         if ( isset( $_GET['contactum_form_search'] ) ) {
@@ -295,6 +373,14 @@ class Forms_List_Table extends \WP_List_Table {
         return parent::current_action();
     }
 
+    /**
+     * search box
+     * 
+     * @param $text string
+     * @param $input_id int
+     * 
+     * @return void
+     */ 
     public function search_box( $text, $input_id ) {
         $requestdata = wp_unslash( $_REQUEST );
 

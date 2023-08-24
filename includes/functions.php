@@ -1,24 +1,23 @@
 <?php
 
+/**
+ *  get entries forms
+ * 
+ * @return array
+ */ 
 function contactum_entries_forms() {
     $chi_forms = contactum()->forms->all();
 
-    foreach ( $chi_forms['forms'] as $key => $form ) {
-        // if ( $form->num_form_entries() < 1 ) {
-        // if ( $form->num_all_form_entries() < 1 ) {
-            // unset( $chi_forms['forms'][ $key ] );
-        // }
-    }
+    foreach ( $chi_forms['forms'] as $key => $form ) {}
 
     return $chi_forms['forms'];
 }
 
-function contactum_get_entries() {
-    $entries = contactum_get_form_entries( $this->form_id, $args );
-    $columns = contactum_get_entry_columns( $this->form_id );
-}
-
-
+/**
+ *  get default form settings
+ * 
+ * @return array
+ */ 
 function contactum_get_default_form_settings() {
     return apply_filters(
         'contactum_get_default_form_settings', [
@@ -44,15 +43,11 @@ function contactum_get_default_form_settings() {
       );
 }
 
-function contactum_format_text( $content ) {
-    $content = wptexturize( $content );
-    $content = convert_smilies( $content );
-    $content = wpautop( $content );
-    $content = make_clickable( $content );
-
-    return $content;
-}
-
+/**
+ *  insert form fields
+ * 
+ * @return int
+ */ 
 function contactum_insert_form_field( $form_id, $field = [], $field_id = null, $order = 0 ) {
     $args = [
         'post_type'    => 'chi_input',
@@ -73,35 +68,11 @@ function contactum_insert_form_field( $form_id, $field = [], $field_id = null, $
     }
 }
 
-function contactum_get_pain_text( $value ) {
-    if ( is_serialized( $value ) ) {
-        $value = unserialize( $value );
-    }
-
-    if ( is_array( $value ) ) {
-        $string_value = [];
-
-        if ( is_array( $value ) ) {
-            foreach ( $value as $key => $single_value ) {
-                if ( is_array( $single_value ) || is_serialized( $single_value ) ) {
-                    $single_value = contactum_get_pain_text( $single_value );
-                }
-
-                $single_value = ucwords( str_replace( [ '_', '-' ], ' ', $key ) ) . ': ' . ucwords( $single_value );
-
-                $string_value[] = $single_value;
-            }
-
-            $value = implode( ' | ', $string_value );
-        }
-    }
-
-    $value = trim( strip_tags( $value ) );
-
-    return $value;
-}
-
-
+/**
+ *  get settings
+ * 
+ * @return array
+ */ 
 function contactum_get_settings( $key = '' ) {
     $settings = get_option( 'contactum_settings', [] );
 
@@ -114,7 +85,11 @@ function contactum_get_settings( $key = '' ) {
     }
 }
 
-
+/**
+ *  get options
+ * 
+ * @return array
+ */ 
 function contactum_get_options( $option_name ,$key = '' ) {
     $settings = get_option( $option_name, [] );
 
@@ -127,7 +102,11 @@ function contactum_get_options( $option_name ,$key = '' ) {
     }
 }
 
-
+/**
+ *  get countries
+ * 
+ * @return array
+ */ 
 function contactum_get_countries() {
 
     $countries = array(
@@ -1110,6 +1089,11 @@ function contactum_get_countries() {
     return $countries;
 }
 
+/**
+ *  get allowed extensions
+ * 
+ * @return array
+ */ 
 function contactum_allowed_extensions() {
     $extesions = [
         'images' => [

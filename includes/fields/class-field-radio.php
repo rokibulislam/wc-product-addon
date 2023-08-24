@@ -5,8 +5,17 @@ use Contactum\Fields\Contactum_Field;
 use Contactum\Fields\Field_Checkbox;
 use Contactum\Fields\Traits\DropDownOption;
 
+/**
+ * Field Radio class
+ * 
+ * @package MultiStoreX
+ */ 
+
 class Field_Radio extends Field_Checkbox {
 
+    /**
+     * constructor
+     */ 
 	public function __construct() {
         $this->name       = __( 'Radio', '' );
         $this->input_type = 'radio_field';
@@ -14,10 +23,16 @@ class Field_Radio extends Field_Checkbox {
         $this->multiple   = false;
     }
 
+    /**
+     * render field
+     * 
+     * @param $field_settings array
+     * @param $form_id int
+     * 
+     * @return void
+     */ 
     public function render( $field_settings, $form_id ) {
         $selected = isset( $field_settings['selected'] ) ? $field_settings['selected'] : '';
-        // $field_settings['photo_value'] == 1
-        // print_r($field_settings);
         ?>
         <li <?php $this->print_list_attributes( $field_settings ); ?>>
             <?php $this->print_label( $field_settings, $form_id ); ?>
@@ -28,7 +43,6 @@ class Field_Radio extends Field_Checkbox {
                 if( $field_settings['photo_value'] ) {
                     $class .= 'list_type_image';  
                 }
-                // echo $field_settings['layout'] == 'inline' ? 'class="show-inline"' : 'class="show"'; 
             ?>
 
             <div class="<?php echo esc_attr($class); ?>" data-required="<?php echo esc_attr( $field_settings['required'] ) ?>" data-type="radio">
@@ -52,7 +66,6 @@ class Field_Radio extends Field_Checkbox {
                                 } else {
                                     echo '<span>'. $option['label'] . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                 }
-                                // echo '<span>'. $option['label'] . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                             ?>
                             </label>
                         <?php }
@@ -63,6 +76,11 @@ class Field_Radio extends Field_Checkbox {
         </li>
     <?php }
 
+    /**
+     * get field properties
+     * 
+     * @return array
+     */ 
     public function get_field_props() {
         $defaults = $this->default_attributes();
         $props    = [
@@ -98,6 +116,14 @@ class Field_Radio extends Field_Checkbox {
         return array_merge( $defaults, $props );
     }
 
+    /**
+     * prepare entry
+     * 
+     * @param $field array
+     * @param $post_data array
+     * 
+     * @return string
+     */ 
     public function prepare_entry( $field, $post_data = [] ) {
         $val  = $post_data[$field['name']];
         return isset( $field['options'][$val] ) ? $field['options'][$val] : $val;

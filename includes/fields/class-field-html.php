@@ -3,14 +3,31 @@
 namespace Contactum\Fields;
 use Contactum\Fields\Contactum_Field;
 
+/**
+ * Field Html class
+ * 
+ * @package MultiStoreX
+ */
+
 class Field_Html extends Contactum_Field {
 
+    /**
+     * constructor
+     */ 
 	public function __construct() {
         $this->name       = __( 'Html', 'contactum' );
         $this->input_type = 'html_field';
         $this->icon       = 'code';
     }
 
+    /**
+     * render field
+     * 
+     * @param $field_settings array
+     * @param $form_id int
+     * 
+     * @return void
+     */ 
     public function render( $field_settings, $form_id ) {
         ?>
         <li <?php $this->print_list_attributes( $field_settings ); ?>>
@@ -18,6 +35,11 @@ class Field_Html extends Contactum_Field {
         </li>
     <?php }
 
+    /**
+     * get field option settings
+     * 
+     * @return array
+     */ 
     public function get_options_settings() {
         $settings = [
             [
@@ -50,6 +72,11 @@ class Field_Html extends Contactum_Field {
         return $settings;
     }
 
+    /**
+     * get field properties
+     * 
+     * @return array
+     */ 
     public function get_field_props() {
         $props = [
             'template'     => $this->get_type(),
@@ -62,7 +89,12 @@ class Field_Html extends Contactum_Field {
 
     	return $props;
     }
-
+    
+    /**
+     * set full width
+     * 
+     * @return boolean
+     */ 
     public function is_full_width() {
         return true;
     }

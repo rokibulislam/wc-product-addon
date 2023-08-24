@@ -4,15 +4,32 @@ namespace Contactum\Fields;
 use Contactum\Fields\Contactum_Field;
 use Contactum\Fields\Traits\TextareaOption;
 
+/**
+ * Field Textarea class
+ * 
+ * @package MultiStoreX
+ */ 
+
 class Field_Textarea extends Contactum_Field {
     use TextareaOption;
 
+    /**
+     * constructor
+     */ 
 	public function __construct() {
         $this->name       = __( 'Textarea', 'contactum' );
         $this->input_type = 'textarea_field';
         $this->icon       = 'paragraph';
     }
 
+    /**
+     * render field
+     * 
+     * @param $field_settings array
+     * @param $form_id int
+     * 
+     * @return void
+     */ 
     public function render( $field_settings, $form_id ) {
         $value       = $field_settings['default'];?>
         <li <?php $this->print_list_attributes( $field_settings ); ?>>
@@ -35,6 +52,11 @@ class Field_Textarea extends Contactum_Field {
         <li>
     <?php }
 
+    /**
+     * get field option settings
+     * 
+     * @return array
+     */ 
     public function get_options_settings() {
         $default_options = $this->get_default_option_settings();
         $default_text_options = $this->get_default_textarea_option_settings();
@@ -42,6 +64,11 @@ class Field_Textarea extends Contactum_Field {
         return array_merge( $default_options, $default_text_options);
     }
 
+    /**
+     * get field properties
+     * 
+     * @return array
+     */ 
     public function get_field_props() {
         $defaults = $this->default_attributes();
         $props    = [

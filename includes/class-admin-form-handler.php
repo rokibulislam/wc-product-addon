@@ -1,13 +1,30 @@
 <?php
 namespace Contactum;
 
+/**
+ * Admin class
+ * 
+ * @package MultiStoreX
+ */ 
+
 class Admin_Form_Handler {
 
+    /**
+     *  constructor
+     */ 
     public function __construct() {
         add_action( 'load-toplevel_page_contactum', [ $this, 'chi_forms_actions' ] );
         add_action( 'admin_notices', [ $this, 'admin_notices' ] );
     }
 
+    /**
+     *  verify current page
+     * 
+     * @param $page_id string
+     * @param $bulk_action string
+     * 
+     * @return boolean
+     */ 
     public function verify_current_page_screen( $page_id, $bulk_action ) {
         if ( !isset( $_REQUEST['_wpnonce'] ) || !isset( $_REQUEST['page'] ) ) {
             return false;
@@ -28,6 +45,11 @@ class Admin_Form_Handler {
         return true;
     }
 
+    /**
+     * forms action
+     * 
+     * @return void
+     */ 
     public function chi_forms_actions() {
         // Nonce validation
         if ( !$this->verify_current_page_screen( 'contactum', 'bulk-contactum-forms' ) ) {
@@ -85,6 +107,10 @@ class Admin_Form_Handler {
         }
     }
 
+    /**
+     *  admin notice
+     * 
+     */ 
     public function admin_notices() {
         if ( !empty( $_GET['duplicated'] ) ) {
             $duplicated = sanitize_text_field( wp_unslash( $_GET['duplicated'] ) );
@@ -93,6 +119,14 @@ class Admin_Form_Handler {
         }
     }
 
+    /**
+     *  display notice
+     * 
+     * @param $text string
+     * @param $type string
+     * 
+     * @return void
+     */ 
     public function display_notice( $text, $type = 'updated' ) {
         printf( '<div class="%s"><p>%s</p></div>', esc_attr( $type ), wp_kses_post( $text ) );
     }

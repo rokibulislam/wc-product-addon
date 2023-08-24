@@ -3,15 +3,29 @@ namespace Contactum;
 
 use Contactum\Forms_List_Table;
 
+/**
+ * Admin class
+ * 
+ * @package MultiStoreX
+ */ 
+
 class Admin {
 
-    private $settings_api;
-
+    /**
+     * Construct
+     */
     public function __construct() {
         add_action( 'admin_menu', [ $this, 'admin_menu' ] );
         add_filter( 'parent_file', [ $this, 'fix_parent_menu' ] );
     }
 
+    /**
+     * Register form post types
+     *
+     * @param $parent_file string
+     * 
+     * @return void
+     */
     public function fix_parent_menu( $parent_file ) {
         $current_screen = get_current_screen();
         $post_types     = [ 'chi_forms' ];
@@ -76,6 +90,11 @@ class Admin {
         ] );
     }
 
+    /**
+     * add admin menu
+     * 
+     * @return void
+     */ 
     public function admin_menu() {
         global $submenu;
 
@@ -86,6 +105,11 @@ class Admin {
         add_submenu_page( $slug, __( 'Forms', 'contactum' ), __( 'Forms', 'contactum' ), $capability, 'contactum', [ $this, 'forms_page'] );
     }
 
+    /**
+     * load forms page
+     * 
+     * @return void
+     */ 
     public function forms_page() {
         $action           = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : null;
         $add_new_page_url = admin_url( 'admin.php?page=contactum&action=add-new' );

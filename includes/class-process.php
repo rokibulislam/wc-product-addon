@@ -2,6 +2,12 @@
 
 namespace Contactum;
 
+/**
+ * Process class
+ * 
+ * @package MultiStoreX
+ */
+
 class Process {
 
     public function __construct() {
@@ -9,6 +15,16 @@ class Process {
         add_filter('woocommerce_add_to_cart_validation', [ $this, 'add_to_cart_validation' ], 10, 4);
     }
 
+    /**
+     * add order line item
+     * 
+     * @param $cart_item_data array
+     * @param $product_id int
+     * @param $variation_id boolean
+     * @param $quantity int
+     * 
+     * @return void
+     */ 
     public function add_cart_item_data( $cart_item_data, $product_id, $variation_id = false, $quantity = 1 ) {
         
         $post_data = wp_unslash( $_POST );
@@ -20,12 +36,6 @@ class Process {
             $form = contactum()->forms->get( $id );
             $fields = $form->getFields();
             $entry_fields  = $form->prepare_entries( $post_data );
-            // echo "<pre>";
-            // print_r( $fields );
-            // print_r( $entry_fields );
-            // print_r( $post_data );
-
-            // exit;
 
             foreach ( $entry_fields as $key => $value ) {
                 $cart_item_data[$key] = sanitize_text_field( $value );
@@ -38,6 +48,16 @@ class Process {
         return $cart_item_data;
     }
 
+    /**
+     * add to cart validation
+     * 
+     * @param $passed boolean
+     * @param $product_id int
+     * @param $qty int
+     * @param $variation_id boolean
+     * 
+     * @return void
+     */ 
     public function add_to_cart_validation( $passed, $product_id, $qty = 1, $variation_id = false ) {
 
         $post_data = wp_unslash( $_POST );

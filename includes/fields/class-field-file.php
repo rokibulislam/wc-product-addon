@@ -2,14 +2,31 @@
 namespace Contactum\Fields;
 use Contactum\Fields\Contactum_Field;
 
+/**
+ * Field File class
+ * 
+ * @package MultiStoreX
+ */
+
 class Field_File extends  Contactum_Field {
 
+    /**
+     * constructor
+     */ 
 	public function __construct() {
         $this->name       = __( 'File', 'contactum' );
         $this->input_type = 'file_field';
         $this->icon       = 'user';
     }
 
+    /**
+     * render field
+     * 
+     * @param $field_settings array
+     * @param $form_id int
+     * 
+     * @return void
+     */ 
     public function render( $field_settings, $form_id ) {
         $allowed_ext = '';
         $extensions  = contactum_allowed_extensions();
@@ -61,6 +78,11 @@ class Field_File extends  Contactum_Field {
         wp_add_inline_script( 'contactum-upload', $script );
     }
 
+    /**
+     * get field option settings
+     * 
+     * @return array
+     */ 
     public function get_options_settings() {
         $default_options      = $this->get_default_option_settings( true, array('dynamic','width') );
 
@@ -121,6 +143,14 @@ class Field_File extends  Contactum_Field {
         return array_merge( $defaults, $props );
     }
 
+    /**
+     * prepare entry
+     * 
+     * @param $field array
+     * @param $post_data array
+     * 
+     * @return string
+     */ 
     public function prepare_entry( $field, $post_data = [] ) {
         return isset( $post_data[$field['name']] ) ? $post_data[$field['name']] : '';
     }

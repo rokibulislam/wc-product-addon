@@ -6,25 +6,34 @@ use Contactum\Recaptcha;
 use Contactum\EntryManager;
 use Contactum\Notification as Contactum_Notification;
 
+/**
+ * Ajax class
+ * 
+ * @package MultiStoreX
+ */ 
+
 class Ajax {
 
+    /**
+     * constructor
+     * 
+     */ 
     public function __construct() {
         add_action( 'wp_ajax_save_contactum_form', [ $this, 'save_contactum_form' ] );
-        // import
-        add_action( 'wp_ajax_contactum_import_form', [ $this, 'import_form' ] );
-        //upload file
+
         add_action( 'wp_ajax_upload_file', [ $this, 'upload_file' ] );
         add_action( 'wp_ajax_nopriv_upload_file', [ $this, 'upload_file' ] );
 
         //delete file
         add_action( 'wp_ajax_file_del', [ $this, 'delete_file' ] );
         add_action( 'wp_ajax_nopriv_file_del', [ $this, 'delete_file' ] );
-
-        // frontend submit
-        add_action( 'wp_ajax_contactum_frontend_submit', [ $this, 'contactum_frontend_submit' ] );
-        add_action( 'wp_ajax_nopriv_contactum_frontend_submit', [ $this, 'contactum_frontend_submit' ] );
     }
 
+    /**
+     * Save Form
+     * 
+     * @return void
+     */ 
     public function save_contactum_form() {
         $post_data = wp_unslash( $_POST );
 
@@ -44,10 +53,6 @@ class Ajax {
         $form_fields   = isset( $post_data['form_fields'] ) ? $post_data['form_fields'] : '';
         $form_fields   = json_decode( $form_fields, true );
 
-        $notifications   = isset( $post_data['notifications'] ) ? $post_data['notifications'] : '';
-        $notifications   = json_decode( $notifications, true );
-
-
         if ( isset( $post_data['settings'] ) ) {
             $form_settings = (array) json_decode( $post_data['settings'] );
         }
@@ -56,7 +61,6 @@ class Ajax {
             'form_id'       => absint( $form_data['contactum_form_id'] ),
             'post_title'    => $form_data['post_title'],
             'form_fields'   => $form_fields,
-            'notifications' => $notifications,
             'form_settings' => $form_settings
         ];
 
@@ -64,12 +68,15 @@ class Ajax {
 
         wp_send_json_success( [
             'form_fields'   => $form_fields,
-            'notifications' => $notifications,
             'form_settings' => $form_settings,
-            // 'integrations'  => $integrations,
         ] );
     }
 
+    /**
+     * Upload file
+     * 
+     * @return void
+     */ 
     public function upload_file() {
         $nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['nonce'] ) ) : '';
 
@@ -109,6 +116,13 @@ class Ajax {
         exit;
     }
 
+    /**
+     * handle Upload and create attachment
+     * 
+     * @param $upload_data array
+     * 
+     * @return object
+     */ 
     public function handle_upload( $upload_data ) {
         $uploaded_file = wp_handle_upload( $upload_data, ['test_form' => false] );
 
@@ -135,6 +149,16 @@ class Ajax {
         return ['success' => false, 'error' => $uploaded_file['error']];
     }
 
+
+    /**
+     * get html of attachment
+     * 
+     * @param $attach_id int
+     * @param $field_name string
+     * @param $type string
+     * 
+     * @return $html string
+     */
     public static function attach_html( $attach_id, $field_name, $type = NULL ) {
         if ( ! $type ) {
             $type = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : 'image';
@@ -167,6 +191,11 @@ class Ajax {
         return $html;
     }
 
+    /**
+     * delete file
+     * 
+     * @return void
+     */ 
     public function delete_file() {
         check_ajax_referer( 'contactum_nonce', 'nonce' );
 
@@ -181,79 +210,5 @@ class Ajax {
 
         echo 'success';
         exit;
-    }
-
-    public function contactum_frontend_submit() {
-        check_ajax_referer('contactum_form_frontend');
-
-        $post_data     = wp_unslash( $_POST );
-        $form_id       = isset( $post_data['form_id'] ) ? intval( $post_data['form_id'] ) : 0;
-        $page_id       = isset( $post_data['page_id'] ) ? intval( $post_data['page_id'] ) : 0;
-        $form          = contactum()->forms->get( $form_id );
-        $form_settings = $form->getSettings();
-        $form_fields   = $form->getFields();
-        $entry_fields  = $form->prepare_entries( $post_data );
-
-        if ( !$form_fields ) {
-            wp_send_json( [
-                'success'     => false,
-                'error'       => __( 'No form field was found.', 'contactum' ),
-            ] );
-        }
-
-        $entry_id = EntryManager::create( [ 'form_id' => $form_id ], $entry_fields );
-
-        if ( is_wp_error( $entry_id ) ) {
-            wp_send_json( [
-                'success' => false,
-                'error'   => $entry_id->get_error_message(),
-            ] );
-        }
-
-        // redirect URL
-        $show_message = false;
-        $redirect_to  = false;
-
-        if ( $form_settings['redirect_to'] == 'page' ) {
-            $redirect_to = get_permalink( $form_settings['page_id'] );
-        } elseif ( $form_settings['redirect_to'] == 'url' ) {
-            $redirect_to = $form_settings['url'];
-        } elseif ( $form_settings['redirect_to'] == 'same' ) {
-            $show_message = true;
-        } else {
-            $show_message = true;
-        }
-
-        // Fire a hook for integration
-        do_action( 'contactum_entry_submission', $entry_id, $form_id, $page_id, $form_settings );
-
-        $field_search = $field_replace = [];
-
-        foreach ( $form_fields as $r_field ) {
-            $field_search[] = '{' . $r_field['name'] . '}';
-
-            if ( $r_field['template'] == 'name_field' ) {
-                $field_replace[] = implode( ' ', explode(CONTACTUM_SEPARATOR, $entry_fields[ $r_field['name'] ] ) );
-            } else if ( $r_field['template'] == 'address_field' ) {
-                $field_replace[] = implode( ',', $entry_fields[ $r_field['name'] ] );
-            } else {
-                $field_replace[] = isset( $entry_fields[ $r_field['name'] ] ) ? $entry_fields[ $r_field['name'] ] : '';
-            }
-        }
-
-        $message = str_replace( $field_search, $field_replace, $form_settings['message'] );
-
-        // send the response
-        $response = apply_filters( 'contactum_entry_submission_response', [
-            'success'      => true,
-            'redirect_to'  => $redirect_to,
-            'show_message' => $show_message,
-            'message'      => $message,
-            'data'         => $post_data,
-            'form_id'      => $form_id,
-            'entry_id'     => $entry_id,
-        ] );
-
-        wp_send_json( $response );
     }
 }

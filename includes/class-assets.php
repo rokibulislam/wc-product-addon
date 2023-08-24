@@ -1,17 +1,34 @@
 <?php
 namespace Contactum;
 
+/**
+ * Assets class
+ * 
+ * @package MultiStoreX
+ */ 
+
 class Assets {
 
+    /**
+     * @var array
+     */ 
     private $settings = [];
+    
+    /**
+     * @var string
+     */ 
     private $postdata;
 
-    function __construct() {
+    /**
+     * constructor
+     * 
+     * @return void
+     */ 
+    public function __construct() {
         $id   = isset( $_GET['id'] ) ? intval( wp_unslash( $_GET['id'] ) ) : '';
         $this->postdata = get_post( $id );
 
         add_action( 'admin_enqueue_scripts', array( $this, 'register_builder_backend' ), 10 );
-        add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ), 10 );
 
         if ( !empty( $this->postdata->ID ) ) {
             add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_builder_scripts' ] );
@@ -22,10 +39,11 @@ class Assets {
         add_action( 'wp_enqueue_scripts', [ $this, 'register_frontend' ] );
     }
 
-    public function enqueue_admin_scripts() {
-
-    }
-
+    /**
+     * remove admin notice
+     * 
+     * @return void
+     */ 
     public function remove_admin_notices() {
         remove_all_actions( 'network_admin_notices' );
         remove_all_actions( 'user_admin_notices' );
@@ -33,6 +51,11 @@ class Assets {
         remove_all_actions( 'all_admin_notices' );
     }
 
+    /**
+     * get frontend localize script
+     * 
+     * @return array
+     */
     public function get_frontend_localized_scripts() {
         return apply_filters( 'contactum_frontend_localize_script', [
             'confirmMsg' => __( 'Are you sure?', 'contactum' ),
@@ -59,7 +82,11 @@ class Assets {
         ] );
     }
 
-
+    /**
+     * get admin localize script
+     * 
+     * @return array
+     */ 
     public function get_admin_localized_scripts() {
         $form               = contactum()->forms->get( $this->postdata->ID );
         $contactum_settings = contactum_get_settings();
@@ -85,6 +112,12 @@ class Assets {
         ]);
     }
 
+    /**
+     * register builder script and styles
+     * 
+     * 
+     * @return void
+     */ 
     public function register_builder_backend() {
         $screen = get_current_screen();
 
@@ -96,6 +129,11 @@ class Assets {
         $this->register_scripts( $this->get_admin_scripts() );
     }
 
+    /**
+     * 
+     * 
+     * @return void
+     */ 
     public function enqueue_builder_scripts() {
         $screen = get_current_screen();
         if ( $screen->base != 'toplevel_page_contactum' ) {
@@ -109,11 +147,21 @@ class Assets {
         wp_localize_script( 'contactum-admin', 'contactum', $localize_script );
     }
 
+    /**
+     * register frontend script and styles
+     * 
+     * @return void
+     */ 
     public function register_frontend() {
         $this->register_styles( $this->get_frontend_styles() );
         $this->register_scripts( $this->get_frontend_scripts() );
     }
 
+    /**
+     * 
+     * 
+     * @return void 
+     */
     public function enqueue_frontend() {
         $this->enqueue_styles( $this->get_frontend_styles() );
         $this->enqueue_scripts( $this->get_frontend_scripts() );
@@ -130,6 +178,11 @@ class Assets {
         ] );
     }
 
+    /**
+     * get admin scripts
+     * 
+     * @return array
+     */ 
     public function get_admin_scripts() {
 
         $form_builder_js_deps = apply_filters( 'contactum_builder_js_deps', [
@@ -180,6 +233,11 @@ class Assets {
         return apply_filters( 'contactum_admin_scripts', $scripts );
     }
 
+    /**
+     * get admin styles
+     * 
+     * @return array
+     */ 
     public function get_admin_styles() {
         $styles = [
             'contactum-font-awesome' => [
@@ -205,6 +263,11 @@ class Assets {
         return apply_filters( 'contactum_admin_styles', $styles );
     }
 
+    /**
+     * get frontend styles
+     * 
+     * @return array
+     */ 
     public function get_frontend_styles() {
 
         $styles = [
@@ -233,6 +296,7 @@ class Assets {
 
         return apply_filters( 'contactum_frontend_styles', $styles );
     }
+
 
     public function get_frontend_scripts() {
 
@@ -293,6 +357,13 @@ class Assets {
     }
 
 
+    /**
+     * Register scripts
+     * 
+     * @param array $scripts
+     * 
+     * @return void
+     */ 
     private function register_scripts( $scripts ) {
         foreach ( $scripts as $handle => $script ) {
             $deps      = isset( $script['deps'] ) ? $script['deps'] : false;
@@ -303,6 +374,13 @@ class Assets {
         }
     }
 
+    /**
+     * Register styles
+     * 
+     * @param array $styles
+     * 
+     * @return void
+     */ 
     public function register_styles( $styles ) {
         foreach ( $styles as $handle => $style ) {
             $deps = isset( $style['deps'] ) ? $style['deps'] : false;
@@ -311,12 +389,26 @@ class Assets {
         }
     }
 
+    /**
+     * Enqueue the scripts
+     * 
+     * @param array $scripts
+     * 
+     * @return void
+     */ 
     public function enqueue_scripts( $scripts ) {
         foreach ( $scripts as $handle => $script ) {
             wp_enqueue_script( $handle );
         }
     }
 
+    /**
+     * Enqueue the styles
+     * 
+     * @param array $styles
+     * 
+     * @return void
+     */ 
     public function enqueue_styles( $styles ) {
         foreach ( $styles as $handle => $script ) {
             wp_enqueue_style( $handle );

@@ -2,36 +2,103 @@
 
 namespace Contactum\Fields;
 
+/**
+ * Contactum Field class
+ * 
+ * @package MultiStoreX
+ */
+
 abstract class Contactum_Field {
 
+    /**
+     * @var $name string
+     */ 
     protected $name       = '';
+
+    /**
+     * @var $input_type string
+     */ 
     protected $input_type = '';
+        
+    /**
+     * @var $icon string
+     */ 
     protected $icon       = 'header';
 
+    /**
+     * get name
+     * 
+     * @return string
+     */ 
 	public function get_name() {
 		return $this->name;
 	}
 
+    /**
+     * get type
+     * 
+     * @return string
+     */ 
 	public function get_type() {
 		return $this->input_type;
 	}
 
+    /**
+     * get icon
+     * 
+     * @return string
+     */ 
 	public function get_icon() {
 		return $this->icon;
 	}
 
+    /**
+     * render field
+     * 
+     * @param $field_settings array
+     * @param $form_id int
+     * 
+     * @return void
+     */ 
 	abstract public function render( $field_settings, $form_id );
-	abstract public function get_options_settings();
-	abstract public function get_field_props();
+	   
+    /**
+     * get field option settings
+     * 
+     * @return array
+     */ 
+    abstract public function get_options_settings();
+	
+    /**
+     * get field properties
+     * 
+     * @return array
+     */ 
+    abstract public function get_field_props();
 
+    /**
+     * set full width
+     * 
+     * @return boolean
+     */ 
 	public function is_full_width() {
 		return false;
 	}
 
+    /**
+     * get validator
+     * 
+     * @return boolean
+     */ 
 	public function get_validator() {
 		return false;
 	}
 
+    /**
+     * get settings
+     * 
+     * @return array
+     */ 
 	public function get_js_settings() {
 
 		$settings = [
@@ -53,6 +120,11 @@ abstract class Contactum_Field {
         return apply_filters( 'contactum_field_get_js_settings', $settings );
 	}
 
+    /**
+     * get default conditional properties
+     * 
+     * @return array
+     */ 
     public function default_conditional_prop() {
         return [
             'condition_status'  => 'no',
@@ -63,6 +135,11 @@ abstract class Contactum_Field {
         ];
     }
 
+    /**
+     * get default attribute properties
+     * 
+     * @return array
+     */ 
 	public function default_attributes() {
         return [
             'template'    => $this->get_type(),
@@ -83,6 +160,11 @@ abstract class Contactum_Field {
         ];
 	}
 
+    /**
+     * get default option settings
+     * 
+     * @return array
+     */ 
 	public static function get_default_option_settings( $is_meta = true, $exclude = [] ) {
 		$common_properties = [
             [
@@ -170,6 +252,11 @@ abstract class Contactum_Field {
         return $common_properties;
     }
 
+    /**
+     * get conditional field
+     * 
+     * @return array
+     */
     public function get_conditional_field() {
         return array(
             'name'           => 'contactum_cond',
@@ -181,6 +268,14 @@ abstract class Contactum_Field {
         );
     }
 
+    /**
+     * print label
+     * 
+     * @param $field object
+     * @param $form_id int
+     * 
+     * @return void
+     */
     public function print_label( $field, $form_id = 0 ) {
         ?>
         <div class="contactum-label"> <label for="<?php echo isset( $field['name'] ) ? esc_attr( $field['name'] ) . '_' . esc_attr( $form_id ) : 'cls'; ?>">
@@ -188,6 +283,13 @@ abstract class Contactum_Field {
         <?php
     }
 
+    /**
+     * print list attribute
+     * 
+     * @param $field object
+     * 
+     * @return void
+     */
     public function print_list_attributes( $field ) {
         $label      = isset( $field['label'] ) ? $field['label'] : '';
         $el_name    = !empty( $field['name'] ) ? $field['name'] : '';
@@ -199,13 +301,26 @@ abstract class Contactum_Field {
         esc_attr( $label ), esc_attr( $message )   );
     }
 
+    /**
+     * required
+     * 
+     * @param $field object
+     * 
+     * @return string
+     */
     public function required( $field ) {
-        print_r($field['required'] === true );
         if ( isset( $field['required'] ) && ( $field['required'] == 'yes' ||  $field['required'] === true ) ) {
             return '<span class="required">*</span>';
         }
     }
 
+    /**
+     * get help string
+     * 
+     * @param $field object
+     * 
+     * @return string
+     */
     public function help_text( $field ) {
         if ( empty( $field['help'] ) ) {
             return;
@@ -215,6 +330,14 @@ abstract class Contactum_Field {
         <?php
     }
 
+    /**
+     * prepare entry
+     * 
+     * @param $field array
+     * @param $post_data array
+     * 
+     * @return string
+     */ 
     public function prepare_entry( $field, $post_data = [] ) {
         $value = !empty( $post_data[$field['name']] ) ? $post_data[$field['name']] : '';
 
@@ -227,6 +350,14 @@ abstract class Contactum_Field {
         return $entry_value;
     }
 
+    /**
+     * conditional logic
+     * 
+     * @param $form_field array
+     * @param $form_id int
+     * 
+     * @return string
+     */ 
     public function conditional_logic( $form_field, $form_id ) {
         if ( !isset( $form_field['contactum_cond']['condition_status'] ) || $form_field['contactum_cond']['condition_status'] != 'yes' ) {
             return;

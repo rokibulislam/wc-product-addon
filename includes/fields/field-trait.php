@@ -3,6 +3,11 @@ namespace Contactum\Fields\Traits;
 
 trait Textoption {
 
+    /**
+     * get default text option settings
+     * 
+     * @return array
+     */ 
     public static function get_default_text_option_settings( $word_restriction = false ) {
         $properties = [
             [
@@ -52,6 +57,11 @@ trait Textoption {
 
 trait DropDownOption {
 
+    /**
+     * get default dropdown option settings
+     * 
+     * @return array
+     */ 
     public function get_default_option_dropdown_settings( $is_multiple = false ) {
         return [
             'name'          => 'options',
@@ -66,6 +76,12 @@ trait DropDownOption {
 }
 
 trait TextareaOption {
+
+    /**
+     * get default textarea option settings
+     * 
+     * @return array
+     */ 
     public function get_default_textarea_option_settings() {
         return [
             [

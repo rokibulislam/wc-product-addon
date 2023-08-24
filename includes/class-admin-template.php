@@ -1,13 +1,27 @@
 <?php
 namespace Contactum;
 
+/**
+ * Admin Template class
+ * 
+ * @package MultiStoreX
+ */
+
 class Admin_Template {
 
+    /**
+     * construct
+     */ 
 	public function __construct() {
         add_action( 'admin_footer', [ $this, 'render_templates' ] );
         add_filter( 'admin_action_create_template', [ $this, 'create_template' ] );
 	}
 
+    /**
+     * render footer template
+     * 
+     * @return void
+     */ 
     public function render_templates() {
         $current_screen = get_current_screen();
 
@@ -22,6 +36,11 @@ class Admin_Template {
         include __DIR__ . '/html/modal.php';
     }
 
+    /**
+     * create_template
+     * 
+     * @return void
+     */ 
 	public function create_template() {
         $get_data = wp_unslash( $_GET );
         $template = isset( $get_data['template'] ) ? sanitize_text_field( $get_data['template'] ) : '';

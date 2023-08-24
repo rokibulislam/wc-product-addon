@@ -4,13 +4,46 @@ namespace Contactum;
 use Contactum\EntryManager;
 use WP_Error;
 
+/**
+ * Form class
+ * 
+ * @package MultiStoreX
+ */ 
+
 class Form {
 
+    /**
+     * form id
+     * 
+     * @var int
+     */ 
     public $id = 0;
+
+    /**
+     * form name
+     * 
+     * @var string
+     */
     public $name;
+
+    /**
+     * form data
+     * 
+     * @var array
+     */
     public $data;
+
+    /**
+     * form fields
+     * 
+     * @var array
+     */
     public $form_fields = [];
 
+    /**
+     * constructor
+     * 
+     */ 
     public function __construct( $form = null ) {
 
         if ( is_numeric( $form ) ) {
@@ -28,14 +61,29 @@ class Form {
         }
     }
 
+    /**
+     * get id
+     * 
+     * @return string
+     */ 
     public function getId() {
         return $this->id;
     }
 
+    /**
+     * get name
+     * 
+     * @return string
+     */ 
     public function getName() {
         return $this->name;
     }
 
+    /**
+     * get fields
+     * 
+     * @return array
+     */ 
     public function getFields() {
 
         $form_fields = [];
@@ -63,6 +111,13 @@ class Form {
         return $form_fields;
     }
 
+    /**
+     * get field values
+     * 
+     * @param $field_template array
+     * 
+     * @return boolean
+     */ 
     public function hasField( $field_template ) {
         foreach ( $this->getFields() as $key => $field ) {
             if ( isset( $field['template'] ) && $field['template'] == $field_template ) {
@@ -71,6 +126,11 @@ class Form {
         }
     }
 
+    /**
+     * get field values
+     * 
+     * @return array
+     */ 
     public function getFieldValues() {
         $values = [];
         $fields = $this->getFields();
@@ -94,7 +154,12 @@ class Form {
 
         return apply_filters( 'contactum_get_field_values', $values );
     }
-
+    
+    /**
+     * get Settings
+     * 
+     * @return array
+     */ 
     public function getSettings() {
         $settings = get_post_meta( $this->id, 'form_settings', true );
         $default  = contactum_get_default_form_settings();
@@ -102,6 +167,13 @@ class Form {
         return array_merge( $default, $settings );
     }
 
+    /**
+     * prepare entries
+     * 
+     * @param $post_data array
+     * 
+     * @return array
+     */ 
     public function prepare_entries( $post_data = [] ) {
         $fields      = contactum()->fields->getFields();
         $form_fields = $this->getFields();

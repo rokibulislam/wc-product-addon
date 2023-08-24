@@ -3,14 +3,31 @@
 namespace Contactum\Fields;
 use Contactum\Fields\Contactum_Field;
 
+/**
+ * Field Image class
+ * 
+ * @package MultiStoreX
+ */
+
 class Field_Image extends Contactum_Field {
 
+    /**
+     * constructor
+     */ 
 	public function __construct() {
         $this->name       = __( 'Image', 'contactum' );
         $this->input_type = 'image_field';
         $this->icon       = 'file-image-o';
     }
 
+    /**
+     * render field
+     * 
+     * @param $field_settings array
+     * @param $form_id int
+     * 
+     * @return void
+     */ 
     public function render( $field_settings, $form_id ) {
         $allowed_ext = '';
         $unique_id = sprintf( '%s-%d', $field_settings['name'], $form_id ); 
@@ -65,6 +82,11 @@ class Field_Image extends Contactum_Field {
         wp_add_inline_script( 'contactum-upload', $script );
     }
 
+    /**
+     * get field option settings
+     * 
+     * @return array
+     */ 
     public function get_options_settings() {
         $default_options      = $this->get_default_option_settings( true, ['dynamic', 'width'] );
 
@@ -117,6 +139,11 @@ class Field_Image extends Contactum_Field {
         return array_merge( $default_options, $settings );
     }
 
+    /**
+     * get field properties
+     * 
+     * @return array
+     */ 
     public function get_field_props() {
         $defaults = $this->default_attributes();
         $props    = [
@@ -127,8 +154,16 @@ class Field_Image extends Contactum_Field {
         ];
 
     	return array_merge( $defaults, $props );
-    }
+    }   
 
+    /**
+     * prepare entry
+     * 
+     * @param $field array
+     * @param $post_data array
+     * 
+     * @return string
+     */ 
     public function prepare_entry( $field, $post_data = [] ) {
         return isset( $post_data[$field['name']] ) ? $post_data[$field['name']] : '';
     }

@@ -2,12 +2,21 @@
 
 namespace Contactum;
 
+/**
+ * MetaDisplay class
+ * 
+ * @package MultiStoreX
+ */
+
 class MetaDisplay {
 
-    public function __construct() {
-
-    } 
-
+    /**
+     * display meta value
+     * 
+     * @param $field object
+     * 
+     * @return string
+     */ 
     public function display( $field ) {
         $display = $field['value'];
         switch ($field['template']) {

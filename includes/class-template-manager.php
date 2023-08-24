@@ -2,10 +2,24 @@
 namespace Contactum;
 use Contactum\Templates\Template_Blank;
 
+/**
+ * TemplateManager class
+ * 
+ * @package MultiStoreX
+ */
+
 class TemplateManager {
 
+    /**
+     * @var array
+     */ 
 	private $templates = [];
 
+    /**
+     * get templates
+     * 
+     * @return array
+     */ 
 	public function get_templates() {
         if ( !empty( $this->templates ) ) {
             return $this->templates;
@@ -16,6 +30,13 @@ class TemplateManager {
         return $this->templates;
     }
 
+    /**
+     * get teamplate by type
+     * 
+     * @param $template_type string
+     * 
+     * @return array | boolean
+     */ 
 	public function get_template( $template_type ) {
 		$templates = $this->get_templates();
 
@@ -26,6 +47,11 @@ class TemplateManager {
         return false;
 	}
 
+    /**
+     * register template
+     * 
+     * @return string
+     */ 
 	private function register_templates() {
         $templates = [
             'blank'   => new Template_Blank()
@@ -34,6 +60,11 @@ class TemplateManager {
         $this->templates = apply_filters( 'contactum-form-templates', $templates );
 	}
 
+    /**
+     * get groups
+     * 
+     * @return array
+     */ 
 	public function get_field_groups() {
         $before_custom_templates = apply_filters( 'contactum-form-templates-section-before', [] );
         $groups                  = array_merge( $before_custom_templates, $this->get_custom_templates() );
@@ -44,6 +75,13 @@ class TemplateManager {
         return $groups;
     }
 
+    /**
+     * create template
+     * 
+     * @param $name string
+     * 
+     * @return int
+     */ 
     public function create( $name ) {
         if ( !$template = $this->exists( $name ) ) {
             return;
@@ -66,6 +104,13 @@ class TemplateManager {
         return $form_id;
     }
 
+    /**
+     * display meta value
+     * 
+     * @param $name string
+     * 
+     * @return array | boolean
+     */ 
     public function exists( $name ) {
         if ( array_key_exists( $name, $this->get_templates() ) ) {
             return $this->templates[ $name ];

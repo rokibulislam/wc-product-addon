@@ -4,15 +4,32 @@ namespace Contactum\Fields;
 use Contactum\Fields\Contactum_Field;
 use Contactum\Fields\Traits\Textoption;
 
+/**
+ * Field Email class
+ * 
+ * @package MultiStoreX
+ */
+
 class Field_Email extends Contactum_Field {
     use Textoption;
 
+    /**
+     * constructor
+     */ 
 	public function __construct() {
         $this->name       = __( 'Email', 'contactum' );
         $this->input_type = 'email_field';
         $this->icon       = 'envelope-o';
     }
 
+    /**
+     * render field
+     * 
+     * @param $field_settings array
+     * @param $form_id int
+     * 
+     * @return void
+     */ 
     public function render( $field_settings, $form_id ) {
         $value = $field_settings['default'];
         if ( isset( $field_settings['auto_populate'] ) && $field_settings['auto_populate'] == 'yes' && is_user_logged_in() ) {
@@ -49,6 +66,11 @@ class Field_Email extends Contactum_Field {
         </li>
     <?php }
 
+    /**
+     * get field option settings
+     * 
+     * @return array
+     */ 
     public function get_options_settings() {
         $default_options      = $this->get_default_option_settings();
         $default_text_options = $this->get_default_text_option_settings();
@@ -85,6 +107,11 @@ class Field_Email extends Contactum_Field {
         return array_merge( $default_options, $default_text_options, $check_duplicate );
     }
 
+    /**
+     * get field properties
+     * 
+     * @return array
+     */ 
     public function get_field_props() {
         $defaults = $this->default_attributes();
         $props = [
@@ -94,6 +121,14 @@ class Field_Email extends Contactum_Field {
     	return array_merge( $defaults, $props );
     }
 
+    /**
+     * prepare entry
+     * 
+     * @param $field array
+     * @param $post_data array
+     * 
+     * @return string
+     */ 
     public function prepare_entry( $field, $post_data = [] ) {
         if ( isset( $field['auto_populate'] ) && $field['auto_populate'] == 'yes' && is_user_logged_in() ) {
             $user = wp_get_current_user();
