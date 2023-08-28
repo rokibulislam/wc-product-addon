@@ -1,70 +1,71 @@
-<?php 
+<?php
+/**
+ * Cart Template
+ *
+ * @author Kamrul
+ * @package MultiStoreX
+ */
 
 namespace Contactum;
 
 /**
  * Cart class
- * 
+ *
  * @package MultiStoreX
- */ 
-
+ */
 class Cart {
 
-    /**
-     * constructor
-     */ 
-    public function __construct () {
-        add_filter('woocommerce_get_item_data', [ $this, 'get_item_data' ], 10, 2);
-        add_filter('woocommerce_cart_item_class', [ $this, 'cart_item_class' ], 10, 3);
-    }
+	/**
+	 * Constructor
+	 */
+	public function __construct() {
+		add_filter( 'woocommerce_get_item_data', array( $this, 'get_item_data' ), 10, 2 );
+		add_filter( 'woocommerce_cart_item_class', array( $this, 'cart_item_class' ), 10, 3 );
+	}
 
-    /**
-     * 
-     * 
-     * @param $item_data array
-     * @param $cart_item array
-     * 
-     * @return $item_data array
-     */ 
-    public function get_item_data( $item_data, $cart_item ) {
+	/**
+	 * Get Item Data
+	 *
+	 * @param array $item_data  item_data.
+	 * @param array $cart_item  cart_item.
+	 *
+	 * @return $item_data array
+	 */
+	public function get_item_data( $item_data, $cart_item ) {
+		$meta = new MetaDisplay();
 
-        $meta = new MetaDisplay();
+		if ( isset( $cart_item['post_data'] ) ) {
+			$entry_fields = $cart_item['post_data'];
+			$form_id      = $cart_item['form_id'];
+			if ( ! empty( $entry_fields ) ) {
+				$item_data[] = array(
+					'key'   => 'form_id',
+					'value' => $form_id,
+				);
 
-        if( isset( $cart_item['post_data'] ) ) {
-            $entry_fields = $cart_item['post_data'];
-            $form_id = $cart_item['form_id'];
+				foreach ( $entry_fields as $key => $field ) {
+					$item_data[] = array(
+						'type'  => $field['template'],
+						'name'  => $field['name'],
+						'key'   => $field['name'],
+						'value' => wc_clean( $meta->display( $field ) ),
+					);
+				}
+			}
+		}
 
-            if( !empty( $entry_fields ) ) {
-                
-                $item_data[] = [
-                    'key'   => 'form_id',
-                    'value' => $form_id
-                ];
+		return $item_data;
+	}
 
-                foreach ( $entry_fields as $key => $field ) {
-                    $item_data[] = array(
-                        'type'  => $field['template'],
-                        'name' =>  $field['name'],
-                        'key'   => __( $field['name'], 'plugin-republic' ),
-                        'value' => $meta->display($field)
-                    );
-                }
-            }
-        }
-
-        return $item_data;
-    }
-
-    /**
-     * add cart item class
-     * 
-     * @param $class
-     * @param $cart_item
-     * 
-     * @return $class string
-     */ 
-    public function cart_item_class($class, $cart_item) {
-        
-        return $class;
-    }
+	/**
+	 * Add cart item class
+	 *
+	 * @param string $item_class item_class.
+	 * @param array  $cart_item cart_item.
+	 *
+	 * @return $class string
+	 */
+	public function cart_item_class( $item_class, $cart_item ) {
+		return $item_class;
+	}
 }

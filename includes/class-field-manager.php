@@ -1,4 +1,11 @@
 <?php
+/**
+ * Field Manager Template
+ *
+ * @author Kamrul
+ * @package MultiStoreX
+ */
+
 namespace Contactum;
 
 use Contactum\Fields\Field_Email;
@@ -18,167 +25,167 @@ use Contactum\Fields\Field_File;
 
 /**
  * FieldManager class
- * 
+ *
  * @package MultiStoreX
  */
-
-
 class FieldManager {
 
-    /**
-     *  store fields
-     * 
-     * @var array 
-     */
-	private $fields = [];
+	/**
+	 *  Store fields
+	 *
+	 * @var array
+	 */
+	private $fields = array();
 
-    /**
-     * get Fields
-     * 
-     * @return array
-     */ 
+	/**
+	 * Get Fields
+	 *
+	 * @return array
+	 */
 	public function getFields() {
-        if ( !empty( $this->fields ) ) {
-            return $this->fields;
-        }
+		if ( ! empty( $this->fields ) ) {
+			return $this->fields;
+		}
 
-        $this->register_field_types();
+		$this->register_field_types();
 
-        return $this->fields;
-    }
+		return $this->fields;
+	}
 
-    /**
-     * get field
-     * 
-     * @param $field_type string 
-     * 
-     * @return void
-     */ 
+	/**
+	 * Get field
+	 *
+	 * @param string $field_type field_type.
+	 *
+	 * @return void
+	 */
 	public function getField( $field_type ) {
 		$fields = $this->getFields();
 
 		if ( array_key_exists( $field_type, $fields ) ) {
-            return $fields[ $field_type ];
-        }
+			return $fields[ $field_type ];
+		}
 
-        return false;
+		return false;
 	}
 
-    /**
-     * register field types
-     * 
-     * @return array
-     */ 
+	/**
+	 * Register field types
+	 *
+	 * @return void
+	 */
 	private function register_field_types() {
-        $fields = [
-            'email_field'    => new Field_Email(),
-            'text_field'     => new Field_Text(),
-            'textarea_field' => new Field_Textarea(),
-            'radio_field'    => new Field_Radio(),
-            'checkbox_field' => new Field_Checkbox(),
-            'date_field'     => new Field_Date(),
-            'dropdown_field' => new Field_Dropdown(),
-            'number_field'   => new Field_Number(),
-            'image_field'    => new Field_Image(),
-            'multiple_select'=> new Field_MultiDropdown(),
-            'html_field'     => new Field_Html(),
-            'section_break'  => new Field_SectionBreak(),
-            'hidden_field'   => new Field_Hidden(),
-            'file_field'     => new Field_File(),
-        ];
+		$fields = array(
+			'email_field'     => new Field_Email(),
+			'text_field'      => new Field_Text(),
+			'textarea_field'  => new Field_Textarea(),
+			'radio_field'     => new Field_Radio(),
+			'checkbox_field'  => new Field_Checkbox(),
+			'date_field'      => new Field_Date(),
+			'dropdown_field'  => new Field_Dropdown(),
+			'number_field'    => new Field_Number(),
+			'image_field'     => new Field_Image(),
+			'multiple_select' => new Field_MultiDropdown(),
+			'html_field'      => new Field_Html(),
+			'section_break'   => new Field_SectionBreak(),
+			'hidden_field'    => new Field_Hidden(),
+			'file_field'      => new Field_File(),
+		);
 
-        $this->fields = apply_filters( 'contactum-form-fields', $fields );
+		$this->fields = apply_filters( 'contactum_form_fields', $fields );
 	}
 
-    /**
-     * get field groups
-     * 
-     * @return void
-     */ 
+	/**
+	 * Get field groups
+	 *
+	 * @return array
+	 */
 	public function get_field_groups() {
-        $before_custom_fields = apply_filters( 'contactum-form-fields-section-before', [] );
-        $groups               = array_merge( $before_custom_fields, $this->get_custom_fields() );
-        $after_custom_fields  = apply_filters( 'contactum-form-fields-section-after', [] );
-        $groups               = array_merge( $groups, $after_custom_fields );
+		$before_custom_fields = apply_filters( 'contactum_form_fields_section_before', array() );
+		$groups               = array_merge( $before_custom_fields, $this->get_custom_fields() );
+		$after_custom_fields  = apply_filters( 'contactum_form_fields_section_after', array() );
+		$groups               = array_merge( $groups, $after_custom_fields );
 
-        return $groups;
-    }
+		return $groups;
+	}
 
-    /**
-     * get custom fields
-     * 
-     * @return array
-     */
-    private function get_custom_fields() {
-        $fields = apply_filters( 'contactum-form-fields-custom-fields', [
-                'text_field',
-                'textarea_field',
-                'email_field',
-                'checkbox_field',
-                'radio_field',
-                'date_field',
-                'dropdown_field',
-                'number_field',
-                'image_field',
-                'multiple_select',
-                'hidden_field',
-                'file_field',
-                'section_break',
-                'html_field',
-            ]
-        );
+	/**
+	 * Get custom fields
+	 *
+	 * @return array
+	 */
+	private function get_custom_fields() {
+		$fields = apply_filters(
+			'contactum_form_fields_custom_fields',
+			array(
+				'text_field',
+				'textarea_field',
+				'email_field',
+				'checkbox_field',
+				'radio_field',
+				'date_field',
+				'dropdown_field',
+				'number_field',
+				'image_field',
+				'multiple_select',
+				'hidden_field',
+				'file_field',
+				'section_break',
+				'html_field',
+			)
+		);
 
-        return [
-            [
-                'title'     => __( 'Custom Fields', 'contactum' ),
-                'id'        => 'custom-fields',
-                'fields'    => $fields,
-                'show'      => true
-            ],
-        ];
-    }
+		return array(
+			array(
+				'title'  => __( 'Custom Fields', 'contactum' ),
+				'id'     => 'custom-fields',
+				'fields' => $fields,
+				'show'   => true,
+			),
+		);
+	}
 
-    /**
-     * get settings
-     * 
-     * @return array
-     */
-    public function get_js_settings() {
-        $fields   = $this->getFields();
+	/**
+	 * Get settings
+	 *
+	 * @return array
+	 */
+	public function get_js_settings() {
+		$fields = $this->getFields();
 
-        $js_array = [];
+		$js_array = array();
 
-        if ( $fields ) {
-            foreach ( $fields as $type => $object ) {
-                if ( is_object( $object ) ) {
-                    $js_array[ $type ] = $object->get_js_settings();
-                }
-            }
-        }
+		if ( $fields ) {
+			foreach ( $fields as $type => $object ) {
+				if ( is_object( $object ) ) {
+					$js_array[ $type ] = $object->get_js_settings();
+				}
+			}
+		}
 
-        return $js_array;
-    }
+		return $js_array;
+	}
 
-    /**
-     * render fields
-     * 
-     * @param $fields array
-     * @param $form_id int
-     * @param $atts array
-     * 
-     * @return void
-     */
-    public function render_fields( $fields, $form_id, $atts = [] ) {
-        if ( empty( $fields ) ) {
-            return;
-        }
+	/**
+	 * Render fields
+	 *
+	 * @param array $fields  fields.
+	 * @param int   $form_id form_id.
+	 * @param array $atts    atts.
+	 *
+	 * @return void
+	 */
+	public function render_fields( $fields, $form_id, $atts = array() ) {
+		if ( empty( $fields ) ) {
+			return;
+		}
 
-        foreach ($fields as $field ) {
-            if ( !$field_object = $this->getField( $field['template'] ) ) {
-                continue;
-            }
+		foreach ( $fields as $field ) {
+			if ( ! $field_object = $this->getField( $field['template'] ) ) {
+				continue;
+			}
 
-            $field_object->render( $field, $form_id );
-        }
-    }
+			$field_object->render( $field, $form_id );
+		}
+	}
 }

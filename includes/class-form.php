@@ -1,4 +1,11 @@
 <?php
+/**
+ * Form Template
+ *
+ * @author Kamrul
+ * @package MultiStoreX
+ */
+
 namespace Contactum;
 
 use Contactum\EntryManager;
@@ -6,189 +13,190 @@ use WP_Error;
 
 /**
  * Form class
- * 
+ *
  * @package MultiStoreX
- */ 
-
+ */
 class Form {
 
-    /**
-     * form id
-     * 
-     * @var int
-     */ 
-    public $id = 0;
+	/**
+	 * Form id
+	 *
+	 * @var int
+	 */
+	public $id = 0;
 
-    /**
-     * form name
-     * 
-     * @var string
-     */
-    public $name;
+	/**
+	 * Form name
+	 *
+	 * @var string
+	 */
+	public $name;
 
-    /**
-     * form data
-     * 
-     * @var array
-     */
-    public $data;
+	/**
+	 * Form data
+	 *
+	 * @var array
+	 */
+	public $data;
 
-    /**
-     * form fields
-     * 
-     * @var array
-     */
-    public $form_fields = [];
+	/**
+	 * Form fields
+	 *
+	 * @var array
+	 */
+	public $form_fields = array();
 
-    /**
-     * constructor
-     * 
-     */ 
-    public function __construct( $form = null ) {
+	/**
+	 * Constructor
+	 *
+	 * @param string $form form.
+	 *
+	 */
+	public function __construct( $form = null ) {
+		if ( is_numeric( $form ) ) {
+			$the_post = get_post( $form );
 
-        if ( is_numeric( $form ) ) {
-            $the_post = get_post( $form );
+			if ( $the_post ) {
+				$this->id   = $the_post->ID;
+				$this->name = $the_post->post_title;
+				$this->data = $the_post;
+			}
+		} elseif ( is_a( $form, 'WP_Post' ) ) {
+			$this->id   = $form->ID;
+			$this->name = $form->post_title;
+			$this->data = $form;
+		}
+	}
 
-            if ( $the_post ) {
-                $this->id   = $the_post->ID;
-                $this->name = $the_post->post_title;
-                $this->data = $the_post;
-            }
-        } elseif ( is_a( $form, 'WP_Post' ) ) {
-            $this->id   = $form->ID;
-            $this->name = $form->post_title;
-            $this->data = $form;
-        }
-    }
+	/**
+	 * Get id
+	 *
+	 * @return string
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * get id
-     * 
-     * @return string
-     */ 
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Get name
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-    /**
-     * get name
-     * 
-     * @return string
-     */ 
-    public function getName() {
-        return $this->name;
-    }
+	/**
+	 * Get fields
+	 *
+	 * @return array
+	 */
+	public function getFields() {
+		$form_fields = array();
 
-    /**
-     * get fields
-     * 
-     * @return array
-     */ 
-    public function getFields() {
+		$fields = get_children(
+			array(
+				'post_parent' => $this->id,
+				'post_status' => 'publish',
+				'post_type'   => 'chi_input',
+				'numberposts' => '-1',
+				'orderby'     => 'menu_order',
+				'order'       => 'ASC',
+			)
+		);
 
-        $form_fields = [];
+		foreach ( $fields as $key => $content ) {
+			$field = maybe_unserialize( $content->post_content );
 
-        $fields = get_children( [
-            'post_parent' => $this->id,
-            'post_status' => 'publish',
-            'post_type'   => 'chi_input',
-            'numberposts' => '-1',
-            'orderby'     => 'menu_order',
-            'order'       => 'ASC',
-        ] );
+			if ( empty( $field['template'] ) ) {
+				continue;
+			}
 
-        foreach ( $fields as $key => $content ) {
-            $field = maybe_unserialize( $content->post_content );
+			$field['id']   = $content->ID;
+			$form_fields[] = $field;
+		}
 
-            if ( empty( $field['template']  ) ) {
-                continue;
-            }
+		return $form_fields;
+	}
 
-            $field['id']   = $content->ID;
-            $form_fields[] = $field;
-        }
+	/**
+	 * Get field values
+	 *
+	 * @param array $field_template field_template.
+	 *
+	 * @return boolean
+	 */
+	public function hasField( $field_template ) {
+		foreach ( $this->getFields() as $key => $field ) {
+			if ( isset( $field['template'] ) && $field['template'] === $field_template ) {
+				return true;
+			}
+		}
+	}
 
-        return $form_fields;
-    }
+	/**
+	 * Get field values
+	 *
+	 * @return array
+	 */
+	public function getFieldValues() {
+		$values = array();
+		$fields = $this->getFields();
 
-    /**
-     * get field values
-     * 
-     * @param $field_template array
-     * 
-     * @return boolean
-     */ 
-    public function hasField( $field_template ) {
-        foreach ( $this->getFields() as $key => $field ) {
-            if ( isset( $field['template'] ) && $field['template'] == $field_template ) {
-                return true;
-            }
-        }
-    }
+		if ( ! $fields ) {
+			return $values;
+		}
 
-    /**
-     * get field values
-     * 
-     * @return array
-     */ 
-    public function getFieldValues() {
-        $values = [];
-        $fields = $this->getFields();
+		foreach ( $fields as $field ) {
+			if ( ! isset( $field['name'] ) ) {
+				continue;
+			}
 
-        if ( !$fields ) {
-            return $values;
-        }
+			$value = array(
+				'label' => isset( $field['label'] ) ? $field['label'] : '',
+				'type'  => $field['template'],
+			);
 
-        foreach ( $fields as $field ) {
-            if ( !isset( $field['name'] ) ) {
-                continue;
-            }
+			$values[ $field['name'] ] = array_merge( $field, $value );
+		}
 
-            $value = [
-                'label' => isset( $field['label'] ) ? $field['label'] : '',
-                'type'  => $field['template'],
-            ];
+		return apply_filters( 'contactum_get_field_values', $values );
+	}
 
-            $values[ $field['name'] ] = array_merge( $field, $value );
-        }
+	/**
+	 * Get Settings
+	 *
+	 * @return array
+	 */
+	public function getSettings() {
+		$settings = get_post_meta( $this->id, 'form_settings', true );
+		$default  = contactum_get_default_form_settings();
 
-        return apply_filters( 'contactum_get_field_values', $values );
-    }
-    
-    /**
-     * get Settings
-     * 
-     * @return array
-     */ 
-    public function getSettings() {
-        $settings = get_post_meta( $this->id, 'form_settings', true );
-        $default  = contactum_get_default_form_settings();
+		return array_merge( $default, $settings );
+	}
 
-        return array_merge( $default, $settings );
-    }
+	/**
+	 * Prepare entries
+	 *
+	 * @param array $post_data post_data.
+	 *
+	 * @return array
+	 */
+	public function prepare_entries( $post_data = array() ) {
+		$fields       = contactum()->fields->getFields();
+		$form_fields  = $this->getFields();
+		$entry_fields = array();
 
-    /**
-     * prepare entries
-     * 
-     * @param $post_data array
-     * 
-     * @return array
-     */ 
-    public function prepare_entries( $post_data = [] ) {
-        $fields      = contactum()->fields->getFields();
-        $form_fields = $this->getFields();
-        $entry_fields = [];
+		foreach ( $form_fields as $key => $field ) {
+			if ( ! array_key_exists( $field['template'], $fields ) ) {
+				continue;
+			}
 
-        foreach ( $form_fields as $key => $field ) {
-            if ( !array_key_exists( $field['template'], $fields ) ) {
-                continue;
-            }
+			$field_class                    = $fields[ $field['template'] ];
+			$entry_fields[ $field['name'] ] = $field_class->prepare_entry( $field, $post_data );
+			$form_fields[ $key ]['value']   = $field_class->prepare_entry( $field, $post_data );
+		}
 
-            $field_class = $fields[ $field['template'] ];
-            $entry_fields[ $field['name'] ] = $field_class->prepare_entry( $field, $post_data );
-            $form_fields[$key][ 'value' ] = $field_class->prepare_entry( $field, $post_data );
-        }
-
-        return $form_fields;
-    }
+		return $form_fields;
+	}
 }

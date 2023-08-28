@@ -6,8 +6,9 @@
             "email": "Kamrul.rajiv300@gmail.com"
         }
     ],
-    "require": {},
-    "require-dev": {},
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^3.0"
+    },
     "autoload": {
         "psr-4": {
             "Contactum\\": "includes/",
@@ -17,5 +18,14 @@
             "includes/functions.php"
         ]
     },
-    "scripts": {}
+    "scripts": {
+        "phpcs": [
+            "phpcs --standard=WordPress"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
 }

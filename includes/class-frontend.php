@@ -1,139 +1,136 @@
 <?php
+/**
+ * Frontend Manager
+ *
+ * @author Kamrul
+ * @package MultiStoreX
+ */
+
 namespace Contactum;
 
 /**
  * Frontend class
- * 
+ *
  * @package MultiStoreX
- */ 
-
+ */
 class Frontend {
 
-    /**
-     * constructor
-     */ 
-    public function __construct() {
-        add_filter('woocommerce_product_add_to_cart_text', [ $this, 'add_to_cart_text' ], 10, 2);
-        add_filter('woocommerce_product_add_to_cart_url', [ $this, 'add_to_cart_url' ], 20, 2);
-        add_filter('woocommerce_loop_add_to_cart_args', [ $this, 'add_to_cart_args' ], 10, 2);
-        add_action( 'woocommerce_before_add_to_cart_button', [ $this, 'add_form_in_single_product' ] );
-    }
+	/**
+	 * Constructor
+	 */
+	public function __construct() {
+		add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'add_to_cart_text' ), 10, 2 );
+		add_filter( 'woocommerce_product_add_to_cart_url', array( $this, 'add_to_cart_url' ), 20, 2 );
+		add_filter( 'woocommerce_loop_add_to_cart_args', array( $this, 'add_to_cart_args' ), 10, 2 );
+		add_action( 'woocommerce_before_add_to_cart_button', array( $this, 'add_form_in_single_product' ) );
+	}
 
-    /**
-     * change add to cart text
-     * 
-     * @param $text  string
-     * @param $product object 
-     * 
-     * @return string
-     */ 
-    public function add_to_cart_text($text, $product) {
+	/**
+	 * Change add to cart text
+	 *
+	 * @param string $text text.
+	 * @param object $product product.
+	 *
+	 * @return string
+	 */
+	public function add_to_cart_text( $text, $product ) {
+		$product_id = $product->get_id();
 
-        $product_id = $product->get_id();
+		if ( $this->wcpa_product( $product_id ) ) {
+			$text = 'Select options';
+		}
 
-        if( $this->Wcpa_Product( $product_id ) ) {
-            $text = 'Select options';
-        }
+		return $text;
+	}
 
-        return $text;
-    }
+	/**
+	 * Change add to cart text
+	 *
+	 * @param string $url url.
+	 * @param object $product  product.
+	 *
+	 * @return string
+	 */
+	public function add_to_cart_url( $url, $product ) {
+		$product_id = $product->get_id();
 
-    /**
-     * change add to cart text
-     * 
-     * @param $url string
-     * @param $product object 
-     * 
-     * @return string
-     */ 
-    public function add_to_cart_url($url, $product) {
+		if ( $this->wcpa_product( $product_id ) ) {
+			return $product->get_permalink();
+		}
 
-        $product_id = $product->get_id();
+		return $url;
+	}
 
-        if( $this->Wcpa_Product( $product_id ) ) {
-            return $product->get_permalink();
-        }
+	/**
+	 * Change add to cart argument
+	 *
+	 * @param array  $args args.
+	 * @param object $product product.
+	 *
+	 * @return string
+	 */
+	public function add_to_cart_args( $args, $product ) {
+		$product_id = $product->get_id();
 
-        return $url;
-    }
+		return $args;
+	}
 
-    /**
-     * change add to cart argument
-     * 
-     * @param $args array
-     * @param $product object 
-     * 
-     * @return string
-     */ 
-    public function add_to_cart_args($args, $product)
-    {
-        $product_id = $product->get_id();
+	/**
+	 * Add form before single product
+	 *
+	 * @return string
+	 */
+	public function add_form_in_single_product() {
+		global $post;
 
-        if( $this->Wcpa_Product( $product_id ) ) {
-            
-        }
+		$id   = get_post_meta( $post->ID, 'custom_form', true );
+		$form = contactum()->forms->get( $id );
 
-        return $args;
-    }
+		if ( ! $form->id ) {
+			return $this->show_error( __( 'The form couldn\'t be found.', 'contactum' ) );
+		}
 
-    /**
-     * add form before single product
-     * 
-     * 
-     * @return string
-     */ 
-    public function add_form_in_single_product() {
-        global $post;
+		$this->render_form( $form );
+	}
 
-        $id   = get_post_meta($post->ID, 'custom_form', true);
-        $form = contactum()->forms->get( $id );
-        
-        if ( !$form->id ) {
-            return $this->show_error( __( 'The form couldn\'t be found.', 'contactum' ) );
-        }
+	/**
+	 * Render form
+	 *
+	 * @param object $form form.
+	 * @param array  $atts atts.
+	 *
+	 * @return void
+	 */
+	private function render_form( $form, $atts = array() ) {
+		contactum()->assets->register_frontend();
+		contactum()->assets->enqueue_frontend();
 
-        $this->render_form( $form );
-    }
+		$form_fields   = $form->getFields();
+		$form_settings = $form->getSettings();
+		?>
+		<ul class="contactum-form form-label-<?php echo esc_attr( $form_settings['label_position'] ); ?>">
+			<?php contactum()->fields->render_fields( $form_fields, $form->id, $atts ); ?>
+			<li>
+				<input type="hidden" name="form_id" value="<?php echo esc_attr( $form->id ); ?>">
+			</li>
+		</ul>
+		<?php
+	}
 
-    /**
-     * render form
-     * 
-     * @param $form object
-     * @param $atts array
-     * 
-     * @return void
-     */ 
-    private function render_form( $form, $atts = []  ) {
-        
-        contactum()->assets->register_frontend();
-        contactum()->assets->enqueue_frontend();
+	/**
+	 * Is form product
+	 *
+	 * @param int $product_id product_id.
+	 *
+	 * @return boolean
+	 */
+	public function wcpa_product( $product_id ) {
+		$custom_form = get_post_meta( $product_id, 'custom_form', true );
 
-        $form_fields = $form->getFields();
-        $form_settings = $form->getSettings();
-    ?>
-        <ul class="contactum-form form-label-<?php echo esc_attr( $form_settings['label_position'] ); ?>">
-            <?php contactum()->fields->render_fields( $form_fields, $form->id, $atts ); ?>
-            <li> 
-                <input type="hidden" name="form_id" value="<?php echo esc_attr( $form->id ); ?>">
-            </li>
-        </ul>
-        <?php
-    }
+		if ( ! empty( $custom_form ) ) {
+			return true;
+		}
 
-    /**
-     * is form product
-     * 
-     * @param $product_id int
-     * 
-     * @return boolean
-     */ 
-    public function Wcpa_Product($product_id) {
-        $custom_form = get_post_meta($product_id, 'custom_form', true);
-
-        if( !empty( $custom_form ) ) {
-            return true;
-        }
-
-        return false;
-    }
+		return false;
+	}
 }

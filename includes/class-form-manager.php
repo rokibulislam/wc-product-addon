@@ -1,4 +1,11 @@
 <?php
+/**
+ * Form Manager Template
+ *
+ * @author Kamrul
+ * @package MultiStoreX
+ */
+
 namespace Contactum;
 
 use Contactum\Form;
@@ -6,214 +13,218 @@ use WP_Query;
 
 /**
  * FormManager class
- * 
+ *
  * @package MultiStoreX
- */ 
-
+ */
 class FormManager {
 
-    /**
-     *  getAll Forms Page
-     * 
-     * @return array
-     */ 
-    public function all() {
-        return $this->getForms( [ 'posts_per_page' => -1 ] );
-    }
+	/**
+	 *  GetAll Forms Page
+	 *
+	 * @return array
+	 */
+	public function all() {
+		return $this->getForms( [ 'posts_per_page' => -1 ] );
+	}
 
-    /**
-     * getAll Forms Page
-     * 
-     * @return array
-     */ 
-    public function getForms( $args = [] ) {
-        $forms_array = [
-            'forms' => [],
-            'meta'  => [
-                'total' => 0,
-                'pages' => 0,
-            ],
-        ];
-        $defaults  = [
-            'post_type'   => 'chi_forms',
-            'post_status' => [ 'publish', 'draft', 'pending' ],
-        ];
+	/**
+	 * GetAll Forms Page
+	 *
+	 * @param array $args args
+	 *
+	 * @return array
+	 */
+	public function getForms( $args = array() ) {
+		$forms_array = array(
+			'forms' => array(),
+			'meta'  => array(
+				'total' => 0,
+				'pages' => 0,
+			),
+		);
 
-        $args  = wp_parse_args( $args, $defaults );
+		$defaults  = array(
+			'post_type'   => 'chi_forms',
+			'post_status' => array( 'publish', 'draft', 'pending' ),
+		);
 
-        $query = new WP_Query( $args );
-        $forms = $query->get_posts();
+		$args  = wp_parse_args( $args, $defaults );
+		$query = new WP_Query( $args );
+		$forms = $query->get_posts();
 
-        if ( $forms ) {
-            foreach ( $forms as $form ) {
-                $forms_array['forms'][$form->ID] = new Form( $form );
-            }
-        }
+		if ( $forms ) {
+			foreach ( $forms as $form ) {
+				$forms_array['forms'][ $form->ID ] = new Form( $form );
+			}
+		}
 
-        $forms_array['meta']['total'] = (int) $query->found_posts;
-        $forms_array['meta']['pages'] = (int) $query->max_num_pages;
+		$forms_array['meta']['total'] = (int) $query->found_posts;
+		$forms_array['meta']['pages'] = (int) $query->max_num_pages;
 
-        wp_reset_postdata();
+		wp_reset_postdata();
 
-        return $forms_array;
-    }
+		return $forms_array;
+	}
 
-    /**
-     * getAll Forms Page
-     * 
-     * @param $form string
-     * 
-     * @return object
-     */ 
-    public function get( $form ) {
-        return new Form( $form );
-    }
+	/**
+	 * GetAll Forms Page
+	 *
+	 * @param string $form form.
+	 *
+	 * @return object
+	 */
+	public function get( $form ) {
+		return new Form( $form );
+	}
 
-    /**
-     * create form
-     * 
-     * @param $form_name string
-     * @param $fields array
-     * 
-     * @return int
-     */ 
-    public function create( $form_name, $fields = [] ) {
-        $author = get_current_user_id();
+	/**
+	 * Create form
+	 *
+	 * @param string $form_name  form_name.
+	 * @param array	 $fields	  fields.
+	 *
+	 * @return int
+	 */
+	public function create( $form_name, $fields = array() ) {
+		$author = get_current_user_id();
 
-        $form_data = [
-            'post_title'  => $form_name,
-            'post_type'   => 'chi_forms',
-            'post_status' => 'publish',
-            'post_author' => $author
-        ];
+		$form_data =  array(
+			'post_title'  => $form_name,
+			'post_type'   => 'chi_forms',
+			'post_status' => 'publish',
+			'post_author' => $author
+		);
 
-        $form_id = wp_insert_post( $form_data );
+		$form_id = wp_insert_post( $form_data );
 
-        if( is_wp_error( $form_id ) ) {
-            return $form_id;
-        }
+		if ( is_wp_error( $form_id ) ) {
+			return $form_id;
+		}
 
-        if ( $fields ) {
+		if ( $fields ) {
 
-            foreach ( $fields as $menu_order => $field ) {
-                wp_insert_post( [
-                    'post_type'    => 'chi_input',
-                    'post_status'  => 'publish',
-                    'post_content' => maybe_serialize( $field ),
-                    'post_parent'  => $form_id,
-                    'menu_order'   => $menu_order,
-                ] );
-            }
+			foreach ( $fields as $menu_order => $field ) {
+				wp_insert_post(
+					array(
+						'post_type'    => 'chi_input',
+						'post_status'  => 'publish',
+						'post_content' => maybe_serialize( $field ),
+						'post_parent'  => $form_id,
+						'menu_order'   => $menu_order,
+					)
+				);
+			}
+		}
 
-        }
+		return $form_id;
+	}
 
-        return $form_id;
-    }
+	/**
+	 * Delete form
+	 *
+	 * @param string  $form_id form_id.
+	 * @param boolean $force   force.
+	 *
+	 * @return void
+	 */
+	public function delete( $form_id, $force = true ) {
+		global $wpdb;
+		wp_delete_post( $form_id, $force );
 
-    /**
-     * delete form
-     * 
-     * @param $form_id string
-     * @param $force boolean
-     * 
-     * @return void
-     */ 
-    public function delete( $form_id, $force = true  ) {
-        global $wpdb;
-        wp_delete_post( $form_id, $force );
+		$wpdb->delete( $wpdb->posts,
+			array(
+				'post_parent' => $form_id,
+				'post_type'   => 'chi_input',
+			)
+		);
+	}
 
-        $wpdb->delete( $wpdb->posts,
-            [
-                'post_parent' => $form_id,
-                'post_type'   => 'chi_input',
-            ]
-        );
-    }
+	/**
+	 * Save form
+	 *
+	 * @param array $data data.
+	 *
+	 * @return array
+	 */
+	public function save( $data ) {
+		$saved_fields  = [];
+		$new_fields    = [];
+		wp_update_post( [ 'ID' => $data['form_id'], 'post_status' => 'publish', 'post_title' => $data['post_title'] ] );
 
-    /**
-     * save form
-     * 
-     * @param $data array
-     * 
-     * @return array
-     */ 
-    public function save( $data ) {
-        $saved_fields  = [];
-        $new_fields = [];
-        wp_update_post( [ 'ID' => $data['form_id'], 'post_status' => 'publish', 'post_title' => $data['post_title'] ] );
+		$existing_fields = get_children(
+			array(
+				'post_parent' => $data['form_id'],
+				'post_status' => 'publish',
+				'post_type'   => 'chi_input',
+				'numberposts' => '-1',
+				'orderby'     => 'menu_order',
+				'order'       => 'ASC',
+				'fields'      => 'ids',
+			)
+		);
 
-        $existing_fields = get_children( [
-            'post_parent' => $data['form_id'],
-            'post_status' => 'publish',
-            'post_type'   => 'chi_input',
-            'numberposts' => '-1',
-            'orderby'     => 'menu_order',
-            'order'       => 'ASC',
-            'fields'      => 'ids',
-        ] );
+		if ( ! empty( $data['form_fields'] ) ) {
+			foreach ( $data['form_fields'] as $order => $field ) {
+				if ( ! empty( $field['is_new'] ) ) {
+					unset( $field['is_new'] );
+					unset( $field['id'] );
 
-        if ( !empty( $data['form_fields'] ) ) {
-            foreach ( $data['form_fields'] as $order => $field ) {
-                if ( !empty( $field['is_new'] ) ) {
-                    unset( $field['is_new'] );
-                    unset( $field['id'] );
+					$field_id = 0;
+				} else {
+					$field_id = $field['id'];
+				}
 
-                    $field_id = 0;
-                } else {
-                    $field_id = $field['id'];
-                }
+				$field_id = contactum_insert_form_field( $data['form_id'], $field, $field_id ,$order );
 
-                $field_id = contactum_insert_form_field($data['form_id'], $field, $field_id ,$order );
+				$new_fields[] = $field_id;
 
-                $new_fields[] = $field_id;
+				$field['id'] = $field_id;
 
-                $field['id'] = $field_id;
+				$saved_fields[] = $field;
+			}
+		}
 
-                $saved_fields[] = $field;
-            }
-        }
-
-        $inputs_to_delete = array_diff( $existing_fields, $new_fields );
+		$inputs_to_delete = array_diff( $existing_fields, $new_fields );
 
 
-        if ( !empty( $inputs_to_delete ) ) {
-            foreach ( $inputs_to_delete as $delete_id ) {
-                wp_delete_post( $delete_id, true );
-            }
-        }
+		if ( ! empty( $inputs_to_delete ) ) {
+			foreach ( $inputs_to_delete as $delete_id ) {
+				wp_delete_post( $delete_id, true );
+			}
+		}
 
-        update_post_meta( $data['form_id'], 'notifications', $data['notifications'] );
-        update_post_meta( $data['form_id'], 'form_settings', $data['form_settings'] );
-        update_post_meta( $data['form_id'], 'contactum_version', CONTACTUM_VERSION );
+		update_post_meta( $data['form_id'], 'notifications', $data['notifications'] );
+		update_post_meta( $data['form_id'], 'form_settings', $data['form_settings'] );
+		update_post_meta( $data['form_id'], 'contactum_version', CONTACTUM_VERSION );
 
-        return $saved_fields;
-    }
+		return $saved_fields;
+	}
 
-    /**
-     * duplicate form
-     * 
-     * @param $id int
-     * 
-     * @return int
-     */ 
-    public function duplicate( $id ) {
-        $form = $this->get( $id);
+	/**
+	 * Duplicate form
+	 *
+	 * @param int $id id.
+	 *
+	 * @return int
+	 */
+	public function duplicate( $id ) {
+		$form = $this->get( $id );
 
-        if ( empty( $form ) ) {
-            return;
-        }
+		if ( empty( $form ) ) {
+			return;
+		}
 
-        $form_id = $this->create( $form->name, $form->getFields() );
+		$form_id = $this->create( $form->name, $form->getFields() );
 
-        $data = [
-            'form_id'       => absint( $form_id ),
-            'post_title'    => sanitize_text_field( $form->name ) . ' (#' . $form_id . ')',
-            'form_fields'   => $this->get( $form_id )->getFields(),
-            'form_settings' => $form->getSettings(),
-        ];
+		$data = array(
+			'form_id'       => absint( $form_id ),
+			'post_title'    => sanitize_text_field( $form->name ) . ' (#' . $form_id . ')',
+			'form_fields'   => $this->get( $form_id )->getFields(),
+			'form_settings' => $form->getSettings(),
+		);
 
-        $form_fields = $this->save( $data );
+		$form_fields = $this->save( $data );
 
-        return $form_id;
-    }
+		return $form_id;
+	}
 }
