@@ -6,21 +6,21 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
-use Contactum\Fields\Contactum_Field;
+use WCPRAEF\Fields\Base_Field;
 
 /**
  * Field SectionBreak class
  *
  * @package MultiStoreX
  */
-class Field_SectionBreak extends Contactum_Field {
+class Field_SectionBreak extends Base_Field {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Section Break', 'contactum' );
+		$this->name       = __( 'Section Break', 'wc-product-addon-custom-field' );
 		$this->input_type = 'section_break';
 		$this->icon       = 'text-width';
 	}
@@ -55,29 +55,29 @@ class Field_SectionBreak extends Contactum_Field {
 		$settings = array(
 			array(
 				'name'      => 'label',
-				'title'     => __( 'Title', 'contactum' ),
+				'title'     => __( 'Title', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'basic',
 				'priority'  => 10,
-				'help_text' => __( 'Title of the section', 'contactum' ),
+				'help_text' => __( 'Title of the section', 'wc-product-addon-custom-field' ),
 			),
 
 			array(
 				'name'      => 'name',
-				'title'     => __( 'Meta Key', 'contactum' ),
+				'title'     => __( 'Meta Key', 'wc-product-addon-custom-field' ),
 				'type'      => 'text_meta',
 				'section'   => 'basic',
 				'priority'  => 11,
-				'help_text' => __( 'Name of the meta key this field will save to', 'contactum' ),
+				'help_text' => __( 'Name of the meta key this field will save to', 'wc-product-addon-custom-field' ),
 			),
 
 			array(
 				'name'      => 'description',
-				'title'     => __( 'Description', 'contactum' ),
+				'title'     => __( 'Description', 'wc-product-addon-custom-field' ),
 				'type'      => 'textarea',
 				'section'   => 'basic',
 				'priority'  => 12,
-				'help_text' => __( 'Some details text about the section', 'contactum' ),
+				'help_text' => __( 'Some details text about the section', 'wc-product-addon-custom-field' ),
 			),
 		);
 
@@ -93,7 +93,7 @@ class Field_SectionBreak extends Contactum_Field {
 		$props = array(
 			'template'       => $this->get_type(),
 			'label'          => $this->get_name(),
-			'description'    => __( 'Some description about this section', 'contactum' ),
+			'description'    => __( 'Some description about this section', 'wc-product-addon-custom-field' ),
 			'id'             => 0,
 			'is_new'         => true,
 			'contactum_cond' => $this->default_conditional_prop(),

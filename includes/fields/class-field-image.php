@@ -6,21 +6,21 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
-use Contactum\Fields\Contactum_Field;
+use WCPRAEF\Fields\Base_Field;
 
 /**
  * Field Image class
  *
  * @package MultiStoreX
  */
-class Field_Image extends Contactum_Field {
+class Field_Image extends Base_Field {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Image', 'contactum' );
+		$this->name       = __( 'Image', 'wc-product-addon-custom-field' );
 		$this->input_type = 'image_field';
 		$this->icon       = 'file-image-o';
 	}
@@ -89,47 +89,47 @@ class Field_Image extends Contactum_Field {
 	 * @return array
 	 */
 	public function get_options_settings() {
-		$default_options = $this->get_default_option_settings( true, arry( 'dynamic', 'width' ) );
+		$default_options = $this->get_default_option_settings( true, array( 'dynamic', 'width' ) );
 
 		$settings = array(
 			array(
 				'name'      => 'max_size',
-				'title'     => __( 'Max. file size', 'contactum' ),
+				'title'     => __( 'Max. file size', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'advanced',
 				'priority'  => 20,
-				'help_text' => __( 'Enter maximum upload size limit in KB', 'contactum' ),
+				'help_text' => __( 'Enter maximum upload size limit in KB', 'wc-product-addon-custom-field' ),
 			),
 
 			array(
 				'name'      => 'count',
-				'title'     => __( 'Max. files', 'contactum' ),
+				'title'     => __( 'Max. files', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'advanced',
 				'priority'  => 21,
-				'help_text' => __( 'Number of images can be uploaded', 'contactum' ),
+				'help_text' => __( 'Number of images can be uploaded', 'wc-product-addon-custom-field' ),
 			),
 			array(
 				'name'      => 'button_label',
-				'title'     => __( 'Button Label', 'contactum' ),
+				'title'     => __( 'Button Label', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
-				'default'   => __( 'Select Image', 'contactum' ),
+				'default'   => __( 'Select Image', 'wc-product-addon-custom-field' ),
 				'section'   => 'basic',
 				'priority'  => 22,
-				'help_text' => __( 'Enter a label for the Select button', 'contactum' ),
+				'help_text' => __( 'Enter a label for the Select button', 'wc-product-addon-custom-field' ),
 			),
 
 			array(
 				'name'        => 'extension',
-				'title'       => __( 'Allowed Images', 'contactum' ),
+				'title'       => __( 'Allowed Images', 'wc-product-addon-custom-field' ),
 				'title_class' => 'label-hr',
 				'type'        => 'checkbox',
 				'options'     => array(
-					'jpg'  => __( 'JPG', 'contactum' ),
-					'jpeg' => __( 'JPEG', 'contactum' ),
-					'png'  => __( 'PNG', 'contactum' ),
-					'gif'  => __( 'GIF', 'contactum' ),
-					'bmp'  => __( 'BMP', 'contactum' ),
+					'jpg'  => __( 'JPG', 'wc-product-addon-custom-field' ),
+					'jpeg' => __( 'JPEG', 'wc-product-addon-custom-field' ),
+					'png'  => __( 'PNG', 'wc-product-addon-custom-field' ),
+					'gif'  => __( 'GIF', 'wc-product-addon-custom-field' ),
+					'bmp'  => __( 'BMP', 'wc-product-addon-custom-field' ),
 				),
 				'section'     => 'advanced',
 				'priority'    => 22,
@@ -150,7 +150,7 @@ class Field_Image extends Contactum_Field {
 		$props    = array(
 			'max_size'     => '1024',
 			'count'        => '1',
-			'button_label' => __( 'Select Image', 'contactum' ),
+			'button_label' => __( 'Select Image', 'wc-product-addon-custom-field' ),
 			'extension'    => array( 'jpg', 'jpeg', 'png', 'gif', 'bmp' ),
 		);
 

@@ -6,7 +6,7 @@
  * @package MultiStoreX
  */
 
-namespace Contactum;
+namespace WCPRAEF;
 
 /**
  * Process class
@@ -79,7 +79,7 @@ class Process {
 				if ( 'yes' === $field['required'] ) {
 					if ( empty( $post_data[ $field['name'] ] ) ) {
 						$passed = false;
-						wc_add_notice( __( 'Please fill in the required ' . $field['name'] . ' field.', 'contactum' ), 'error' );
+						wc_add_notice( __( 'Please fill in the required ' . $field['name'] . ' field.', 'wc-product-addon-custom-field' ), 'error' );
 					}
 				}
 			}

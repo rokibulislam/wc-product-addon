@@ -6,10 +6,10 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
-use Contactum\Fields\Contactum_Field;
-use Contactum\Fields\Traits\Textoption;
+use WCPRAEF\Fields\Base_Field;
+use WCPRAEF\Fields\Traits\Textoption;
 
 /**
  * Field Text class
@@ -17,14 +17,14 @@ use Contactum\Fields\Traits\Textoption;
  * @package MultiStoreX
  * @author  Kamrul
  */
-class Field_Text extends Contactum_Field {
+class Field_Text extends Base_Field {
 	use Textoption;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Text', 'contactum' );
+		$this->name       = __( 'Text', 'wc-product-addon-custom-field' );
 		$this->input_type = 'text_field';
 		$this->icon       = 'text-width';
 	}
@@ -79,12 +79,12 @@ class Field_Text extends Contactum_Field {
 				'type'          => 'checkbox',
 				'is_single_opt' => true,
 				'options'       => array(
-					'no' => __( 'Unique Values Only', 'contactum' ),
+					'no' => __( 'Unique Values Only', 'wc-product-addon-custom-field' ),
 				),
 				'default'       => '',
 				'section'       => 'advanced',
 				'priority'      => 23,
-				'help_text'     => __( 'Select this option to limit user input to unique values only. This will require that a value entered in a field does not currently exist in the entry database for that field.', 'contactum' ),
+				'help_text'     => __( 'Select this option to limit user input to unique values only. This will require that a value entered in a field does not currently exist in the entry database for that field.', 'wc-product-addon-custom-field' ),
 			),
 		);
 

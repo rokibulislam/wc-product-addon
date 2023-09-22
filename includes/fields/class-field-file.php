@@ -6,16 +6,16 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
-use Contactum\Fields\Contactum_Field;
+use WCPRAEF\Fields\Base_Field;
 
 /**
  * Field File class
  *
  * @package MultiStoreX
  */
-class Field_File extends Contactum_Field {
+class Field_File extends Base_Field {
 	/**
 	 * Constructor
 	 */
@@ -51,7 +51,7 @@ class Field_File extends Contactum_Field {
 			<div class="contactum-fields">
 				<div id="<?php echo esc_attr( $unique_id ); ?>-upload-container">
 					<div class="attachment-upload-filelist" data-type="file" data-required="<?php echo $field_settings['required']; ?>">
-						<a id="<?php echo esc_attr( $unique_id ); ?>-pickfiles" data-form_id="<?php echo esc_attr( $form_id ); ?>" class="button btn-image file-selector <?php echo $field_settings['name'] . '_' . $form_id; ?>" href="#" data-field-name="<?php echo esc_attr( $field_settings['name'] ); ?>" ><?php _e( 'Select File(s)', 'contactum' ); ?></a>
+						<a id="<?php echo esc_attr( $unique_id ); ?>-pickfiles" data-form_id="<?php echo esc_attr( $form_id ); ?>" class="button btn-image file-selector <?php echo $field_settings['name'] . '_' . $form_id; ?>" href="#" data-field-name="<?php echo esc_attr( $field_settings['name'] ); ?>" ><?php _e( 'Select File(s)', 'wc-product-addon-custom-field' ); ?></a>
 						<ul class="attachment-list thumbnails"></ul>
 					</div>
 				</div><!-- .container -->
@@ -92,32 +92,32 @@ class Field_File extends Contactum_Field {
 		$settings = array(
 			array(
 				'name'      => 'max_size',
-				'title'     => __( 'Max. file size', 'contactum' ),
+				'title'     => __( 'Max. file size', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'variation' => 'number',
 				'section'   => 'advanced',
 				'priority'  => 20,
-				'help_text' => __( 'Enter maximum upload size limit in KB', 'contactum' ),
+				'help_text' => __( 'Enter maximum upload size limit in KB', 'wc-product-addon-custom-field' ),
 			),
 
 			array(
 				'name'      => 'count',
-				'title'     => __( 'Max. files', 'contactum' ),
+				'title'     => __( 'Max. files', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'variation' => 'number',
 				'section'   => 'advanced',
 				'priority'  => 21,
-				'help_text' => __( 'Number of images can be uploaded', 'contactum' ),
+				'help_text' => __( 'Number of images can be uploaded', 'wc-product-addon-custom-field' ),
 			),
 			array(
 				'name'        => 'extension',
-				'title'       => __( 'Allowed Files', 'contactum' ),
+				'title'       => __( 'Allowed Files', 'wc-product-addon-custom-field' ),
 				'title_class' => 'label-hr',
 				'type'        => 'checkbox',
 				'options'     => array(
-					'images' => __( 'Images (jpg, jpeg, gif, png, bmp)', 'contactum' ),
-					'audio'  => __( 'Audio (mp3, wav, ogg, wma, mka, m4a, ra, mid, midi)', 'contactum' ),
-					'video'  => __( 'Videos (avi, divx, flv, mov, ogv, mkv, mp4, m4v, divx, mpg, mpeg, mpe)', 'contactum' ),
+					'images' => __( 'Images (jpg, jpeg, gif, png, bmp)', 'wc-product-addon-custom-field' ),
+					'audio'  => __( 'Audio (mp3, wav, ogg, wma, mka, m4a, ra, mid, midi)', 'wc-product-addon-custom-field' ),
+					'video'  => __( 'Videos (avi, divx, flv, mov, ogv, mkv, mp4, m4v, divx, mpg, mpeg, mpe)', 'wc-product-addon-custom-field' ),
 				),
 				'section'     => 'advanced',
 				'priority'    => 22,

@@ -45,6 +45,7 @@ module.exports = function(grunt) {
             main: {
                 src: [
                     '**',
+                    '!vendor/**',
                     '!node_modules/**',
                     '!build/**',
                     '!src/**',

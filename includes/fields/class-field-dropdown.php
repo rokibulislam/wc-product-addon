@@ -5,24 +5,24 @@
  * @author Kamrul
  * @package MultiStoreX
  */
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
-use Contactum\Fields\Contactum_Field;
-use Contactum\Fields\Traits\DropDownOption;
+use WCPRAEF\Fields\Base_Field;
+use WCPRAEF\Fields\Traits\DropDownOption;
 
 /**
  * Field Dropdown class
  *
  * @package MultiStoreX
  */
-class Field_Dropdown extends Contactum_Field {
+class Field_Dropdown extends Base_Field {
 	use DropDownOption;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'DropDown', 'contactum' );
+		$this->name       = __( 'DropDown', 'wc-product-addon-custom-field' );
 		$this->input_type = 'dropdown_field';
 		$this->icon       = 'caret-square-o-down';
 		$this->multiple   = false;
@@ -81,11 +81,11 @@ class Field_Dropdown extends Contactum_Field {
 			$this->get_default_option_dropdown_settings( $this->multiple ),
 			array(
 				'name'      => 'first',
-				'title'     => __( 'Select Text', 'contactum' ),
+				'title'     => __( 'Select Text', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'basic',
 				'priority'  => 13,
-				'help_text' => __( '', 'contactum' ),
+				'help_text' => __( '', 'wc-product-addon-custom-field' ),
 			),
 		);
 
@@ -116,7 +116,7 @@ class Field_Dropdown extends Contactum_Field {
 					'value' => 'option-3',
 				),
 			),
-			'first'    => __( '— Select —', 'contactum' ),
+			'first'    => __( '— Select —', 'wc-product-addon-custom-field' ),
 		);
 
 		return array_merge( $defaults, $props );

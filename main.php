@@ -1,26 +1,26 @@
 <?php
-/**
-Plugin Name: WC Woocommerce Product Adddon Rokib
-Description: WordPress Product Form Builder plugin. Use Drag & Drop form builder to create your WordPress forms.
+/*
+Plugin Name:  Product Addon Extra Field For Woocommerce
+Description: Woocommerce Product Extra Field Plugin
 Version:     1.0
 Author:      Md Kamrul islam
 Author URI:  https://profiles.wordpress.org/rajib00002/
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: WCWCPAR
+Text Domain: wc-product-addon-custom-field
 Domain Path: languages
-**/
+*/
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-require_once __DIR__ . '/vendor/autoload.php';
+// require_once __DIR__ . '/vendor/autoload.php';
 
 /**
  * MultiStoreX class
  *
  * @class MultiStoreX The class that holds the entire MultiStoreX plugin
  */
-final class Chi {
+final class Main {
 	/**
 	 * Multistorex version.
 	 *
@@ -48,6 +48,9 @@ final class Chi {
 	 */
 	public function __construct() {
 		$this->define_constants();
+		$this->includes();
+		$this->init_classes();
+		
 		register_activation_hook( __FILE__, array( $this, 'activate' ) );
 
 		add_action( 'plugins_loaded', array( $this, 'init_plugin' ) );
@@ -116,8 +119,6 @@ final class Chi {
 	 * @return void
 	 */
 	public function init_plugin() {
-		$this->includes();
-		$this->init_classes();
 		$this->init_hooks();
 		do_action( 'contactum_loaded' );
 	}
@@ -128,12 +129,48 @@ final class Chi {
 	 * @return void
 	 */
 	public function includes() {
-		require_once CONTACTUM_INCLUDES . '/class-product-meta.php';
-		require_once CONTACTUM_INCLUDES . '/class-cart.php';
+        
+        //fields.
+		require_once CONTACTUM_INCLUDES . '/fields/field-trait.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-base-field.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-field-checkbox.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-field-date.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-field-dropdown.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-field-email.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-field-file.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-field-hidden.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-field-html.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-field-image.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-field-multidropdown.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-field-number.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-field-radio.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-field-sectionbreak.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-field-text.php';
+		require_once CONTACTUM_INCLUDES . '/fields/class-field-textarea.php';
+		
+        //template.
+        require_once CONTACTUM_INCLUDES . '/templates/class-base-template.php';
+        require_once CONTACTUM_INCLUDES . '/templates/class-template-blank.php';
+        
+        require_once CONTACTUM_INCLUDES . '/class-admin-form-handler.php';
+        require_once CONTACTUM_INCLUDES . '/class-admin-template.php';
+        require_once CONTACTUM_INCLUDES . '/class-admin.php';
+        require_once CONTACTUM_INCLUDES . '/class-ajax.php';
+        require_once CONTACTUM_INCLUDES . '/class-assets.php';
+        require_once CONTACTUM_INCLUDES . '/class-cart.php';
+
+        require_once CONTACTUM_INCLUDES . '/class-field-manager.php';
+        require_once CONTACTUM_INCLUDES . '/class-form-manager.php';
+        require_once CONTACTUM_INCLUDES . '/class-form.php';
+        require_once CONTACTUM_INCLUDES . '/class-frontend.php';
+        require_once CONTACTUM_INCLUDES . '/class-forms-list.php';
+		require_once CONTACTUM_INCLUDES . '/class-meta-display.php';
 		require_once CONTACTUM_INCLUDES . '/class-order.php';
 		require_once CONTACTUM_INCLUDES . '/class-process.php';
-		require_once CONTACTUM_INCLUDES . '/class-frontend.php';
-		require_once CONTACTUM_INCLUDES . '/class-meta-display.php';
+		require_once CONTACTUM_INCLUDES . '/class-product-meta.php';
+		require_once CONTACTUM_INCLUDES . '/class-template-manager.php';
+
+		require_once CONTACTUM_INCLUDES . '/functions.php';
 	}
 
 	/**
@@ -144,15 +181,15 @@ final class Chi {
 	public function activate() {
 
 		if ( ! array_key_exists( 'fields', $this->container ) ) {
-			$this->container['fields'] = new Contactum\FieldManager();
+			$this->container['fields'] = new WCPRAEF\FieldManager();
 		}
 
 		if ( ! array_key_exists( 'forms', $this->container ) ) {
-			$this->container['forms'] = new Contactum\FormManager();
+			$this->container['forms'] = new WCPRAEF\FormManager();
 		}
 
 		if ( ! array_key_exists( 'templates', $this->container ) ) {
-			$this->container['templates'] = new Contactum\TemplateManager();
+			$this->container['templates'] = new WCPRAEF\TemplateManager();
 		}
 
 		$installed = get_option( 'contactum_installed' );
@@ -171,21 +208,21 @@ final class Chi {
 	 */
 	public function init_classes() {
 		if ( is_admin() ) {
-			$this->container['admin']              = new Contactum\Admin();
-			$this->container['admin_template']     = new Contactum\Admin_Template();
-			$this->container['admin_form_handler'] = new Contactum\Admin_Form_Handler();
-			$this->container['product_meta']       = new Contactum\ProductMeta();
+			$this->container['admin']              = new WCPRAEF\Admin();
+			$this->container['admin_template']     = new WCPRAEF\Admin_Template();
+			$this->container['admin_form_handler'] = new WCPRAEF\Admin_Form_Handler();
+			$this->container['product_meta']       = new WCPRAEF\ProductMeta();
 		}
 
-		$this->container['assets']    = new Contactum\Assets();
-		$this->container['ajax']      = new Contactum\Ajax();
-		$this->container['fields']    = new Contactum\FieldManager();
-		$this->container['templates'] = new Contactum\TemplateManager();
-		$this->container['forms']     = new Contactum\FormManager();
-		$this->container['frontend']  = new Contactum\Frontend();
-		$this->container['order']     = new Contactum\Order();
-		$this->container['cart']      = new Contactum\Cart();
-		$this->container['process']   = new Contactum\Process();
+		$this->container['assets']    = new WCPRAEF\Assets();
+		$this->container['ajax']      = new WCPRAEF\Ajax();
+		$this->container['fields']    = new WCPRAEF\FieldManager();
+		$this->container['templates'] = new WCPRAEF\TemplateManager();
+		$this->container['forms']     = new WCPRAEF\FormManager();
+		$this->container['frontend']  = new WCPRAEF\Frontend();
+		$this->container['order']     = new WCPRAEF\Order();
+		$this->container['cart']      = new WCPRAEF\Cart();
+		$this->container['process']   = new WCPRAEF\Process();
 	}
 
 	/**
@@ -203,7 +240,7 @@ final class Chi {
 	 * @uses load_plugin_textdomain()
 	 */
 	public function localization_setup() {
-		load_plugin_textdomain( 'contactum', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'wc-product-addon-custom-field', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**
@@ -223,7 +260,7 @@ if ( ! function_exists( 'contactum' ) ) {
 	 * @return MultiStoreX
 	 */
 	function contactum() {
-		return Chi::init();
+		return Main::init();
 	}
 }
 

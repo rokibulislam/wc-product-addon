@@ -6,7 +6,7 @@
  * @package MultiStoreX
  */
 
-namespace Contactum;
+namespace WCPRAEF;
 
 use WP_Query;
 
@@ -20,6 +20,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
  * @package MultiStoreX
  */
 class Forms_List_Table extends \WP_List_Table {
+	
 	/**
 	 * Constructor
 	 */
@@ -43,10 +44,10 @@ class Forms_List_Table extends \WP_List_Table {
 	public function get_columns() {
 		$columns = array(
 			'cb'        => '<input type="checkbox" />',
-			'name'      => __( 'Form Name', 'contactum' ),
-			'shortcode' => __( 'Shortcode', 'contactum' ),
-			'author'    => __( 'Author', 'contactum' ),
-			'date'      => __( 'Date', 'contactum' ),
+			'name'      => __( 'Form Name', 'wc-product-addon-custom-field' ),
+			'shortcode' => __( 'Shortcode', 'wc-product-addon-custom-field' ),
+			'author'    => __( 'Author', 'wc-product-addon-custom-field' ),
+			'date'      => __( 'Date', 'wc-product-addon-custom-field' ),
 		);
 
 		return $columns;
@@ -194,8 +195,8 @@ class Forms_List_Table extends \WP_List_Table {
 					'bulk-contactum-forms'
 				)
 			),
-			esc_attr__( 'Duplicate this form', 'contactum' ),
-			esc_html__( 'Duplicate', 'contactum' )
+			esc_attr__( 'Duplicate this form', 'wc-product-addon-custom-field' ),
+			esc_html__( 'Duplicate', 'wc-product-addon-custom-field' )
 		);
 
 		$actions['delete'] = sprintf(
@@ -212,8 +213,8 @@ class Forms_List_Table extends \WP_List_Table {
 					'bulk-contactum-forms'
 				)
 			),
-			esc_attr__( 'Delete this form', 'contactum' ),
-			esc_html__( 'Delete', 'contactum' )
+			esc_attr__( 'Delete this form', 'wc-product-addon-custom-field' ),
+			esc_html__( 'Delete', 'wc-product-addon-custom-field' )
 		);
 
 		return $title . $this->row_actions( $actions );
@@ -270,7 +271,7 @@ class Forms_List_Table extends \WP_List_Table {
 		if ( $time_diff > 0 && $time_diff < 24 * 60 * 60 ) {
 			$h_time = sprintf(
 				/* translators: %s: Time */
-				__( '%s ago', '' ),
+				__( '%s ago', 'contactum' ),
 				human_time_diff( $time )
 			);
 		} else {
@@ -314,8 +315,8 @@ class Forms_List_Table extends \WP_List_Table {
 		$ids = isset( $_REQUEST['id'] ) ? wp_parse_id_list( wp_unslash( $_REQUEST['id'] ) ) : array();
 
 		if ( $action ) {
-			$remove_query_args = [ '_wp_http_referer', '_wpnonce', 'action', 'id', 'post', 'action2' ];
-			$add_query_args    = [];
+			$remove_query_args = array( '_wp_http_referer', '_wpnonce', 'action', 'id', 'post', 'action2' );
+			$add_query_args    = array();
 			switch ( $action ) {
 				case 'delete':
 					foreach ( $ids as $id ) {
@@ -325,7 +326,7 @@ class Forms_List_Table extends \WP_List_Table {
 					break;
 				case 'duplicate':
 					if ( ! empty( $get_data['id'] ) ) {
-						$id = intval( $get_data['id'] );
+						$id                           = intval( $get_data['id'] );
 						$add_query_args['duplicated'] = contactum()->forms->duplicate( $id );
 					}
 					break;
@@ -366,7 +367,7 @@ class Forms_List_Table extends \WP_List_Table {
 	 * @return array
 	 */
 	public function get_bulk_actions() {
-		$actions['bulk-delete'] = __( 'Delete Permanently', 'contactum' );
+		$actions['bulk-delete'] = __( 'Delete Permanently', 'wc-product-addon-custom-field' );
 
 		return $actions;
 	}

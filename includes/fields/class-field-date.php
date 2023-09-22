@@ -6,22 +6,22 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
-use Contactum\Fields\Contactum_Field;
+use WCPRAEF\Fields\Base_Field;
 
 /**
  * Field Date class
  *
  * @package MultiStoreX
  */
-class Field_Date extends Contactum_Field {
+class Field_Date extends Base_Field {
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Date', 'contactum' );
+		$this->name       = __( 'Date', 'wc-product-addon-custom-field' );
 		$this->input_type = 'date_field';
 		$this->icon       = 'calendar';
 	}
@@ -84,28 +84,28 @@ class Field_Date extends Contactum_Field {
 		$settings = array(
 			array(
 				'name'          => 'format',
-				'title'         => __( 'Date Format', 'contactum' ),
+				'title'         => __( 'Date Format', 'wc-product-addon-custom-field' ),
 				'type'          => 'select',
 				'is_single_opt' => true,
 				'options'       => array(
-					'm/d/Y'       => __( 'm/d/Y - (Ex: 04/28/2018)', 'contactum' ),
-					'm/d/y'       => __( 'm/d/Y - (Ex: 04/28/18)', 'contactum' ),
-					'd/m/Y'       => __( 'm/d/Y - (Ex: 28/04/2018)', 'contactum' ),
-					'd.m.Y'       => __( 'd.m.Y - (Ex: 28.04.2018)', 'contactum' ),
-					'm/d/Y'       => __( 'm/d/Y - (Ex: 04/28/2018)', 'contactum' ),
-					'y/m/d'       => __( 'y/m/d - (Ex: 28/04/18)', 'contactum' ),
-					'd-m-y'       => __( 'd-m-y - (Ex: 28-04-18)', 'contactum' ),
-					'h:i K'       => __( 'h:i K - (Ex: 08:55 PM)', 'contactum' ),
-					'H:i'         => __( 'H:i - (Ex: 20:55 )', 'contactum' ),
-					'd.m.Y H:i K' => __( 'd.m.Y H:i K- (Ex: 28.04.2018 20:55 PM)', 'contactum' ),
-					'd/m/Y H:i K' => __( 'd/m/Y H:i K- (Ex: 28/04/2018 20:55 PM)', 'contactum' ),
-					'd.m.Y H:i'   => __( 'd.m.Y H:i - (Ex: 28.04.2018 20:55)', 'contactum' ),
-					'd/m/Y H:i'   => __( 'd/m/Y H:i - (Ex: 28/04/2018 20:55)', 'contactum' ),
-					'H:i'         => __( 'H:i - (Ex: 28-04-18 )', 'contactum' ),
+					'm/d/Y'       => __( 'm/d/Y - (Ex: 04/28/2018)', 'wc-product-addon-custom-field' ),
+					'm/d/y'       => __( 'm/d/Y - (Ex: 04/28/18)', 'wc-product-addon-custom-field' ),
+					'd/m/Y'       => __( 'm/d/Y - (Ex: 28/04/2018)', 'wc-product-addon-custom-field' ),
+					'd.m.Y'       => __( 'd.m.Y - (Ex: 28.04.2018)', 'wc-product-addon-custom-field' ),
+					'm/d/Y'       => __( 'm/d/Y - (Ex: 04/28/2018)', 'wc-product-addon-custom-field' ),
+					'y/m/d'       => __( 'y/m/d - (Ex: 28/04/18)', 'wc-product-addon-custom-field' ),
+					'd-m-y'       => __( 'd-m-y - (Ex: 28-04-18)', 'wc-product-addon-custom-field' ),
+					'h:i K'       => __( 'h:i K - (Ex: 08:55 PM)', 'wc-product-addon-custom-field' ),
+					'H:i'         => __( 'H:i - (Ex: 20:55 )', 'wc-product-addon-custom-field' ),
+					'd.m.Y H:i K' => __( 'd.m.Y H:i K- (Ex: 28.04.2018 20:55 PM)', 'wc-product-addon-custom-field' ),
+					'd/m/Y H:i K' => __( 'd/m/Y H:i K- (Ex: 28/04/2018 20:55 PM)', 'wc-product-addon-custom-field' ),
+					'd.m.Y H:i'   => __( 'd.m.Y H:i - (Ex: 28.04.2018 20:55)', 'wc-product-addon-custom-field' ),
+					'd/m/Y H:i'   => __( 'd/m/Y H:i - (Ex: 28/04/2018 20:55)', 'wc-product-addon-custom-field' ),
+					'H:i'         => __( 'H:i - (Ex: 28-04-18 )', 'wc-product-addon-custom-field' ),
 				),
 				'section'       => 'advanced',
 				'priority'      => 24,
-				'help_text'     => __( 'The date format', 'contactum' ),
+				'help_text'     => __( 'The date format', 'wc-product-addon-custom-field' ),
 			),
 		);
 

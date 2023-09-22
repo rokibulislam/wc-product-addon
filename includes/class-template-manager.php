@@ -1,14 +1,14 @@
 <?php
 /**
- * Product Meta
+ * Template Manager
  *
  * @author Kamrul
  * @package MultiStoreX
  */
 
-namespace Contactum;
+namespace WCPRAEF;
 
-use Contactum\Templates\Template_Blank;
+use WCPRAEF\Templates\Template_Blank;
 
 /**
  * TemplateManager class
@@ -61,9 +61,9 @@ class TemplateManager {
 	 * @return void
 	 */
 	private function register_templates() {
-		$templates = [
-			'blank' => new Template_Blank(),
-		];
+        $templates = array(
+            'blank' => new Template_Blank(),
+        );
 
 		$this->templates = apply_filters( 'contactum_form_templates', $templates );
 	}

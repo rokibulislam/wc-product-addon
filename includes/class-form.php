@@ -6,9 +6,8 @@
  * @package MultiStoreX
  */
 
-namespace Contactum;
+namespace WCPRAEF;
 
-use Contactum\EntryManager;
 use WP_Error;
 
 /**

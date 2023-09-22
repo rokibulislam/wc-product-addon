@@ -6,21 +6,21 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
-use Contactum\Fields\Contactum_Field;
+use WCPRAEF\Fields\Base_Field;
 
 /**
  * Field Hidden class
  *
  * @package MultiStoreX
  */
-class Field_Hidden extends Contactum_Field {
+class Field_Hidden extends Base_Field {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Hidden', 'contactum' );
+		$this->name       = __( 'Hidden', 'wc-product-addon-custom-field' );
 		$this->input_type = 'hidden_field';
 		$this->icon       = 'eye-slash';
 	}
@@ -53,19 +53,19 @@ class Field_Hidden extends Contactum_Field {
 		$settings = array(
 			array(
 				'name'      => 'name',
-				'title'     => __( 'Meta Key', 'contactum' ),
+				'title'     => __( 'Meta Key', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'basic',
 				'priority'  => 10,
-				'help_text' => __( 'Name of the meta key this field will save to', 'contactum' ),
+				'help_text' => __( 'Name of the meta key this field will save to', 'wc-product-addon-custom-field' ),
 			),
 			array(
 				'name'      => 'meta_value',
-				'title'     => __( 'Meta Value', 'contactum' ),
+				'title'     => __( 'Meta Value', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'basic',
 				'priority'  => 11,
-				'help_text' => __( 'Enter the meta value', 'contactum' ),
+				'help_text' => __( 'Enter the meta value', 'wc-product-addon-custom-field' ),
 			),
 			array(
 				'name'      => 'dynamic',
@@ -73,7 +73,7 @@ class Field_Hidden extends Contactum_Field {
 				'type'      => 'dynamic',
 				'section'   => 'advanced',
 				'priority'  => 23,
-				'help_text' => __( 'Check this option to allow field to be populated dynamically using hooks/query string/shortcode', 'contactum' ),
+				'help_text' => __( 'Check this option to allow field to be populated dynamically using hooks/query string/shortcode', 'wc-product-addon-custom-field' ),
 			),
 		);
 

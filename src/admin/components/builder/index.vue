@@ -38,17 +38,9 @@
         </div>
 
         <div class="builder-save">
-          
-          <span class="form-id btn btn-copy" title="click to copy shortcode" :data-clipboard-text="shortcode">
-              <!-- <i class="fa fa-clipboard" aria-hidden="true"></i> -->
-              <i class="el-icon-document-copy"> </i>
-              [contactum id="{{ post.ID }}"]
-          </span>
-
           <div class="save_form_builder">
             <button type="submit"> Save Form <span v-if="loading == true" class="showLoading"><i class="fa fa-spinner fa-pulse" aria-hidden="true"></i></span></button>
-          </div>
-        
+          </div>        
         </div>
      
       </div>
@@ -212,14 +204,12 @@ import form_column_field from "../pro/form-template/column.vue";
 
 
 import modal from '../../components/modal/index.vue';
-import RokDiaglog from '../../components/dialog/index.vue';
 
 
 export default {
   name: "Builder",
   components: {
     modal,
-    RokDiaglog,
     draggable,
     form_settings,
     form_text_field,
@@ -248,10 +238,7 @@ export default {
   },
   data() {
     return {
-      form_fields_components: window.contactum.hooks.applyFilters(
-        "form_fields_components",
-        []
-      ),
+      form_fields_components: [],
       post_title_editing: false,
       activeTab: "editor",
       loading: false,
@@ -390,22 +377,9 @@ export default {
 
     save_form_builder() {
         this.loading = true;
-      // axios.post(contactum.ajaxurl, {
-      //       action: "save_contactum_form",
-      //       form_data: jQuery("#contactum-form-builder").serialize(),
-      //       form_fields: JSON.stringify(this.form_fields),
-      //       notifications: JSON.stringify(this.notifications),
-      //       settings: JSON.stringify(this.settings),
-      // })
-      // .then(response => {
-      //     console.log(response);
-      // })
-      // .catch(e => {
-      //     console.log(e);
-      // });
-      var self = this;
-      jQuery.post(
-        contactum.ajaxurl,
+        var self = this;
+        jQuery.post(
+            contactum.ajaxurl,
         {
           action: "save_contactum_form",
           form_data: jQuery("#contactum-form-builder").serialize(),
@@ -417,38 +391,17 @@ export default {
         },
         (response, textStatus, xhr) => {
             this.loading = false;
-
-          if (response.data.form_fields) {
-            this.$store.dispatch("set_form_fields", response.data.form_fields);
-          }
-
-          if (response.data.notifications) {
-            this.$store.dispatch(
-              "set_form_notification",
-              response.data.notifications
-            );
-          }
-
-          if (response.data.form_settings) {
-            this.$store.dispatch(
-              "set_form_settings",
-              response.data.form_settings
-            );
-          }
-          if (response.data.integrations) {
-            this.$store.dispatch(
-              "set_form_integrations",
-              response.data.integrations
-            );
-          }
-
-            // this.$swal({
-            //     title: "Form successfully Save.",
-            //     html: '',
-            //     type: 'success',
-            //     timer: 1000
-            // });
-
+            if (response.data.form_fields) {
+                this.$store.dispatch("set_form_fields", response.data.form_fields);
+            }
+            
+            if (response.data.form_settings) {
+                this.$store.dispatch(
+                    "set_form_settings",
+                    response.data.form_settings
+                );
+            }
+            
             this.$notify.success({
                   title: '',
                   message: 'Form successfully Save.',
@@ -520,23 +473,6 @@ export default {
           self.swap_form_field_elements(payload);
         }
       },
-    });
-    //bind clipboard
-    let clipboard = new ClipboardJS(".form-id");
-
-    jQuery(".form-id").tooltip();
-
-    clipboard.on("success", function (e) {
-      jQuery(e.trigger).attr("data-original-title", "Copied!").tooltip("show");
-
-      // Reset the copied tooltip
-      setTimeout(function () {
-        jQuery(e.trigger)
-          .tooltip("hide")
-          .attr("data-original-title", "click to copy shortcode");
-      }, 1000);
-
-      e.clearSelection();
     });
   },
 

@@ -1,4 +1,3 @@
-import { createHooks } from '@wordpress/hooks';
 import Vue from 'vue';
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
@@ -10,17 +9,13 @@ import locale from 'element-ui/lib/locale'
 locale.use(lang);
 
 import VueSweetalert2 from 'vue-sweetalert2';
-// import Notifications from 'vue-notification';
 import { Notification } from 'element-ui';
 
-// Vue.use(Notifications);
 Vue.use(Notification);
 Vue.use(VueSweetalert2);
 Vue.use(ElementUI);
 
-
-import App from './App.vue';
-import router from './router';
+import builder from './components/builder/index.vue';
 import store from './store';
 import menuFix from './utils/admin-menu-fix';
 
@@ -83,28 +78,11 @@ Vue.mixin({
     }
 })
 
-window.contactum.hooks = (wp && wp.hooks) ? wp.hooks : createHooks();
-
-if (contactum.hooks) {
-    contactum.addFilter = (hookName, namespace, component, priority = 10) => {
-        contactum.hooks.addFilter(
-            hookName,
-            namespace,
-            (components) => {
-                components.push(component);
-                return components;
-            },
-            priority
-        );
-    };
-}
-
 /* eslint-disable no-new */
 new Vue({
 	el: '#contactum-admin-app',
-	router,
 	store,
-	render: (h) => h(App)
+	render: (h) => h(builder)
 });
 
 

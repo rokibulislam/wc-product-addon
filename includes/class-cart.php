@@ -6,7 +6,7 @@
  * @package MultiStoreX
  */
 
-namespace Contactum;
+namespace WCPRAEF;
 
 /**
  * Cart class
@@ -20,7 +20,7 @@ class Cart {
 	 */
 	public function __construct() {
 		add_filter( 'woocommerce_get_item_data', array( $this, 'get_item_data' ), 10, 2 );
-		add_filter( 'woocommerce_cart_item_class', array( $this, 'cart_item_class' ), 10, 3 );
+		add_filter( 'woocommerce_cart_item_class', array( $this, 'cart_item_class' ), 10, 1 );
 	}
 
 	/**
@@ -61,11 +61,10 @@ class Cart {
 	 * Add cart item class
 	 *
 	 * @param string $item_class item_class.
-	 * @param array  $cart_item cart_item.
 	 *
 	 * @return $class string
 	 */
-	public function cart_item_class( $item_class, $cart_item ) {
+	public function cart_item_class( $item_class ) {
 		return $item_class;
 	}
 }

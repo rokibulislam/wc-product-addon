@@ -6,22 +6,22 @@
  * @package MultiStoreX
  */
 
-namespace Contactum;
+namespace WCPRAEF;
 
-use Contactum\Fields\Field_Email;
-use Contactum\Fields\Field_Text;
-use Contactum\Fields\Field_Textarea;
-use Contactum\Fields\Field_Radio;
-use Contactum\Fields\Field_Checkbox;
-use Contactum\Fields\Field_Date;
-use Contactum\Fields\Field_Dropdown;
-use Contactum\Fields\Field_MultiDropdown;
-use Contactum\Fields\Field_Number;
-use Contactum\Fields\Field_Image;
-use Contactum\Fields\Field_Html;
-use Contactum\Fields\Field_SectionBreak;
-use Contactum\Fields\Field_Hidden;
-use Contactum\Fields\Field_File;
+use WCPRAEF\Fields\Field_Email;
+use WCPRAEF\Fields\Field_Text;
+use WCPRAEF\Fields\Field_Textarea;
+use WCPRAEF\Fields\Field_Radio;
+use WCPRAEF\Fields\Field_Checkbox;
+use WCPRAEF\Fields\Field_Date;
+use WCPRAEF\Fields\Field_Dropdown;
+use WCPRAEF\Fields\Field_MultiDropdown;
+use WCPRAEF\Fields\Field_Number;
+use WCPRAEF\Fields\Field_Image;
+use WCPRAEF\Fields\Field_Html;
+use WCPRAEF\Fields\Field_SectionBreak;
+use WCPRAEF\Fields\Field_Hidden;
+use WCPRAEF\Fields\Field_File;
 
 /**
  * FieldManager class
@@ -57,7 +57,7 @@ class FieldManager {
 	 *
 	 * @param string $field_type field_type.
 	 *
-	 * @return void
+	 * @return object|boolean
 	 */
 	public function getField( $field_type ) {
 		$fields = $this->getFields();
@@ -137,7 +137,7 @@ class FieldManager {
 
 		return array(
 			array(
-				'title'  => __( 'Custom Fields', 'contactum' ),
+				'title'  => __( 'Custom Fields', 'wc-product-addon-custom-field' ),
 				'id'     => 'custom-fields',
 				'fields' => $fields,
 				'show'   => true,

@@ -6,24 +6,23 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Templates;
+namespace WCPRAEF\Templates;
 
-use Contactum\Templates\Contactum_Form_Template;
+use WCPRAEF\Templates\Base_Form_Template;
 
 /**
  * Template Blank class
  *
  * @package MultiStoreX
  */
-class Template_Blank extends Contactum_Form_Template {
+class Template_Blank extends Base_Form_Template {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		parent::__construct();
 		$this->enabled     = true;
-		$this->title       = __( 'Blank Form', 'contactum' );
-		$this->description = __( 'Create a simple Blank form.', 'contactum' );
+		$this->title       = __( 'Blank Form', 'wc-product-addon-custom-field' );
+		$this->description = __( 'Create a simple Blank form.', 'wc-product-addon-custom-field' );
 		$this->image       = '';
 		$this->category    = 'default';
 	}

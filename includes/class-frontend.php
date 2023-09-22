@@ -6,7 +6,7 @@
  * @package MultiStoreX
  */
 
-namespace Contactum;
+namespace WCPRAEF;
 
 /**
  * Frontend class
@@ -87,7 +87,7 @@ class Frontend {
 		$form = contactum()->forms->get( $id );
 
 		if ( ! $form->id ) {
-			return $this->show_error( __( 'The form couldn\'t be found.', 'contactum' ) );
+			return $this->show_error( __( 'The form couldn\'t be found.', 'wc-product-addon-custom-field' ) );
 		}
 
 		$this->render_form( $form );

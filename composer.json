@@ -20,7 +20,7 @@
     },
     "scripts": {
         "phpcs": [
-            "phpcs --standard=WordPress"
+            "phpcs --standard=WordPress -p"
         ]
     },
     "config": {

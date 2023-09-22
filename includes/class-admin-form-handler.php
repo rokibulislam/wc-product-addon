@@ -6,7 +6,7 @@
  * @package MultiStoreX
  */
 
-namespace Contactum;
+namespace WCPRAEF;
 
 /**
  * Admin class
@@ -71,12 +71,12 @@ class Admin_Form_Handler {
 		$action    = $chi_forms->current_action();
 
 		if ( $action ) {
-			$remove_query_args = [ '_wp_http_referer', '_wpnonce', 'action', 'id', 'post', 'action2', 'paged', 'doaction' ];
+			$remove_query_args = array( '_wp_http_referer', '_wpnonce', 'action', 'id', 'post', 'action2', 'paged', 'doaction' );
 			$add_query_args    = array();
 
 			switch ( $action ) {
 				case 'contactum_form_search':
-					$redirect = remove_query_arg( [ 'contactum_form_search' ], $remove_query_args );
+					$redirect = remove_query_arg( array( 'contactum_form_search' ), $remove_query_args );
 					break;
 
 				case 'delete':
@@ -88,7 +88,7 @@ class Admin_Form_Handler {
 
 				case 'duplicate':
 					if ( ! empty( $get_data['id'] ) ) {
-						$id = intval( $get_data['id'] );
+						$id                           = intval( $get_data['id'] );
 						$add_query_args['duplicated'] = contactum()->forms->duplicate( $id );
 					}
 					break;
@@ -121,7 +121,7 @@ class Admin_Form_Handler {
 
 		if ( ! empty( $get_data['duplicated'] ) ) {
 			$duplicated = sanitize_text_field( $get_data['duplicated'] );
-			$notice = sprintf( __( 'Form duplicated successfully', 'contactum' ) );
+			$notice     = sprintf( __( 'Form duplicated successfully', 'wc-product-addon-custom-field' ) );
 			$this->display_notice( $notice );
 		}
 	}

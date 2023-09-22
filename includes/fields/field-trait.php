@@ -1,5 +1,5 @@
 <?php
-namespace Contactum\Fields\Traits;
+namespace WCPRAEF\Fields\Traits;
 
 trait Textoption {
 
@@ -14,43 +14,43 @@ trait Textoption {
 		$properties = array(
 			array(
 				'name'       => 'placeholder',
-				'title'      => __( 'Placeholder text', 'contactum' ),
+				'title'      => __( 'Placeholder text', 'wc-product-addon-custom-field' ),
 				'type'       => 'text',
 				'tag_filter' => 'no_fields',
 				'section'    => 'advanced',
 				'priority'   => 10,
-				'help_text'  => __( 'Text for HTML5 placeholder attribute', 'contactum' ),
+				'help_text'  => __( 'Text for HTML5 placeholder attribute', 'wc-product-addon-custom-field' ),
 			),
 
 			array(
 				'name'       => 'default',
-				'title'      => __( 'Default value', 'contactum' ),
+				'title'      => __( 'Default value', 'wc-product-addon-custom-field' ),
 				'type'       => 'text',
 				'tag_filter' => 'no_fields',
 				'section'    => 'advanced',
 				'priority'   => 11,
-				'help_text'  => __( 'The default value this field will have', 'contactum' ),
+				'help_text'  => __( 'The default value this field will have', 'wc-product-addon-custom-field' ),
 			),
 
 			array(
 				'name'      => 'size',
-				'title'     => __( 'Size', 'contactum' ),
+				'title'     => __( 'Size', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'variation' => 'number',
 				'section'   => 'advanced',
 				'priority'  => 20,
-				'help_text' => __( 'Size of this input field', 'contactum' ),
+				'help_text' => __( 'Size of this input field', 'wc-product-addon-custom-field' ),
 			),
 		);
 
 		if ( $word_restriction ) {
 			$properties[] = array(
 				'name'      => 'word_restriction',
-				'title'     => __( 'Word Restriction', 'contactum' ),
+				'title'     => __( 'Word Restriction', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'advanced',
 				'priority'  => 15,
-				'help_text' => __( 'Numebr of words the author to be restricted in', 'contactum' ),
+				'help_text' => __( 'Numebr of words the author to be restricted in', 'wc-product-addon-custom-field' ),
 			);
 		}
 
@@ -70,12 +70,12 @@ trait DropDownOption {
 	public function get_default_option_dropdown_settings( $is_multiple = false ) {
 		return array(
 			'name'        => 'options',
-			'title'       => __( 'Options', 'contactum' ),
+			'title'       => __( 'Options', 'wc-product-addon-custom-field' ),
 			'type'        => 'option_data',
 			'is_multiple' => $is_multiple,
 			'section'     => 'basic',
 			'priority'    => 12,
-			'help_text'   => __( 'Add options for the form field', 'contactum' ),
+			'help_text'   => __( 'Add options for the form field', 'wc-product-addon-custom-field' ),
 		);
 	}
 }
@@ -91,29 +91,29 @@ trait TextareaOption {
 		return array(
 			array(
 				'name'      => 'rows',
-				'title'     => __( 'Rows', 'contactum' ),
+				'title'     => __( 'Rows', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'advanced',
 				'priority'  => 10,
-				'help_text' => __( 'Number of rows in textarea', 'contactum' ),
+				'help_text' => __( 'Number of rows in textarea', 'wc-product-addon-custom-field' ),
 			),
 
 			array(
 				'name'      => 'cols',
-				'title'     => __( 'Columns', 'contactum' ),
+				'title'     => __( 'Columns', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'advanced',
 				'priority'  => 11,
-				'help_text' => __( 'Number of columns in textarea', 'contactum' ),
+				'help_text' => __( 'Number of columns in textarea', 'wc-product-addon-custom-field' ),
 			),
 
 			array(
 				'name'         => 'placeholder',
-				'title'        => __( 'Placeholder text', 'contactum' ),
+				'title'        => __( 'Placeholder text', 'wc-product-addon-custom-field' ),
 				'type'         => 'text',
 				'section'      => 'advanced',
 				'priority'     => 12,
-				'help_text'    => __( 'Text for HTML5 placeholder attribute', 'contactum' ),
+				'help_text'    => __( 'Text for HTML5 placeholder attribute', 'wc-product-addon-custom-field' ),
 				'dependencies' => array(
 					'rich' => 'no',
 				),
@@ -121,11 +121,11 @@ trait TextareaOption {
 
 			array(
 				'name'      => 'default',
-				'title'     => __( 'Default value', 'contactum' ),
+				'title'     => __( 'Default value', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'advanced',
 				'priority'  => 13,
-				'help_text' => __( 'The default value this field will have', 'contactum' ),
+				'help_text' => __( 'The default value this field will have', 'wc-product-addon-custom-field' ),
 			),
 		);
 	}

@@ -1,75 +1,90 @@
+<?php
+/**
+ * Form List View
+ *
+ * @author Kamrul
+ * @package MultiStoreX
+ */
+
+?>
 <div id="contactum-form-template-modal">
-    <div class="contactum-form-template-modal">
-        <span id="modal-label" class="screen-reader-text"><?php esc_html_e( 'Modal window. Press escape to close.', 'contactum'  ); ?></span>
-        <a href="#" class="close">× <span class="screen-reader-text"><?php esc_html_e( 'Close modal window', 'contactum'  ); ?></span></a>
-        <header class="modal-header">
-            <h2> <?php esc_html_e( 'Select a Template', 'contactum' ); ?> </h2>
-        </header>
+	<div class="contactum-form-template-modal">
+		<span id="modal-label" class="screen-reader-text"><?php esc_html_e( 'Modal window. Press escape to close.', 'contactum' ); ?></span>
+		<a href="#" class="close">× <span class="screen-reader-text"><?php esc_html_e( 'Close modal window', 'contactum' ); ?></span></a>
+		<header class="modal-header">
+			<h2> <?php esc_html_e( 'Select a Template', 'contactum' ); ?> </h2>
+		</header>
 
-        <div class="content-container modal-footer">
-            <div class="content">
-                <ul>
-                    <?php
-                    foreach ( $templates as $key => $template ) {
-                        $class    = 'template-active';
-                        $title    = $template->title;
-                        $image    = $template->image ? $template->image : '';
-                        $disabled = '';
+		<div class="content-container modal-footer">
+			<div class="content">
+				<ul>
+					<?php
+					foreach ( $templates as $key => $template ) {
+						$class    = 'template-active';
+						$title    = $template->title;
+						$image    = $template->image ? $template->image : '';
+						$disabled = '';
 
-                        $url   = esc_url( add_query_arg( [
-                            'action'   => $action_name,
-                            'template' => $key,
-                            '_wpnonce' => wp_create_nonce( 'contactum_create_from_template' ),
-                        ], admin_url( 'admin.php' ) ) );
+						$url   = esc_url(
+							add_query_arg(
+								array(
+									'action'   => $action_name,
+									'template' => $key,
+									'_wpnonce' => wp_create_nonce( 'contactum_create_from_template' ),
+								),
+								admin_url( 'admin.php' )
+							)
+						);
 
-                        if ( !$template->is_enabled() ) {
-                            $url      = '#';
-                            $class    = 'template-inactive';
-                            $title    = __( 'This integration is not installed.', '' );
-                            $disabled = 'disabled';
-                        }
-                    ?>
+						if ( ! $template->is_enabled() ) {
+							$url      = '#';
+							$class    = 'template-inactive';
+							$title    = __( 'This integration is not installed.', 'wc-product-addon-custom-field' );
+							$disabled = 'disabled';
+						}
+					?>
+						<li class="<?php echo esc_attr( $class ); ?>">
+						<h3><?php echo esc_html( $template->get_title() ); ?></h3>
+							<?php
+							if ( $image ) {
+								printf( '<img src="%s" alt="%s">', esc_attr( $image ), esc_attr( $title ) );
+							}
+							?>
 
-                        <li class="<?php echo esc_attr( $class ); ?>">
-                            <h3><?php echo esc_html( $template->get_title() ); ?></h3>
-                            <?php if ( $image ) {
-                            printf( '<img src="%s" alt="%s">', esc_attr( $image ), esc_attr( $title ) );
-                        } ?>
-
-                            <div class="form-create-overlay">
-                                <div class="title"><?php echo esc_html( $title ); ?></div>
-                                <div class="description"><?php echo esc_html( $template->get_description() ); ?></div>
-                                <br>
-                                <a href="<?php echo esc_url( $url ); ?>" class="button button-primary  btn-submit" title="<?php echo esc_attr( $template->get_title() ); ?>" <?php echo esc_attr($disabled ); ?>>
-                                    <?php esc_html_e( 'Create Form', '' ); ?>
-                                </a>
-                            </div>
-                        </li>
-
-                    <?php
-                    } ?>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="contactum-form-template-modal-backdrop"></div>
+							<div class="form-create-overlay">
+								<div class="title"><?php echo esc_html( $title ); ?></div>
+								<div class="description"><?php echo esc_html( $template->get_description() ); ?></div>
+								<br>
+								<a href="<?php echo esc_url( $url ); ?>" class="button button-primary  btn-submit" title="<?php echo esc_attr( $template->get_title() ); ?>" <?php echo esc_attr( $disabled ); ?>>
+									<?php esc_html_e( 'Create Form', 'wc-product-addon-custom-field' ); ?>
+								</a>
+							</div>
+						</li>
+						<?php
+					}
+					?>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="contactum-form-template-modal-backdrop"></div>
 </div>
 
 <style type="text/css">
 
 .contactum-form-template-modal {
-    background: #fff;
-    position: fixed;
-    top: 8%;
-    bottom: 5%;
-    right: 5%;
-    left: 12%;
-    display: none;
-    box-shadow: 0 1px 20px 5px rgba(0, 0, 0, 0.1);
-    z-index: 160000;
+	background: #fff;
+	position: fixed;
+	top: 8%;
+	bottom: 5%;
+	right: 5%;
+	left: 12%;
+	display: none;
+	box-shadow: 0 1px 20px 5px rgba(0, 0, 0, 0.1);
+	z-index: 160000;
 }
 .contactum-form-template-modal.show {
-  display: block;
+	display: block;
 }
 .contactum-form-template-modal * {
   box-sizing: border-box;
@@ -301,78 +316,78 @@
 }
 
 .btn-submit {
-    background: #409EFF;
-    /* background: #7e3bd0; */
-    /* width: 200px; */
-    padding: 10px 20px;
-    background: #7e3bd0;
-    color: #fff;
-    border: none;
+	background: #409EFF;
+	/* background: #7e3bd0; */
+	/* width: 200px; */
+	padding: 10px 20px;
+	background: #7e3bd0;
+	color: #fff;
+	border: none;
 }
 
 .btn-submit:hover {
-    background: #7e3bd0;
-    color: #fff;
+	background: #7e3bd0;
+	color: #fff;
 }
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .contactum-form-template-modal .modal-header h2 small {
-    display: none;
+	display: none;
   }
   .contactum-form-template-modal .content ul li {
-    float: none;
-    width: 100%;
-    margin-left: 0;
+	float: none;
+	width: 100%;
+	margin-left: 0;
   }
 }
 
 @media (max-width: 767px) {
-    .contactum-form-template-modal .content ul li {
-        margin-left: 0;
-    }
-    .contactum-form-template-modal .modal-header h2 small {
-        display: none;
-    }
+	.contactum-form-template-modal .content ul li {
+		margin-left: 0;
+	}
+	.contactum-form-template-modal .modal-header h2 small {
+		display: none;
+	}
 }
 </style>
 
 <script type="text/javascript">
 (function($) {
-    var popup = {
-        init: function() {
-            $('.wrap').on('click', 'a.page-title-action.add-form', this.openModal);
-            $('.contactum-form-template-modal-backdrop, .contactum-form-template-modal .close').on('click', $.proxy(this.closeModal, this) );
+	var popup = {
+		init: function() {
+			$('.wrap').on('click', 'a.page-title-action.add-form', this.openModal);
+			$('.contactum-form-template-modal-backdrop, .contactum-form-template-modal .close').on('click', $.proxy(this.closeModal, this) );
 
-            $('body').on( 'keydown', $.proxy(this.onEscapeKey, this) );
-        },
+			$('body').on( 'keydown', $.proxy(this.onEscapeKey, this) );
+		},
 
-        openModal: function(e) {
-            e.preventDefault();
+		openModal: function(e) {
+			e.preventDefault();
 
-            $('.contactum-form-template-modal').show();
-            $('.contactum-form-template-modal-backdrop').show();
-        },
+			$('.contactum-form-template-modal').show();
+			$('.contactum-form-template-modal-backdrop').show();
+		},
 
-        onEscapeKey: function(e) {
-            if ( 27 === e.keyCode ) {
-                this.closeModal(e);
-            }
-        },
+		onEscapeKey: function(e) {
+			if ( 27 === e.keyCode ) {
+				this.closeModal(e);
+			}
+		},
 
-        closeModal: function(e) {
-            if ( typeof e !== 'undefined' ) {
-                e.preventDefault();
-            }
+		closeModal: function(e) {
+			if ( typeof e !== 'undefined' ) {
+				e.preventDefault();
+			}
 
-            $('.contactum-form-template-modal').hide();
-            $('.contactum-form-template-modal-backdrop').hide();
-        }
-    };
+			$('.contactum-form-template-modal').hide();
+			$('.contactum-form-template-modal-backdrop').hide();
+		}
+	};
 
-    $(function() {
-        popup.init();
-    });
+	$(function() {
+		popup.init();
+	});
 
 })(jQuery);
 </script>

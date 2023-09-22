@@ -6,21 +6,21 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
-use Contactum\Fields\Contactum_Field;
+use WCPRAEF\Fields\Base_Field;
 
 /**
  * Field Html class
  *
  * @package MultiStoreX
  */
-class Field_Html extends Contactum_Field {
+class Field_Html extends Base_Field {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Html', 'contactum' );
+		$this->name       = __( 'Html', 'wc-product-addon-custom-field' );
 		$this->input_type = 'html_field';
 		$this->icon       = 'code';
 	}
@@ -50,23 +50,23 @@ class Field_Html extends Contactum_Field {
 		$settings = array(
 			array(
 				'name'      => 'html',
-				'title'     => __( 'Html Codes', 'contactum' ),
+				'title'     => __( 'Html Codes', 'wc-product-addon-custom-field' ),
 				'type'      => 'textarea',
 				'section'   => 'basic',
 				'priority'  => 11,
-				'help_text' => __( 'Paste your HTML codes, WordPress shortcodes will also work here', 'contactum' ),
+				'help_text' => __( 'Paste your HTML codes, WordPress shortcodes will also work here', 'wc-product-addon-custom-field' ),
 			),
 			array(
 				'name'      => 'name',
-				'title'     => __( 'Meta Key', 'contactum' ),
+				'title'     => __( 'Meta Key', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'basic',
 				'priority'  => 12,
-				'help_text' => __( 'Name of the meta key this field will save to', 'contactum' ),
+				'help_text' => __( 'Name of the meta key this field will save to', 'wc-product-addon-custom-field' ),
 			),
 			array(
 				'name'      => 'contactum_cond',
-				'title'     => __( 'Conditional Logic', 'contactum' ),
+				'title'     => __( 'Conditional Logic', 'wc-product-addon-custom-field' ),
 				'type'      => 'conditional-logic',
 				'section'   => 'advanced',
 				'priority'  => 30,
@@ -86,7 +86,7 @@ class Field_Html extends Contactum_Field {
 		$props = array(
 			'template'       => $this->get_type(),
 			'label'          => $this->get_name(),
-			'html'           => sprintf( '%s', __( 'HTML Section', 'contactum' ) ),
+			'html'           => sprintf( '%s', __( 'HTML Section', 'wc-product-addon-custom-field' ) ),
 			'id'             => 0,
 			'is_new'         => true,
 			'contactum_cond' => $this->default_conditional_prop(),

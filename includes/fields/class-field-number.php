@@ -6,21 +6,21 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
-use Contactum\Fields\Contactum_Field;
+use WCPRAEF\Fields\Base_Field;
 
 /**
  * Field Number class
  *
  * @package MultiStoreX
  */
-class Field_Number extends Contactum_Field {
+class Field_Number extends Base_Field {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Numeric', 'contactum' );
+		$this->name       = __( 'Numeric', 'wc-product-addon-custom-field' );
 		$this->input_type = 'number_field';
 		$this->icon       = 'hashtag';
 	}
@@ -40,8 +40,8 @@ class Field_Number extends Contactum_Field {
 
 		<?php
 				$this->print_label( $field_settings );
-				printf( 
-                    '<div class="contactum-fields"> <input
+				printf(
+					'<div class="contactum-fields"> <input
 						id="%s"
 						type="number"
 						class="contactum-el-form-control %s"
@@ -56,7 +56,7 @@ class Field_Number extends Contactum_Field {
 						data-type="text"
 					/> </div>',
 					esc_attr( $field_settings['name'] ) . '_' . esc_attr( $form_id ),
-					esc_attr( $field_settings['name'] ).'_'. esc_attr( $form_id ),
+					esc_attr( $field_settings['name'] ) . '_' . esc_attr( $form_id ),
 					esc_attr( $field_settings['min_value_field'] ),
 					$field_settings['max_value_field'] === 0 ? '' : esc_attr( $field_settings['max_value_field'] ),
 					esc_attr( $field_settings['step_text_field'] ),
@@ -83,7 +83,7 @@ class Field_Number extends Contactum_Field {
 		$settings = array(
 			array(
 				'name'      => 'step_text_field',
-				'title'     => __( 'Step', '' ),
+				'title'     => __( 'Step', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'variation' => 'number',
 				'section'   => 'advanced',
@@ -92,8 +92,8 @@ class Field_Number extends Contactum_Field {
 			),
 
 			array(
-				'name'   	=> 'min_value_field',
-				'title'     => __( 'Min Value', '' ),
+				'name'      => 'min_value_field',
+				'title'     => __( 'Min Value', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'variation' => 'number',
 				'section'   => 'advanced',
@@ -103,7 +103,7 @@ class Field_Number extends Contactum_Field {
 
 			array(
 				'name'      => 'max_value_field',
-				'title'     => __( 'Max Value', '' ),
+				'title'     => __( 'Max Value', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'variation' => 'number',
 				'section'   => 'advanced',

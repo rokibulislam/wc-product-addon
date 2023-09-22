@@ -6,24 +6,24 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
-use Contactum\Fields\Contactum_Field;
-use Contactum\Fields\Traits\TextareaOption;
+use WCPRAEF\Fields\Base_Field;
+use WCPRAEF\Fields\Traits\TextareaOption;
 
 /**
  * Field Textarea class
  *
  * @package MultiStoreX
  */
-class Field_Textarea extends Contactum_Field {
+class Field_Textarea extends Base_Field {
 	use TextareaOption;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Textarea', 'contactum' );
+		$this->name       = __( 'Textarea', 'wc-product-addon-custom-field' );
 		$this->input_type = 'textarea_field';
 		$this->icon       = 'paragraph';
 	}
@@ -81,8 +81,8 @@ class Field_Textarea extends Contactum_Field {
 		$props    = array(
 			'rows' => 5,
 			'cols' => 25,
-        );
+		);
 
-		return  array_merge( $defaults, $props );
+		return array_merge( $defaults, $props );
 	}
 }

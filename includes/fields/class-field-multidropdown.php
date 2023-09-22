@@ -6,9 +6,9 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
-use Contactum\Fields\Contactum_Field;
+use WCPRAEF\Fields\Base_Field;
 
 /**
  * Field MultiDropdown class
@@ -20,7 +20,7 @@ class Field_MultiDropdown extends Field_Dropdown {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Multi Select', 'contactum' );
+		$this->name       = __( 'Multi Select', 'wc-product-addon-custom-field' );
 		$this->input_type = 'multiple_select';
 		$this->icon       = 'list-ul';
 		$this->multiple   = false;

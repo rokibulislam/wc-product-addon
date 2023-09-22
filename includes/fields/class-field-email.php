@@ -6,24 +6,24 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
-use Contactum\Fields\Contactum_Field;
-use Contactum\Fields\Traits\Textoption;
+use WCPRAEF\Fields\Base_Field;
+use WCPRAEF\Fields\Traits\Textoption;
 
 /**
  * Field Email class
  *
  * @package MultiStoreX
  */
-class Field_Email extends Contactum_Field {
+class Field_Email extends Base_Field {
 	use Textoption;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Email', 'contactum' );
+		$this->name       = __( 'Email', 'wc-product-addon-custom-field' );
 		$this->input_type = 'email_field';
 		$this->icon       = 'envelope-o';
 	}
@@ -92,12 +92,12 @@ class Field_Email extends Contactum_Field {
 				'type'          => 'checkbox',
 				'is_single_opt' => true,
 				'options'       => array(
-					'no' => __( 'Unique Values Only', 'contactum' ),
+					'no' => __( 'Unique Values Only', 'wc-product-addon-custom-field' ),
 				),
 				'default'       => '',
 				'section'       => 'advanced',
 				'priority'      => 23,
-				'help_text'     => __( 'Select this option to limit user input to unique values only. This will require that a value entered in a field does not currently exist in the entry database for that field.', 'contactum' ),
+				'help_text'     => __( 'Select this option to limit user input to unique values only. This will require that a value entered in a field does not currently exist in the entry database for that field.', 'wc-product-addon-custom-field' ),
 			),
 			array(
 				'name'          => 'auto_populate',
@@ -105,12 +105,12 @@ class Field_Email extends Contactum_Field {
 				'type'          => 'checkbox',
 				'is_single_opt' => true,
 				'options'       => array(
-					'yes' => __( 'Auto-populate Email', 'contactum' ),
+					'yes' => __( 'Auto-populate Email', 'wc-product-addon-custom-field' ),
 				),
 				'default'       => '',
 				'section'       => 'advanced',
 				'priority'      => 23,
-				'help_text'     => __( 'If a user is logged into the site, this email field will be auto-populated with his email. And form\'s email field will be hidden.', 'contactum' ),
+				'help_text'     => __( 'If a user is logged into the site, this email field will be auto-populated with his email. And form\'s email field will be hidden.', 'wc-product-addon-custom-field' ),
 			),
 		);
 

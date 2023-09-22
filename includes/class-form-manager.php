@@ -6,9 +6,9 @@
  * @package MultiStoreX
  */
 
-namespace Contactum;
+namespace WCPRAEF;
 
-use Contactum\Form;
+use WCPRAEF\Form;
 use WP_Query;
 
 /**
@@ -24,13 +24,13 @@ class FormManager {
 	 * @return array
 	 */
 	public function all() {
-		return $this->getForms( [ 'posts_per_page' => -1 ] );
+		return $this->getForms( array( 'posts_per_page' => -1 ) );
 	}
 
 	/**
 	 * GetAll Forms Page
 	 *
-	 * @param array $args args
+	 * @param array $args args.
 	 *
 	 * @return array
 	 */
@@ -88,11 +88,11 @@ class FormManager {
 	public function create( $form_name, $fields = array() ) {
 		$author = get_current_user_id();
 
-		$form_data =  array(
+		$form_data = array(
 			'post_title'  => $form_name,
 			'post_type'   => 'chi_forms',
 			'post_status' => 'publish',
-			'post_author' => $author
+			'post_author' => $author,
 		);
 
 		$form_id = wp_insert_post( $form_data );
@@ -147,9 +147,9 @@ class FormManager {
 	 * @return array
 	 */
 	public function save( $data ) {
-		$saved_fields  = [];
-		$new_fields    = [];
-		wp_update_post( [ 'ID' => $data['form_id'], 'post_status' => 'publish', 'post_title' => $data['post_title'] ] );
+		$saved_fields  = array();
+		$new_fields    = array();
+		wp_update_post( array( 'ID' => $data['form_id'], 'post_status' => 'publish', 'post_title' => $data['post_title'] ) );
 
 		$existing_fields = get_children(
 			array(
@@ -174,7 +174,7 @@ class FormManager {
 					$field_id = $field['id'];
 				}
 
-				$field_id = contactum_insert_form_field( $data['form_id'], $field, $field_id ,$order );
+				$field_id = contactum_insert_form_field( $data['form_id'], $field, $field_id, $order );
 
 				$new_fields[] = $field_id;
 
@@ -185,7 +185,6 @@ class FormManager {
 		}
 
 		$inputs_to_delete = array_diff( $existing_fields, $new_fields );
-
 
 		if ( ! empty( $inputs_to_delete ) ) {
 			foreach ( $inputs_to_delete as $delete_id ) {

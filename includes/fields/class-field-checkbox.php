@@ -6,17 +6,17 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
-use Contactum\Fields\Contactum_Field;
-use Contactum\Fields\Traits\DropDownOption;
+use WCPRAEF\Fields\Base_Field;
+use WCPRAEF\Fields\Traits\DropDownOption;
 
 /**
  * Field Checkbox class
  *
  * @package MultiStoreX
  */
-class Field_Checkbox extends Contactum_Field {
+class Field_Checkbox extends Base_Field {
 	use DropDownOption;
 
 	/**

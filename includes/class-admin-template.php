@@ -6,7 +6,7 @@
  * @package MultiStoreX
  */
 
-namespace Contactum;
+namespace WCPRAEF;
 
 /**
  * Admin Template class
@@ -31,7 +31,7 @@ class Admin_Template {
 	public function render_templates() {
 		$current_screen = get_current_screen();
 
-		if ( ! in_array( $current_screen->id, [ 'toplevel_page_contactum' ] ) ) {
+		if ( ! in_array( $current_screen->id, array( 'toplevel_page_contactum' ) ) ) {
 			return true;
 		}
 

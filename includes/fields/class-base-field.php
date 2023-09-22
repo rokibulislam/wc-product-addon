@@ -1,12 +1,12 @@
 <?php
 /**
- * Contactum Field Checkbox
+ * Field Checkbox
  *
  * @author Kamrul
  * @package MultiStoreX
  */
 
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
 /**
  * Contactum Field class
@@ -14,7 +14,7 @@ namespace Contactum\Fields;
  * @package MultiStoreX
  * @author  Kamrul
  */
-abstract class Contactum_Field {
+abstract class Base_Field {
 
 	/**
 	 * Name of field
@@ -125,8 +125,8 @@ abstract class Contactum_Field {
 	   	if ( $validator = $this->get_validator() ) {
 			$settings['validator'] = $validator;
 		}
-		
-		return apply_filters( 'contactum_field_get_js_settings', $settings );
+        
+		return apply_filters( 'Base_Field_get_js_settings', $settings );
 	}
 
 	/**
@@ -139,7 +139,7 @@ abstract class Contactum_Field {
 			'condition_status' => 'no',
 			'cond_field'       => array(),
 			'cond_operator'    => array( '=' ),
-			'cond_option'      => array( __( '- select -', 'contactum' ) ),
+			'cond_option'      => array( __( '- select -', 'wc-product-addon-custom-field' ) ),
 			'cond_logic'       => 'all',
 		);
 	}
@@ -180,46 +180,46 @@ abstract class Contactum_Field {
 		$common_properties = array(
 			array(
 				'name'      => 'label',
-				'title'     => __( 'Field Label', 'contactum' ),
+				'title'     => __( 'Field Label', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'basic',
 				'priority'  => 10,
-				'help_text' => __( 'Enter a title of this field', 'contactum' ),
+				'help_text' => __( 'Enter a title of this field', 'wc-product-addon-custom-field' ),
 			),
 
 			array(
 				'name'      => 'help',
-				'title'     => __( 'Help text', 'contactum' ),
+				'title'     => __( 'Help text', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'basic',
 				'priority'  => 20,
-				'help_text' => __( 'Give the user some information about this field', 'contactum' ),
+				'help_text' => __( 'Give the user some information about this field', 'wc-product-addon-custom-field' ),
 			),
 
 			array(
 				'name'      => 'required',
-				'title'     => __( 'Required', 'contactum' ),
+				'title'     => __( 'Required', 'wc-product-addon-custom-field' ),
 				'type'      => 'required',
 				'options'   => array(
-					'yes' => __( 'Yes', 'contactum' ),
-					'no'  => __( 'No', 'contactum' ),
+					'yes' => __( 'Yes', 'wc-product-addon-custom-field' ),
+					'no'  => __( 'No', 'wc-product-addon-custom-field' ),
 				),
 				'section'   => 'basic',
 				'priority'  => 21,
 				'default'   => 'no',
 				'inline'    => true,
-				'message'   => __( 'This Field is Required', 'contactum' ),
-				'help_text' => __( 'Check this option to mark the field required. A form will not submit unless all required fields are provided.', 'contactum' ),
+				'message'   => __( 'This Field is Required', 'wc-product-addon-custom-field' ),
+				'help_text' => __( 'Check this option to mark the field required. A form will not submit unless all required fields are provided.', 'wc-product-addon-custom-field' ),
 			),
 
 			array(
 				'name'     => 'width',
-				'title'    => __( 'Field Size', 'contactum' ),
+				'title'    => __( 'Field Size', 'wc-product-addon-custom-field' ),
 				'type'     => 'radio',
 				'options'  => array(
-					'small'  => __( 'Small', 'contactum' ),
-					'medium' => __( 'Medium', 'contactum' ),
-					'large'  => __( 'Large', 'contactum' ),
+					'small'  => __( 'Small', 'wc-product-addon-custom-field' ),
+					'medium' => __( 'Medium', 'wc-product-addon-custom-field' ),
+					'large'  => __( 'Large', 'wc-product-addon-custom-field' ),
 				),
 				'section'  => 'advanced',
 				'priority' => 21,
@@ -229,21 +229,21 @@ abstract class Contactum_Field {
 
 			array(
 				'name'      => 'css',
-				'title'     => __( 'CSS Class Name', 'contactum' ),
+				'title'     => __( 'CSS Class Name', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'advanced',
 				'priority'  => 22,
-				'help_text' => __( 'Provide a container class name for this field. Available classes: contactum-col-half, contactum-col-half-last, contactum-col-one-third, contactum-col-one-third-last', 'contactum' ),
+				'help_text' => __( 'Provide a container class name for this field. Available classes: wc-product-addon-custom-field-col-half, wc-product-addon-custom-field-col-half-last, wc-product-addon-custom-field-col-one-third, wc-product-addon-custom-field-col-one-third-last', 'wc-product-addon-custom-field' ),
 			),
 		);
 		if ( $is_meta ) {
 			$common_properties[] = array(
 				'name'      => 'name',
-				'title'     => __( 'Meta Key', 'contactum' ),
+				'title'     => __( 'Meta Key', 'wc-product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'basic',
 				'priority'  => 11,
-				'help_text' => __( 'Name of the meta key this field will save to', 'contactum' ),
+				'help_text' => __( 'Name of the meta key this field will save to', 'wc-product-addon-custom-field' ),
 			);
 		}
 
@@ -266,7 +266,7 @@ abstract class Contactum_Field {
 	public function get_conditional_field() {
 		return array(
 			'name'      => 'contactum_cond',
-			'title'     => __( 'Conditional Logic', 'contactum' ),
+			'title'     => __( 'Conditional Logic', 'wc-product-addon-custom-field' ),
 			'type'      => 'conditional_logic',
 			'section'   => 'advanced',
 			'priority'  => 30,
@@ -308,7 +308,8 @@ abstract class Contactum_Field {
 			esc_attr( $el_name ),
 			esc_attr( $class_name ),
 			esc_attr( $field_size ),
-			esc_attr( $label ), esc_attr( $message )
+			esc_attr( $label ),
+            esc_attr( $message ),
 		);
 	}
 
@@ -381,7 +382,7 @@ abstract class Contactum_Field {
 			$cond_inputs['type']    = $form_field['template'];
 			$cond_inputs['name']    = $form_field['name'];
 			$cond_inputs['form_id'] = $form_id;
-			$condition              = json_encode( $cond_inputs );
+			$condition              = wp_json_encode( $cond_inputs );
 		} else {
 			$condition = '';
 		}

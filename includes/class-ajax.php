@@ -6,12 +6,7 @@
  * @package MultiStoreX
  */
 
-namespace Contactum;
-
-use Contactum\Tools;
-use Contactum\Recaptcha;
-use Contactum\EntryManager;
-use Contactum\Notification as Contactum_Notification;
+namespace WCPRAEF;
 
 /**
  * Ajax class
@@ -22,7 +17,6 @@ class Ajax {
 
 	/**
 	 * Constructor
-	 *
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_save_contactum_form', array( $this, 'save_contactum_form' ) );
@@ -43,7 +37,7 @@ class Ajax {
 		$post_data = wp_unslash( $_POST );
 
 		if ( ! wp_verify_nonce( $post_data['contactum_form_builder_nonce'], 'contactum-form-builder-nonce' ) ) {
-			wp_send_json_error( __( 'Unauthorized operation', 'contactum' ) );
+			wp_send_json_error( __( 'Unauthorized operation', 'wc-product-addon-custom-field' ) );
 		}
 
 		if ( isset( $post_data['form_data'] ) ) {
@@ -51,7 +45,7 @@ class Ajax {
 		}
 
 		if ( empty( $form_data['contactum_form_id'] ) ) {
-			wp_send_json_error( __( 'Invalid form id', 'contactum' ) );
+			wp_send_json_error( __( 'Invalid form id', 'wc-product-addon-custom-field' ) );
 		}
 
 		$form_fields = isset( $post_data['form_fields'] ) ? $post_data['form_fields'] : '';
@@ -69,14 +63,14 @@ class Ajax {
 		);
 
 		$form_fields = contactum()->forms->save( $data );
-
-		wp_send_json_success(
-			array(
-				'form_fields'   => $form_fields,
-				'form_settings' => $form_settings,
-		 	)
-		);
-	}
+        
+        wp_send_json_success(
+            array(
+                'form_fields'   => $form_fields,
+                'form_settings' => $form_settings,
+            )
+        );
+    }
 
 	/**
 	 * Upload file

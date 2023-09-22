@@ -6,11 +6,11 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Fields;
+namespace WCPRAEF\Fields;
 
-use Contactum\Fields\Contactum_Field;
-use Contactum\Fields\Field_Checkbox;
-use Contactum\Fields\Traits\DropDownOption;
+use WCPRAEF\Fields\Base_Field;
+use WCPRAEF\Fields\Field_Checkbox;
+use WCPRAEF\Fields\Traits\DropDownOption;
 
 /**
  * Field Radio class
@@ -22,7 +22,7 @@ class Field_Radio extends Field_Checkbox {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Radio', 'contactum' );
+		$this->name       = __( 'Radio', 'wc-product-addon-custom-field' );
 		$this->input_type = 'radio_field';
 		$this->icon       = 'dot-circle-o';
 		$this->multiple   = false;
@@ -90,7 +90,7 @@ class Field_Radio extends Field_Checkbox {
 			'selected'    => '',
 			'inline'      => 'no',
 			'layout'      => 'default',
-			'image'    	  => true,
+            'image'       => true,
 			'sync_value'  => true,
 			'photo_value' => false,
 			'show_value'  => false,

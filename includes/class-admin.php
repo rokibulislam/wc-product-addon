@@ -6,9 +6,9 @@
  * @package MultiStoreX
  */
 
-namespace Contactum;
+namespace WCPRAEF;
 
-use Contactum\Forms_List_Table;
+use WCPRAEF\Forms_List_Table;
 
 /**
  * Admin class
@@ -54,7 +54,7 @@ class Admin {
 		register_post_type(
 			'chi_forms',
 			array(
-				'label'           => __( 'Forms', 'contactum' ),
+				'label'           => __( 'Forms', 'wc-product-addon-custom-field' ),
 				'public'          => false,
 				'show_ui'         => false,
 				'show_in_menu'    => false,
@@ -73,21 +73,21 @@ class Admin {
 					'delete_post'         => $capability,
 					'read_post'           => $capability,
 				),
-				'labels' => array(
-					'name'               => __( 'Forms', 'contactum' ),
-					'singular_name'      => __( 'Form', 'contactum' ),
-					'menu_name'          => __( 'Forms', 'contactum' ),
-					'add_new'            => __( 'Add Form', 'contactum' ),
-					'add_new_item'       => __( 'Add New Form', 'contactum' ),
-					'edit'               => __( 'Edit', 'contactum' ),
-					'edit_item'          => __( 'Edit Form', 'contactum' ),
-					'new_item'           => __( 'New Form', 'contactum' ),
-					'view'               => __( 'View Form', 'contactum' ),
-					'view_item'          => __( 'View Form', 'contactum' ),
-					'search_items'       => __( 'Search Form', 'contactum' ),
-					'not_found'          => __( 'No Form Found', 'contactum' ),
-					'not_found_in_trash' => __( 'No Form Found in Trash', 'contactum' ),
-					'parent'             => __( 'Parent Form', 'contactum' ),
+				'labels'          => array(
+					'name'               => __( 'Forms', 'wc-product-addon-custom-field' ),
+					'singular_name'      => __( 'Form', 'wc-product-addon-custom-field' ),
+					'menu_name'          => __( 'Forms', 'wc-product-addon-custom-field' ),
+					'add_new'            => __( 'Add Form', 'wc-product-addon-custom-field' ),
+					'add_new_item'       => __( 'Add New Form', 'wc-product-addon-custom-field' ),
+					'edit'               => __( 'Edit', 'wc-product-addon-custom-field' ),
+					'edit_item'          => __( 'Edit Form', 'wc-product-addon-custom-field' ),
+					'new_item'           => __( 'New Form', 'wc-product-addon-custom-field' ),
+					'view'               => __( 'View Form', 'wc-product-addon-custom-field' ),
+					'view_item'          => __( 'View Form', 'wc-product-addon-custom-field' ),
+					'search_items'       => __( 'Search Form', 'wc-product-addon-custom-field' ),
+					'not_found'          => __( 'No Form Found', 'wc-product-addon-custom-field' ),
+					'not_found_in_trash' => __( 'No Form Found in Trash', 'wc-product-addon-custom-field' ),
+					'parent'             => __( 'Parent Form', 'wc-product-addon-custom-field' ),
 				),
 			)
 		);
@@ -113,8 +113,8 @@ class Admin {
 		$capability = 'manage_options';
 		$slug       = 'contactum';
 
-		$hook = add_menu_page( __( 'Product Addon App', 'contactum' ), __( 'Product Addon App', 'contactum' ), $capability, $slug, array( $this, 'forms_page' ), 'dashicons-text' );
-		add_submenu_page( $slug, __( 'Forms', 'contactum' ), __( 'Forms', 'contactum' ), $capability, 'contactum', array( $this, 'forms_page' ) );
+		$hook = add_menu_page( __( 'Product Addon App', 'wc-product-addon-custom-field' ), __( 'Product Addon App', 'wc-product-addon-custom-field' ), $capability, $slug, array( $this, 'forms_page' ), 'dashicons-text' );
+		add_submenu_page( $slug, __( 'Forms', 'wc-product-addon-custom-field' ), __( 'Forms', 'wc-product-addon-custom-field' ), $capability, 'contactum', array( $this, 'forms_page' ) );
 	}
 
 	/**

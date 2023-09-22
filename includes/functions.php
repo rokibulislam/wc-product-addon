@@ -28,21 +28,21 @@ function contactum_get_default_form_settings() {
 		'contactum_get_default_form_settings',
 		array(
 			'redirect_to'        => 'same',
-			'message'            => __( 'Thanks for contact us! We will get in touch with you shortly.', 'contactum' ),
+			'message'            => __( 'Thanks for contact us! We will get in touch with you shortly.', 'wc-product-addon-custom-field' ),
 			'page_id'            => '',
 			'url'                => '',
 			'pages'              => wp_list_pluck( get_pages(), 'post_title', 'ID' ),
-			'submit_text'        => __( 'Submit Query', 'contactum' ),
+			'submit_text'        => __( 'Submit Query', 'wc-product-addon-custom-field' ),
 			'schedule_form'      => 'false',
 			'schedule_start'     => '',
 			'schedule_end'       => '',
-			'sc_pending_message' => __( 'Form submission hasn\'t been started yet', 'contactum' ),
-			'sc_expired_message' => __( 'Form submission is now closed.', 'contactum' ),
+			'sc_pending_message' => __( 'Form submission hasn\'t been started yet', 'wc-product-addon-custom-field' ),
+			'sc_expired_message' => __( 'Form submission is now closed.', 'wc-product-addon-custom-field' ),
 			'require_login'      => 'false',
-			'req_login_message'  => __( 'You need to login to submit a query.', 'contactum' ),
+			'req_login_message'  => __( 'You need to login to submit a query.', 'wc-product-addon-custom-field' ),
 			'limit_entries'      => 'false',
 			'limit_number'       => '100',
-			'limit_message'      => __( 'Sorry, we have reached the maximum number of submissions.', 'contactum' ),
+			'limit_message'      => __( 'Sorry, we have reached the maximum number of submissions.', 'wc-product-addon-custom-field' ),
 			'label_position'     => 'above',
 			'use_theme_css'      => 'contactum-style',
 		),
@@ -1112,35 +1112,35 @@ function contactum_allowed_extensions() {
 	$extesions = array(
 		'images' => array(
 			'ext'   => 'jpg,jpeg,gif,png,bmp',
-			'label' => __( 'Images', 'weforms' ),
+			'label' => __( 'Images', 'wc-product-addon-custom-field' ),
 		),
 		'audio'  => array(
 			'ext'   => 'mp3,wav,ogg,wma,mka,m4a,ra,mid,midi',
-			'label' => __( 'Audio', 'weforms' ),
+			'label' => __( 'Audio', 'wc-product-addon-custom-field' ),
 		),
 		'video'  => array(
 			'ext'   => 'avi,divx,flv,mov,ogv,mkv,mp4,m4v,divx,mpg,mpeg,mpe',
-			'label' => __( 'Videos', 'weforms' ),
+			'label' => __( 'Videos', 'wc-product-addon-custom-field' ),
 		),
 		'pdf'    => array(
 			'ext'   => 'pdf',
-			'label' => __( 'PDF', 'weforms' ),
+			'label' => __( 'PDF', 'wc-product-addon-custom-field' ),
 		),
 		'office' => array(
 			'ext'   => 'doc,ppt,pps,xls,mdb,docx,xlsx,pptx,odt,odp,ods,odg,odc,odb,odf,rtf,txt',
-			'label' => __( 'Office Documents', 'weforms' ),
+			'label' => __( 'Office Documents', 'wc-product-addon-custom-field' ),
 		),
 		'zip'    => array(
 			'ext'   => 'zip,gz,gzip,rar,7z',
-			'label' => __( 'Zip Archives', 'weforms' ),
+			'label' => __( 'Zip Archives', 'wc-product-addon-custom-field' ),
 		),
 		'exe'    => array(
 			'ext'   => 'exe',
-			'label' => __( 'Executable Files', 'weforms' ),
+			'label' => __( 'Executable Files', 'wc-product-addon-custom-field' ),
 		),
 		'csv'    => array(
 			'ext'   => 'csv',
-			'label' => __( 'CSV', 'weforms' ),
+			'label' => __( 'CSV', 'wc-product-addon-custom-field' ),
 		),
 	);
 

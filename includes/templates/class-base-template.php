@@ -6,14 +6,14 @@
  * @package MultiStoreX
  */
 
-namespace Contactum\Templates;
+namespace WCPRAEF\Templates;
 
 /**
  * Base Template class
  *
  * @package MultiStoreX
  */
-abstract class Contactum_Form_Template {
+abstract class Base_Form_Template {
 
 	/**
 	 * Title
