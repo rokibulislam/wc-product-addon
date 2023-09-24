@@ -2,8 +2,8 @@
 /**
  * Field Number
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF\Fields;
@@ -13,14 +13,14 @@ use WCPRAEF\Fields\Base_Field;
 /**
  * Field Number class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Field_Number extends Base_Field {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Numeric', 'wc-product-addon-custom-field' );
+		$this->name       = __( 'Numeric', 'product-addon-custom-field' );
 		$this->input_type = 'number_field';
 		$this->icon       = 'hashtag';
 	}
@@ -41,10 +41,10 @@ class Field_Number extends Base_Field {
 		<?php
 				$this->print_label( $field_settings );
 				printf(
-					'<div class="contactum-fields"> <input
+					'<div class="wcprafe-fields"> <input
 						id="%s"
 						type="number"
-						class="contactum-el-form-control %s"
+						class="wcprafe-el-form-control %s"
 						min="%s"
 						max="%s"
 						step="%s"
@@ -83,7 +83,7 @@ class Field_Number extends Base_Field {
 		$settings = array(
 			array(
 				'name'      => 'step_text_field',
-				'title'     => __( 'Step', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Step', 'product-addon-custom-field' ),
 				'type'      => 'text',
 				'variation' => 'number',
 				'section'   => 'advanced',
@@ -93,7 +93,7 @@ class Field_Number extends Base_Field {
 
 			array(
 				'name'      => 'min_value_field',
-				'title'     => __( 'Min Value', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Min Value', 'product-addon-custom-field' ),
 				'type'      => 'text',
 				'variation' => 'number',
 				'section'   => 'advanced',
@@ -103,7 +103,7 @@ class Field_Number extends Base_Field {
 
 			array(
 				'name'      => 'max_value_field',
-				'title'     => __( 'Max Value', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Max Value', 'product-addon-custom-field' ),
 				'type'      => 'text',
 				'variation' => 'number',
 				'section'   => 'advanced',
@@ -123,9 +123,9 @@ class Field_Number extends Base_Field {
 	public function get_field_props() {
 		$defaults = $this->default_attributes();
 		$props    = array(
-			'step_text_field' => '0',
+			'step_text_field' => '1',
 			'min_value_field' => '0',
-			'max_value_field' => '0',
+			'max_value_field' => '100',
 		);
 
 		return array_merge( $defaults, $props );

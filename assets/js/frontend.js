@@ -1,35 +1,33 @@
 ;(function($, window) {
-    window.Contactum = {
+    window.WCPRAEF = {
 
         init: function() {
-            $('.contactum-form-add').on('submit', this.formSubmit);
-            $('.contactum-form').on('click', 'img.contactum-clone-field', this.cloneField);
-            $('.contactum-form').on('click', 'img.contactum-remove-field', this.removeField);
+            $('.wcprafe-form-add').on('submit', this.formSubmit);
         },
 
         formSubmit: function(e) {
             e.preventDefault();
             let form = $(this),
                 submitButton = form.find('input[type=submit]')
-                form_data = Contactum.validateForm(form);
+                form_data = WCPRAEF.validateForm(form);
 
             if (form_data) {
-                 form.find('li.contactum-submit').append('<span class="contactum-loading"></span>');
+                 form.find('li.wcprafe-submit').append('<span class="wcprafe-loading"></span>');
                  submitButton.attr('disabled', 'disabled').addClass('button-primary-disabled');
 
-                 $.post(frontend.ajaxurl, form_data, function(res) {
+                 $.post(wcprafe_frontend.ajaxurl, form_data, function(res) {
                     if ( res.success) {
-                        $('body').trigger('contactumform:success', res);
+                        $('body').trigger('wcprafeform:success', res);
 
                         if ( res.show_message == true) {
-                                form.before( '<div class="contactum-success">' + res.message + '</div>');
+                                form.before( '<div class="wcprafe-success">' + res.message + '</div>');
                                 form.slideUp( 'fast', function() {
                                     form.remove();
                                 });
 
                                 //focus
                                 $('html, body').animate({
-                                    scrollTop: $('.contactum-success').offset().top - 100
+                                    scrollTop: $('.wcprafe-success').offset().top - 100
                                 }, 'fast');
 
                         } else {
@@ -45,7 +43,7 @@
                                 } else {
                                     submitButton.removeAttr('disabled');
                                     submitButton.removeClass('button-primary-disabled');
-                                    form.find('span.contactum-loading').remove();
+                                    form.find('span.wcprafe-loading').remove();
                                 }
 
                                 return;
@@ -68,7 +66,7 @@
                         }
 
                         submitButton.removeClass('button-primary-disabled');
-                        form.find('span.contactum-loading').remove();
+                        form.find('span.wcprafe-loading').remove();
                     });
                 }
         },
@@ -82,8 +80,8 @@
                 error_type  = '';
 
             // remove all initial errors if any
-            Contactum.removeErrors(self);
-            Contactum.removeErrorNotice(self);
+            WCPRAEF.removeErrors(self);
+            WCPRAEF.removeErrorNotice(self);
 
             // ===== Validate: Text and Textarea ========
             // var required = self.find('[data-required="yes"]:visible');
@@ -104,7 +102,7 @@
                             error = true;
                             error_type = 'required';
                             // make it warn collor
-                            Contactum.markError( item, error_type, error_message );
+                            WCPRAEF.markError( item, error_type, error_message );
                         }
                         break;
                     case 'select':
@@ -116,7 +114,7 @@
                             error_type = 'required';
 
                             // make it warn collor
-                            Contactum.markError( item, error_type, error_message );
+                            WCPRAEF.markError( item, error_type, error_message );
                         }
                         break;
                     case 'multiselect':
@@ -127,7 +125,7 @@
                             error_type = 'required';
 
                             // make it warn collor
-                            Contactum.markError( item,  error_type, error_message );
+                            WCPRAEF.markError( item,  error_type, error_message );
                         }
                         break;
 
@@ -140,7 +138,7 @@
                             error_type = 'required';
 
                             // make it warn collor
-                            Contactum.markError( item,  error_type, error_message );
+                            WCPRAEF.markError( item,  error_type, error_message );
                         }
                         break;
 
@@ -152,7 +150,7 @@
                             error_type = 'required';
 
                             // make it warn collor
-                            Contactum.markError( item,  error_type, error_message );
+                            WCPRAEF.markError( item,  error_type, error_message );
                         }
                         break;
 
@@ -161,17 +159,17 @@
 
                         if ( val !== '' ) {
                             //run the validation
-                            if( !Contactum.isValidEmail( val ) ) {
+                            if( !WCPRAEF.isValidEmail( val ) ) {
                                 error = true;
                                 error_type = 'validation';
 
-                                Contactum.markError( item,  error_type );
+                                WCPRAEF.markError( item,  error_type );
                             }
                         } else if( val === '' ) {
                             error = true;
                             error_type = 'required';
 
-                            Contactum.markError( item,  error_type, error_message );
+                            WCPRAEF.markError( item,  error_type, error_message );
                         }
                         break;
 
@@ -181,16 +179,16 @@
 
                         if ( val !== '' ) {
                             //run the validation
-                            if( !Contactum.isValidURL( val ) ) {
+                            if( !WCPRAEF.isValidURL( val ) ) {
                                 error = true;
                                 error_type = 'validation';
 
-                                Contactum.markError( item,  error_type );
+                                WCPRAEF.markError( item,  error_type );
                             }
                         } else if( val === '' ) {
                             error = true;
                             error_type = 'required';
-                            Contactum.markError( item,  error_type, error_message )
+                            WCPRAEF.markError( item,  error_type, error_message )
                         }
                         break;
                 };
@@ -205,14 +203,14 @@
                     error = true;
                     error_type = 'required';
 
-                    Contactum.markError( map_required,  error_type );
+                    WCPRAEF.markError( map_required,  error_type );
                 }
             }
 
             // if already some error found, bail out
             if (error) {
                 // add error notice
-                Contactum.addErrorNotice(self,'end');
+                WCPRAEF.addErrorNotice(self,'end');
                 return false;
             }
 
@@ -222,15 +220,14 @@
         },
 
         addErrorNotice: function( form, position ) {
-            $(form).find('li.contactum-submit').append('<div class="contactum-errors">' + frontend.error_message + '</div>');
+            $(form).find('li.wcprafe-submit').append('<div class="wcprafe-errors">' + wcprafe_frontend.error_message + '</div>');
         },
 
         removeErrorNotice: function(form) {
-            $(form).find('.contactum-errors').remove();
+            $(form).find('.wcprafe-errors').remove();
         },
 
         markError: function(item, error_type, error_message = null) {
-            console.log(error_message);
             var error_string = '';
             $(item).closest('li').addClass('has-error');
 
@@ -252,8 +249,8 @@
                             break
                     }
                 }
-                $(item).siblings('.contactum-error-msg').remove();
-                $(item).after('<div class="contactum-error-msg">'+ error_string +'</div>')
+                $(item).siblings('.wcprafe-error-msg').remove();
+                $(item).after('<div class="wcprafe-error-msg">'+ error_string +'</div>')
             }
 
             $(item).focus();
@@ -261,7 +258,7 @@
 
         removeErrors: function(item) {
             $(item).find('.has-error').removeClass('has-error');
-            $('.contactum-error-msg').remove();
+            $('.wcprafe-error-msg').remove();
         },
 
         isValidEmail: function( email ) {
@@ -273,33 +270,10 @@
             var urlregex = new RegExp("^(http:\/\/www.|https:\/\/www.|ftp:\/\/www.|www.|http:\/\/|https:\/\/){1}([0-9A-Za-z]+\.)");
             return urlregex.test(url);
         },
-
-        cloneField: function(e) {
-            e.preventDefault();
-
-            var $div = $(this).closest('tr');
-            var $clone = $div.clone();
-            // console.log($clone);
-
-            //clear the inputs
-            $clone.find('input').val('');
-            $clone.find(':checked').attr('checked', '');
-            $div.after($clone);
-        },
-
-        removeField: function() {
-            //check if it's the only item
-            var $parent = $(this).closest('tr');
-            var items = $parent.siblings().andSelf().length;
-
-            if( items > 1 ) {
-                $parent.remove();
-            }
-        },
     };
 
     jQuery(document).ready(function($) {
-        Contactum.init();
+        WCPRAEF.init();
     });
 
 })(jQuery, window);

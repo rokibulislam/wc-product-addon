@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <label class="contactum-label">{{ field.name }}</label>
+      <label class="wcprafe-label">{{ field.name }}</label>
       <ul class="field-option-actions">
         <li>
           <el-checkbox v-model="editfield.show_value" :label="show_value"> {{ "Show values" }} </el-checkbox>
@@ -9,9 +9,9 @@
         <li>
           <el-checkbox v-model="editfield.sync_value" :label="sync_value"> {{ "Sync values" }} </el-checkbox>
         </li>
-        <li v-if="editfield.image">
+        <!-- <li v-if="editfield.image">
             <el-checkbox v-model="editfield.photo_value" :label="photo_value"> {{ "Photo" }} </el-checkbox>
-        </li>
+        </li> -->
       </ul>
     </div>
 
@@ -41,7 +41,7 @@
           <i class="fa fa-bars"></i>
         </div>
         
-        <div v-if="editfield.photo_value == true ">
+        <!-- <div v-if="editfield.photo_value == true ">
           <div class="ff_photo_card">
             <div class="wpf_photo_holder">
               <img
@@ -56,7 +56,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="option_label">
           <el-input type="text" v-model="option.label" @input="set_option_value(index, option.label)"> </el-input>
@@ -109,19 +109,14 @@
 <script>
 import option_field from "../../mixin/option-field.js";
 import modal from "../modal/index.vue";
-import photoUploader from "./photoUploader.vue";
 export default {
   name: "field_option_data",
   mixins: [option_field],
   components: {
     modal,
-    photoUploader,
   },
   data: function () {
     return {
-      // sync_value: true,
-      // photo_value: false,
-      // show_value: false,
       options: [],
       selected: [],
       bulkEditVisible: false,
@@ -286,9 +281,10 @@ export default {
         _.noConflict();
       }
 
-      if (typeof wp !== "undefined" && wp.media && wp.media.editor) {
+      console.log( wp.media );
+
+      if (typeof wp !== "undefined" && wp.media  ) {
         var self = this;
-        console.log('hello 2');
         var send_attachment_bkp = wp.media.editor.send.attachment;
         wp.media.editor.send.attachment = function (props, attachment) {
           option.photo = attachment.url;

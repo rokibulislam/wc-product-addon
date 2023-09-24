@@ -27,15 +27,13 @@ function is_element_in_viewport (el) {
 
 const store = new Vuex.Store({
 	state: {
-		field_settings: window.contactum.field_settings,
-		panel_sections: window.contactum.panel_sections,
-		form_fields: window.contactum.form_fields,
-		post: window.contactum.post,
-		integrations: window.contactum.integrations,
-        settings: window.contactum.settings,
+		field_settings: window.wcprafe.field_settings,
+		panel_sections: window.wcprafe.panel_sections,
+		form_fields: window.wcprafe.form_fields,
+		post: window.wcprafe.post,
+        settings: window.wcprafe.settings,
 		current_panel: 'form_fields',
-		editfield: 0,
-		notifications: window.contactum.notifications
+		editfield: 0
 	},
 
 	getters: {
@@ -48,9 +46,6 @@ const store = new Vuex.Store({
 		post(state) {
 			return state.post;
 		},
-		integrations(state) {
-			return state.integrations;
-		},
 		form_fields(state) {
 			return state.form_fields;
 		},
@@ -60,9 +55,6 @@ const store = new Vuex.Store({
 		editfield(state) {
 			return state.editfield;
 		},
-        notifications(state) {
-            return state.notifications;
-        },
         settings(state) {
             return state.settings
         }
@@ -220,7 +212,7 @@ const store = new Vuex.Store({
             }
             // bring newly added element into viewport
             Vue.nextTick(function () {
-                var el = jQuery('.form-preview-stage .contactum-form .field-items').eq( index );
+                var el = jQuery('.form-preview-stage .wcprafe-form .field-items').eq( index );
                 if (el && !is_element_in_viewport(el.get(0))) {
                     jQuery('.form-preview-stage section').scrollTo(el, 800, {offset: -200});
                 }
@@ -318,36 +310,6 @@ const store = new Vuex.Store({
             // return state;
 		},
 
-		//notification
-		addNotification(state, payload) {
-			let notification = {
-				...payload
-			};
-			state.notifications.push(notification);
-		},
-
-		updateNotification(state, payload) {
-			state.notifications[payload.index] = payload.value;
-		},
-
-		deleteNotification(state, payload) {
-			state.notifications.splice(payload, 1);
-		},
-
-		duplicateNotification(state, payload) {
-			let clone = { ...state.notifications[payload] };
-			let index = parseInt(payload) + 1;
-			state.notifications.splice(index, 0, clone);
-		},
-
-		updateNotificationProperty(state, payload) {
-			state.notifications[payload.index][payload.property] = payload.value;
-		},
-
-        updateIntegration( state, payload ) {
-
-        },
-
 		set_form_fields: function(state, payload) {
 			Vue.set(state, 'form_fields', payload);
 		},
@@ -367,17 +329,10 @@ const store = new Vuex.Store({
             Vue.set(state, 'post', payload);
         },
 
-        set_form_notification: function( state, payload ) {
-            Vue.set(state, 'notifications', payload);
-        },
 
         set_form_settings: function( state, payload ) {
             Vue.set(state, 'settings', payload);
         },
-
-        set_form_integrations: function( state, payload ) {
-            Vue.set(state, 'integrations', payload);
-        }
 
 	},
 	actions: {
@@ -407,26 +362,6 @@ const store = new Vuex.Store({
 			context.commit('close_field_options', payload);
 		},
 
-		addNotification: function(context, payload) {
-			context.commit('addNotification', payload);
-		},
-
-		deleteNotification(context, payload) {
-			context.commit('deleteNotification', payload);
-		},
-
-		duplicateNotification(context, payload) {
-			context.commit('duplicateNotification', payload);
-		},
-
-		updateNotificationProperty(context, payload) {
-			context.commit('updateNotificationProperty', payload);
-		},
-
-        updateIntegration( state, payload ) {
-            context.commit('updateIntegration', payload);
-        },
-
 		set_form_fields: function(context, payload) {
 			context.commit('set_form_fields', payload);
 		},
@@ -443,16 +378,8 @@ const store = new Vuex.Store({
             context.commit('set_form_post', payload);
         },
 
-        set_form_notification: function(context,payload) {
-            context.commit('set_form_notification', payload);
-        },
-
         set_form_settings: function( context,payload ) {
             context.commit('set_form_settings', payload);
-        },
-
-        set_form_integrations: function(context,payload) {
-            context.commit('set_form_integrations', payload);
         },
 
         set_current_panel:  function(context,payload) {

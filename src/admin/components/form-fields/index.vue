@@ -55,7 +55,7 @@ export default {
   mounted: function() {
     // bind jquery ui draggable
     jQuery(this.$el).find('.panel-form-field-buttons .panel-button').draggable({
-        connectToSortable: '.form-preview-stage .contactum-form, .contactum-column-inner-fields .contactum-column-fields-sortable-list',
+        connectToSortable: '.form-preview-stage .wcprafe-form, .wcprafe-column-inner-fields .wcprafe-column-fields-sortable-list',
         helper: 'clone',
         revert: 'invalid',
         cancel: '.button-faded',

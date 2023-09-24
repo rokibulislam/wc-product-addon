@@ -2,8 +2,8 @@
 /**
  * Cart Template
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF;
@@ -11,7 +11,7 @@ namespace WCPRAEF;
 /**
  * Cart class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Cart {
 

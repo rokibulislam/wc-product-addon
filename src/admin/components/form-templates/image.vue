@@ -1,5 +1,5 @@
 <template>
-  <div class="contactum-fields">
+  <div class="wcprafe-fields">
       <a class="btn-image" href="#">
         <template v-if="field.button_label === ''">{{ 'Select Image' }}</template>
         <template v-else>{{ field.button_label }}</template>

@@ -2,8 +2,8 @@
 /**
  * Abstract class template
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF\Templates;
@@ -11,7 +11,7 @@ namespace WCPRAEF\Templates;
 /**
  * Base Template class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 abstract class Base_Form_Template {
 
@@ -83,7 +83,7 @@ abstract class Base_Form_Template {
 	 * @return array
 	 */
 	public function get_form_settings() {
-		return contactum_get_default_form_settings();
+		return wcprafe_get_default_form_settings();
 	}
 
 	/**
@@ -92,7 +92,7 @@ abstract class Base_Form_Template {
 	 * @return array
 	 */
 	public function get_register_fields() {
-		return contactum()->fields->getFields();
+		return wc_product_addon_extra_field()->fields->getFields();
 	}
 
 	/**

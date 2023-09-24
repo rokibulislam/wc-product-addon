@@ -2,8 +2,8 @@
 /**
  * Admin Template
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF;
@@ -11,7 +11,7 @@ namespace WCPRAEF;
 /**
  * Admin Template class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Admin_Template {
 
@@ -31,12 +31,12 @@ class Admin_Template {
 	public function render_templates() {
 		$current_screen = get_current_screen();
 
-		if ( ! in_array( $current_screen->id, array( 'toplevel_page_contactum' ) ) ) {
+		if ( ! in_array( $current_screen->id, array( 'toplevel_page_product_addon_custom_field' ) ) ) {
 			return true;
 		}
 
-		$templates      = contactum()->templates->get_templates();
-		$blank_form_url = admin_url( 'admin.php?page=contactum&action=add-new' );
+		$templates      = wc_product_addon_extra_field()->templates->get_templates();
+		$blank_form_url = admin_url( 'admin.php?page=product_addon_custom_field&action=add-new' );
 		$action_name    = 'create_template';
 
 		include __DIR__ . '/html/modal.php';
@@ -55,15 +55,15 @@ class Admin_Template {
 			return;
 		}
 
-		$template_obj = contactum()->templates->get_template( $template );
+		$template_obj = wc_product_addon_extra_field()->templates->get_template( $template );
 
 		if ( false === $template_obj ) {
 			return;
 		}
 
-		$form_id = contactum()->templates->create( $template );
+		$form_id = wc_product_addon_extra_field()->templates->create( $template );
 
-		wp_redirect( admin_url( 'admin.php?page=contactum&action=edit&id='. $form_id ) );
+		wp_redirect( admin_url( 'admin.php?page=product_addon_custom_field&action=edit&id='. $form_id ) );
 		exit;
 	}
 }

@@ -1,7 +1,7 @@
-.contactum-nav {
+.wcprafe-nav {
   display: flex;
 }
-.contactum-tabs {
+.wcprafe-tabs {
   flex: 1;
 }
 .builder-save {
@@ -17,7 +17,7 @@
   display: flex;
   margin-bottom: 5px;
 }
-.contactum-nav {
+.wcprafe-nav {
   flex: 1;
 }
 .save_form_builder {
@@ -83,7 +83,7 @@
   background: #f9f9f9;
   /*padding: 10px;*/
 }
-form#contactum-form-builder {
+form#wcprafe-form-builder {
   width: 100%;
 }
 .builder-body {
@@ -155,35 +155,35 @@ form#contactum-form-builder {
   cursor: pointer;
   border-right: 1px solid #000;
 }
-ul.contactum-form li.contactum-name .contactum-fields {
+ul.wcprafe-form li.wcprafe-name .wcprafe-fields {
   display: flex;
   justify-content: space-between;
 }
-ul.contactum-form li.contactum-name .contactum-fields div {
+ul.wcprafe-form li.wcprafe-name .wcprafe-fields div {
   margin-right: 10px;
 }
-ul.contactum-form li.field-size-small .contactum-fields {
+ul.wcprafe-form li.field-size-small .wcprafe-fields {
   width: 30%;
 }
-ul.contactum-form li.field-size-medium .contactum-fields {
+ul.wcprafe-form li.field-size-medium .wcprafe-fields {
   width: 65%;
 }
-ul.contactum-form li.field-size-large .contactum-fields {
+ul.wcprafe-form li.field-size-large .wcprafe-fields {
   width: 100%;
 }
-ul.contactum-form li.name .contactum-fields {
+ul.wcprafe-form li.name .wcprafe-fields {
   display: flex;
   justify-content: space-between;
 }
-ul.contactum-form li.name .contactum-fields div {
+ul.wcprafe-form li.name .wcprafe-fields div {
   margin-right: 10px;
 }
-ul.contactum-form.form-label-above li .contactum-label {
+ul.wcprafe-form.form-label-above li .wcprafe-label {
   display: block;
   width: 100%;
   margin-bottom: 5px;
 }
-ul.contactum-form.form-label-hidden li .contactum-label {
+ul.wcprafe-form.form-label-hidden li .wcprafe-label {
   display: none;
 }
 .form-builder-container header {
@@ -212,19 +212,19 @@ span.form-id {
   font-size: 20px;
   cursor: pointer;
 }
-ul.contactum-form.form-label-left li,
-ul.contactum-form.form-label-right li {
+ul.wcprafe-form.form-label-left li,
+ul.wcprafe-form.form-label-right li {
   display: flex;
   justify-content: space-between;
 }
-ul.contactum-form.form-label-right li {
+ul.wcprafe-form.form-label-right li {
   flex-direction: row-reverse;
 }
-ul.contactum-form.form-label-left li div.contactum-label,
-ul.contactum-form.form-label-right li div.contactum-label {
+ul.wcprafe-form.form-label-left li div.wcprafe-label,
+ul.wcprafe-form.form-label-right li div.wcprafe-label {
   flex-basis: 20%;
 }
-ul.contactum-form.form-label-right li div.contactum-fields {
+ul.wcprafe-form.form-label-right li div.wcprafe-fields {
   flex-basis: 75%;
 }
 

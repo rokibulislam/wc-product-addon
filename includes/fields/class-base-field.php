@@ -2,17 +2,17 @@
 /**
  * Field Checkbox
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF\Fields;
 
 /**
- * Contactum Field class
+ * WCPRAEF Field class
  *
- * @package MultiStoreX
- * @author  Kamrul
+ * @package WC_Product_Addon_Extra_Field
+ * @author  Rokibul
  */
 abstract class Base_Field {
 
@@ -139,7 +139,7 @@ abstract class Base_Field {
 			'condition_status' => 'no',
 			'cond_field'       => array(),
 			'cond_operator'    => array( '=' ),
-			'cond_option'      => array( __( '- select -', 'wc-product-addon-custom-field' ) ),
+			'cond_option'      => array( __( '- select -', 'product-addon-custom-field' ) ),
 			'cond_logic'       => 'all',
 		);
 	}
@@ -180,46 +180,46 @@ abstract class Base_Field {
 		$common_properties = array(
 			array(
 				'name'      => 'label',
-				'title'     => __( 'Field Label', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Field Label', 'product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'basic',
 				'priority'  => 10,
-				'help_text' => __( 'Enter a title of this field', 'wc-product-addon-custom-field' ),
+				'help_text' => __( 'Enter a title of this field', 'product-addon-custom-field' ),
 			),
 
 			array(
 				'name'      => 'help',
-				'title'     => __( 'Help text', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Help text', 'product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'basic',
 				'priority'  => 20,
-				'help_text' => __( 'Give the user some information about this field', 'wc-product-addon-custom-field' ),
+				'help_text' => __( 'Give the user some information about this field', 'product-addon-custom-field' ),
 			),
 
 			array(
 				'name'      => 'required',
-				'title'     => __( 'Required', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Required', 'product-addon-custom-field' ),
 				'type'      => 'required',
 				'options'   => array(
-					'yes' => __( 'Yes', 'wc-product-addon-custom-field' ),
-					'no'  => __( 'No', 'wc-product-addon-custom-field' ),
+					'yes' => __( 'Yes', 'product-addon-custom-field' ),
+					'no'  => __( 'No', 'product-addon-custom-field' ),
 				),
 				'section'   => 'basic',
 				'priority'  => 21,
 				'default'   => 'no',
 				'inline'    => true,
-				'message'   => __( 'This Field is Required', 'wc-product-addon-custom-field' ),
-				'help_text' => __( 'Check this option to mark the field required. A form will not submit unless all required fields are provided.', 'wc-product-addon-custom-field' ),
+				'message'   => __( 'This Field is Required', 'product-addon-custom-field' ),
+				'help_text' => __( 'Check this option to mark the field required. A form will not submit unless all required fields are provided.', 'product-addon-custom-field' ),
 			),
 
 			array(
 				'name'     => 'width',
-				'title'    => __( 'Field Size', 'wc-product-addon-custom-field' ),
+				'title'    => __( 'Field Size', 'product-addon-custom-field' ),
 				'type'     => 'radio',
 				'options'  => array(
-					'small'  => __( 'Small', 'wc-product-addon-custom-field' ),
-					'medium' => __( 'Medium', 'wc-product-addon-custom-field' ),
-					'large'  => __( 'Large', 'wc-product-addon-custom-field' ),
+					'small'  => __( 'Small', 'product-addon-custom-field' ),
+					'medium' => __( 'Medium', 'product-addon-custom-field' ),
+					'large'  => __( 'Large', 'product-addon-custom-field' ),
 				),
 				'section'  => 'advanced',
 				'priority' => 21,
@@ -229,21 +229,21 @@ abstract class Base_Field {
 
 			array(
 				'name'      => 'css',
-				'title'     => __( 'CSS Class Name', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'CSS Class Name', 'product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'advanced',
 				'priority'  => 22,
-				'help_text' => __( 'Provide a container class name for this field. Available classes: wc-product-addon-custom-field-col-half, wc-product-addon-custom-field-col-half-last, wc-product-addon-custom-field-col-one-third, wc-product-addon-custom-field-col-one-third-last', 'wc-product-addon-custom-field' ),
+				'help_text' => __( 'Provide a container class name for this field. Available classes: product-addon-custom-field-col-half, product-addon-custom-field-col-half-last, product-addon-custom-field-col-one-third, product-addon-custom-field-col-one-third-last', 'product-addon-custom-field' ),
 			),
 		);
 		if ( $is_meta ) {
 			$common_properties[] = array(
 				'name'      => 'name',
-				'title'     => __( 'Meta Key', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Meta Key', 'product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'basic',
 				'priority'  => 11,
-				'help_text' => __( 'Name of the meta key this field will save to', 'wc-product-addon-custom-field' ),
+				'help_text' => __( 'Name of the meta key this field will save to', 'product-addon-custom-field' ),
 			);
 		}
 
@@ -265,8 +265,8 @@ abstract class Base_Field {
 	 */
 	public function get_conditional_field() {
 		return array(
-			'name'      => 'contactum_cond',
-			'title'     => __( 'Conditional Logic', 'wc-product-addon-custom-field' ),
+			'name'      => 'wcprafe_cond',
+			'title'     => __( 'Conditional Logic', 'product-addon-custom-field' ),
 			'type'      => 'conditional_logic',
 			'section'   => 'advanced',
 			'priority'  => 30,
@@ -284,7 +284,7 @@ abstract class Base_Field {
 	 */
 	public function print_label( $field, $form_id = 0 ) {
 		?>
-		<div class="contactum-label"> <label for="<?php echo isset( $field['name'] ) ? esc_attr( $field['name'] ) . '_' . esc_attr( $form_id ) : 'cls'; ?>">
+		<div class="wcprafe-label"> <label for="<?php echo isset( $field['name'] ) ? esc_attr( $field['name'] ) . '_' . esc_attr( $form_id ) : 'cls'; ?>">
 		<?php echo esc_html( $field['label'] ) . wp_kses_post( $this->required( $field ) ); ?> </label> </div>
 		<?php
 	}
@@ -304,7 +304,7 @@ abstract class Base_Field {
 		$message    = ! empty( $field['message'] ) ? $field['message'] : '';
 
 		printf(
-			'class="contactum-el contactum-%s%s%s" data-label="%s" data-errormessage="%s"',
+			'class="wcprafe-el wcprafe-%s%s%s" data-label="%s" data-errormessage="%s"',
 			esc_attr( $el_name ),
 			esc_attr( $class_name ),
 			esc_attr( $field_size ),
@@ -338,7 +338,7 @@ abstract class Base_Field {
 			return;
 		}
 		?>
-		<span class="contactum-help"><?php echo esc_attr( $field['help'] ); ?></span>
+		<span class="wcprafe-help"><?php echo esc_attr( $field['help'] ); ?></span>
 		<?php
 	}
 
@@ -354,7 +354,7 @@ abstract class Base_Field {
 		$value = ! empty( $post_data[ $field['name'] ] ) ? $post_data[ $field['name'] ] : '';
 
 		if ( is_array( $value ) ) {
-			$entry_value = implode( CONTACTUM_SEPARATOR, $value );
+			$entry_value = implode( WCPRAEF_SEPARATOR, $value );
 		} else {
 			$entry_value = trim( $value );
 		}
@@ -371,11 +371,11 @@ abstract class Base_Field {
 	 * @return string | void
 	 */
 	public function conditional_logic( $form_field, $form_id ) {
-		if ( ! isset( $form_field['contactum_cond']['condition_status'] ) || $form_field['contactum_cond']['condition_status'] !== 'yes' ) {
+		if ( ! isset( $form_field['wcprafe_cond']['condition_status'] ) || $form_field['wcprafe_cond']['condition_status'] !== 'yes' ) {
 			return;
 		}
 
-		$cond_inputs                     = $form_field['contactum_cond'];
+		$cond_inputs                     = $form_field['wcprafe_cond'];
 		$cond_inputs['condition_status'] = isset( $cond_inputs['condition_status'] ) ? $cond_inputs['condition_status'] : '';
 
 		if ( $cond_inputs['condition_status'] === 'yes' ) {
@@ -386,8 +386,8 @@ abstract class Base_Field {
 		} else {
 			$condition = '';
 		}
-			$script = "contactum_conditional_items.push({$condition});";
-			wp_add_inline_script( 'contactum-frontend', $script );
+			$script = "wcprafe_conditional_items.push({$condition});";
+			wp_add_inline_script( 'wcprafe-frontend', $script );
 		?>
 		<?php
 	}

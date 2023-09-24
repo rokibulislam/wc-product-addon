@@ -3,8 +3,8 @@
     <form
       method="post"
       action
-      id="contactum-form-builder"
-      class="contactum-form-builde"
+      id="wcprafe-form-builder"
+      class="wcprafe-form-builde"
       v-on:submit.prevent="save_form_builder"
     >
       <div class="builder-header">
@@ -17,9 +17,9 @@
           {{ post.post_title }}
         </span>
         
-        <div class="contactum-nav">
+        <div class="wcprafe-nav">
           <!-- nav-tab-wrapper  'nav-tab' -->
-          <ul class="contactum-tabs">
+          <ul class="wcprafe-tabs">
             <li>
               <a
                 href="#form-builder-container"
@@ -93,7 +93,7 @@
           <div class="builder-body">
             <section class="form-field">
               <ul
-                :class="[ 'contactum-form', 'sortable-list', 'form-label-' + settings.label_position]"
+                :class="[ 'wcprafe-form', 'sortable-list', 'form-label-' + settings.label_position]"
               >
                 <li
                   v-for="(field, index) in form_fields"
@@ -104,7 +104,7 @@
                   :data-index="index"
                   data-source="stage"
                 >
-                  <div class="contactum-label">
+                  <div class="wcprafe-label">
                     <label v-if="!is_full_width(field.template) && ( field.template != 'submit_field' && field.template != 'name_field' ) ">
                       {{ field.label }}
                       <span
@@ -133,11 +133,7 @@
                   </div>
                 </li>
               </ul>
-              <input type="hidden" name="contactum_form_id" :value="post.ID" />
-
-              <div class="submit_wrapper" v-if="hasSubmitField() == undefined">
-                <input type="submit" class="btn-submit" :value="settings.submit_text" disabled />
-              </div>
+              <input type="hidden" name="form_id" :value="post.ID" />
             </section>
             <div class="field-panel">
               <div class="forms-fields-tab">
@@ -193,16 +189,6 @@ import form_hidden_field from "../form-templates/hidden.vue";
 import form_section_break from "../form-templates/section.vue";
 import form_number_field from "../form-templates/number.vue";
 
-
-import form_file_field from "../pro/form-template/file.vue";
-import form_checkbox_grid from "../pro/form-template/checkbox-grid.vue";
-import form_multiple_choice_grid from "../pro/form-template/multiple-choice-grid.vue";
-import form_linear_scale from "../pro/form-template/linear.vue";
-import form_signature_field from "../pro/form-template/signature.vue";
-import form_repeat_field from "../pro/form-template/repeat.vue";
-import form_column_field from "../pro/form-template/column.vue";
-
-
 import modal from '../../components/modal/index.vue';
 
 
@@ -228,13 +214,6 @@ export default {
     field_options,
     form_fields,
     Form_settings,
-    form_file_field,
-    form_checkbox_grid,
-    form_multiple_choice_grid,
-    form_linear_scale,
-    form_signature_field,
-    form_repeat_field,
-    form_column_field,
   },
   data() {
     return {
@@ -266,33 +245,13 @@ export default {
     current_panel: function () {
       return this.$store.getters.current_panel;
     },
-    notifications: function () {
-      return this.$store.getters.notifications;
-    },
     settings: function () {
       return this.$store.getters.settings;
     },
-    integrations: function () {
-      return this.$store.getters.integrations;
-    },
-    shortcode: function() {
-        return `[contactum id="${this.post.ID}"]`;
-    }
   },
 
   methods: {
-    hasSubmitField: function() {
-       let response =  this.form_fields.find( field => field.template== "submit_field" );
-       console.log("response", response);
-
-       return response;
-       
-    },
-    // makeActive: function (tab, event) {
     makeActive: function (val) {
-      // console.log(tab);
-      console.log(event);
-      console.log('make active');
       this.activeTab = val;
     },
 
@@ -379,15 +338,13 @@ export default {
         this.loading = true;
         var self = this;
         jQuery.post(
-            contactum.ajaxurl,
+            wcprafe.ajaxurl,
         {
-          action: "save_contactum_form",
-          form_data: jQuery("#contactum-form-builder").serialize(),
+          action: "save_wcprafe_form",
+          form_data: jQuery("#wcprafe-form-builder").serialize(),
           form_fields: JSON.stringify(this.form_fields),
-          notifications: JSON.stringify(this.notifications),
           settings: JSON.stringify(this.settings),
-          integrations: JSON.stringify(this.integrations),
-          contactum_form_builder_nonce: contactum.nonce,
+          form_builder_nonce: wcprafe.nonce,
         },
         (response, textStatus, xhr) => {
             this.loading = false;
@@ -444,14 +401,13 @@ export default {
   mounted: function () {
     var self = this;
     // bind jquery ui sortable
-    jQuery(".form-preview-stage .contactum-form.sortable-list").sortable({
+    jQuery(".form-preview-stage .wcprafe-form.sortable-list").sortable({
       placeholder: "form-preview-stage-dropzone",
       items: ".field-items",
       handle: ".control-button .move",
       scroll: true,
       over: function () {},
       update: function (e, ui) {
-        console.log('sortable page', ui);
         var item = ui.item[0],
           data = item.dataset,
           source = data.source,
@@ -504,10 +460,10 @@ $button-text-secondary-color: #545454;
         margin-bottom: 5px;
         background: $background-color;
         padding: 5px;
-        .contactum-nav {
+        .wcprafe-nav {
             display: flex;
             flex: 1;
-            .contactum-tabs {
+            .wcprafe-tabs {
                 flex: 1;
                 display: flex;
                 gap: 15px;
@@ -608,7 +564,7 @@ $button-text-secondary-color: #545454;
   padding: 10px;
 }
 
-form#contactum-form-builder {
+form#wcprafe-form-builder {
   width: 100%;
 }
 
@@ -680,29 +636,29 @@ form#contactum-form-builder {
       cursor: pointer;
     }
 }
-.contactum-fields {
+.wcprafe-fields {
     margin-bottom: 10px;
 }
 
-ul.contactum-form  {
+ul.wcprafe-form  {
     
     border: 1px dashed #cfcfcf;
     min-height: 70px;
     // margin: 0 10px;
     margin-left: 0px;
 
-    li.field-size-small .contactum-fields {
+    li.field-size-small .wcprafe-fields {
         width: 30%;
     }
-    li.field-size-medium .contactum-fields {
+    li.field-size-medium .wcprafe-fields {
         width: 65%;
     }
-    li.field-size-large .contactum-fields {
+    li.field-size-large .wcprafe-fields {
         width: 100%;
     }
 
     li.name {
-        .contactum-fields {
+        .wcprafe-fields {
             display: flex;
             justify-content: space-between;
             div {
@@ -712,13 +668,13 @@ ul.contactum-form  {
     }
 }
 
-ul.contactum-form.form-label-above li .contactum-label {
+ul.wcprafe-form.form-label-above li .wcprafe-label {
   display: block;
   width: 100%;
   margin-bottom: 10px;
 }
 
-ul.contactum-form.form-label-hidden li .contactum-label {
+ul.wcprafe-form.form-label-hidden li .wcprafe-label {
   display: none;
 }
 
@@ -758,21 +714,21 @@ ul.contactum-form.form-label-hidden li .contactum-label {
   color: #fff;
 }
 
-ul.contactum-form.form-label-left li,
-ul.contactum-form.form-label-right li {
+ul.wcprafe-form.form-label-left li,
+ul.wcprafe-form.form-label-right li {
   display: flex;
   justify-content: space-between;
 }
 
-ul.contactum-form.form-label-left li div.contactum-label,
-ul.contactum-form.form-label-right li div.contactum-label {
+ul.wcprafe-form.form-label-left li div.wcprafe-label,
+ul.wcprafe-form.form-label-right li div.wcprafe-label {
   flex-basis: 20%;
 }
 
-ul.contactum-form.form-label-right {
+ul.wcprafe-form.form-label-right {
     li {
         flex-direction: row-reverse;
-        div.contactum-fields {
+        div.wcprafe-fields {
             flex-basis: 75%;
         }
     }

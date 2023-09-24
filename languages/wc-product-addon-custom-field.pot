@@ -1,0 +1,747 @@
+# Copyright (C) 2023 Md Kamrul islam
+# This file is distributed under the GPL2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Product Addon Extra Field For Woocommerce 1.0\n"
+"Report-Msgid-Bugs-To: "
+"https://wordpress.org/support/plugin/woocommerce-product-addon\n"
+"POT-Creation-Date: 2023-09-22 22:23:46+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2023-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
+
+#: includes/class-admin-form-handler.php:124
+msgid "Form duplicated successfully"
+msgstr ""
+
+#: includes/class-admin.php:57 includes/class-admin.php:77
+#: includes/class-admin.php:79 includes/class-admin.php:117
+#: includes/html/form-list-view.php:13
+msgid "Forms"
+msgstr ""
+
+#: includes/class-admin.php:78
+msgid "Form"
+msgstr ""
+
+#: includes/class-admin.php:80 includes/html/form-list-view.php:14
+msgid "Add Form"
+msgstr ""
+
+#: includes/class-admin.php:81
+msgid "Add New Form"
+msgstr ""
+
+#: includes/class-admin.php:82
+msgid "Edit"
+msgstr ""
+
+#: includes/class-admin.php:83
+msgid "Edit Form"
+msgstr ""
+
+#: includes/class-admin.php:84
+msgid "New Form"
+msgstr ""
+
+#: includes/class-admin.php:85 includes/class-admin.php:86
+msgid "View Form"
+msgstr ""
+
+#: includes/class-admin.php:87
+msgid "Search Form"
+msgstr ""
+
+#: includes/class-admin.php:88
+msgid "No Form Found"
+msgstr ""
+
+#: includes/class-admin.php:89
+msgid "No Form Found in Trash"
+msgstr ""
+
+#: includes/class-admin.php:90
+msgid "Parent Form"
+msgstr ""
+
+#: includes/class-admin.php:116
+msgid "Product Addon App"
+msgstr ""
+
+#: includes/class-ajax.php:40
+msgid "Unauthorized operation"
+msgstr ""
+
+#: includes/class-ajax.php:48
+msgid "Invalid form id"
+msgstr ""
+
+#: includes/class-assets.php:73
+msgid "Are you sure?"
+msgstr ""
+
+#: includes/class-assets.php:74
+msgid "Yes, delete it"
+msgstr ""
+
+#: includes/class-assets.php:75
+msgid "No, cancel it"
+msgstr ""
+
+#: includes/class-assets.php:83 includes/fields/class-field-file.php:114
+msgid "Allowed Files"
+msgstr ""
+
+#: includes/class-assets.php:89
+msgid "Maximum number of files reached!"
+msgstr ""
+
+#: includes/class-assets.php:90
+msgid "The file you have uploaded exceeds the file size limit. Please try again."
+msgstr ""
+
+#: includes/class-assets.php:91
+msgid "You have uploaded an incorrect file type. Please try again."
+msgstr ""
+
+#: includes/class-assets.php:93
+msgid "Please fix the errors to proceed"
+msgstr ""
+
+#: includes/class-assets.php:192
+msgid "is required"
+msgstr ""
+
+#: includes/class-assets.php:193
+msgid "does not match"
+msgstr ""
+
+#: includes/class-assets.php:194
+msgid "is not valid"
+msgstr ""
+
+#: includes/class-assets.php:195
+msgid "requires a unique entry and this value has already been used"
+msgstr ""
+
+#: includes/class-field-manager.php:140
+msgid "Custom Fields"
+msgstr ""
+
+#: includes/class-forms-list.php:47
+msgid "Form Name"
+msgstr ""
+
+#: includes/class-forms-list.php:48
+msgid "Shortcode"
+msgstr ""
+
+#: includes/class-forms-list.php:49
+msgid "Author"
+msgstr ""
+
+#: includes/class-forms-list.php:50 includes/fields/class-field-date.php:24
+msgid "Date"
+msgstr ""
+
+#: includes/class-forms-list.php:198
+msgid "Duplicate this form"
+msgstr ""
+
+#: includes/class-forms-list.php:199
+msgid "Duplicate"
+msgstr ""
+
+#: includes/class-forms-list.php:216
+msgid "Delete this form"
+msgstr ""
+
+#: includes/class-forms-list.php:217
+msgid "Delete"
+msgstr ""
+
+#: includes/class-forms-list.php:262
+msgid "Y/m/d g:i:s A"
+msgstr ""
+
+#: includes/class-forms-list.php:274
+#. translators: %s: Time
+msgid "%s ago"
+msgstr ""
+
+#: includes/class-forms-list.php:278
+msgid "Y/m/d"
+msgstr ""
+
+#: includes/class-forms-list.php:370
+msgid "Delete Permanently"
+msgstr ""
+
+#: includes/class-frontend.php:90
+msgid "The form couldn't be found."
+msgstr ""
+
+#: includes/class-product-meta.php:35
+msgid "Product Addons"
+msgstr ""
+
+#: includes/class-product-meta.php:64
+msgid "Custom Form"
+msgstr ""
+
+#: includes/fields/class-base-field.php:142
+msgid "- select -"
+msgstr ""
+
+#: includes/fields/class-base-field.php:183
+msgid "Field Label"
+msgstr ""
+
+#: includes/fields/class-base-field.php:187
+msgid "Enter a title of this field"
+msgstr ""
+
+#: includes/fields/class-base-field.php:192
+msgid "Help text"
+msgstr ""
+
+#: includes/fields/class-base-field.php:196
+msgid "Give the user some information about this field"
+msgstr ""
+
+#: includes/fields/class-base-field.php:201
+msgid "Required"
+msgstr ""
+
+#: includes/fields/class-base-field.php:204
+msgid "Yes"
+msgstr ""
+
+#: includes/fields/class-base-field.php:205
+msgid "No"
+msgstr ""
+
+#: includes/fields/class-base-field.php:211
+msgid "This Field is Required"
+msgstr ""
+
+#: includes/fields/class-base-field.php:212
+msgid ""
+"Check this option to mark the field required. A form will not submit unless "
+"all required fields are provided."
+msgstr ""
+
+#: includes/fields/class-base-field.php:217
+msgid "Field Size"
+msgstr ""
+
+#: includes/fields/class-base-field.php:220
+msgid "Small"
+msgstr ""
+
+#: includes/fields/class-base-field.php:221
+msgid "Medium"
+msgstr ""
+
+#: includes/fields/class-base-field.php:222
+msgid "Large"
+msgstr ""
+
+#: includes/fields/class-base-field.php:232
+msgid "CSS Class Name"
+msgstr ""
+
+#: includes/fields/class-base-field.php:236
+msgid ""
+"Provide a container class name for this field. Available classes: "
+"product-addon-custom-field-col-half, "
+"product-addon-custom-field-col-half-last, "
+"product-addon-custom-field-col-one-third, "
+"product-addon-custom-field-col-one-third-last"
+msgstr ""
+
+#: includes/fields/class-base-field.php:242
+#: includes/fields/class-field-hidden.php:56
+#: includes/fields/class-field-html.php:61
+#: includes/fields/class-field-sectionbreak.php:67
+msgid "Meta Key"
+msgstr ""
+
+#: includes/fields/class-base-field.php:246
+#: includes/fields/class-field-hidden.php:60
+#: includes/fields/class-field-html.php:65
+#: includes/fields/class-field-sectionbreak.php:71
+msgid "Name of the meta key this field will save to"
+msgstr ""
+
+#: includes/fields/class-base-field.php:269
+#: includes/fields/class-field-html.php:69
+msgid "Conditional Logic"
+msgstr ""
+
+#: includes/fields/class-field-checkbox.php:26
+msgid "Checkbox"
+msgstr ""
+
+#: includes/fields/class-field-checkbox.php:95
+msgid "Layout"
+msgstr ""
+
+#: includes/fields/class-field-checkbox.php:98
+msgid "Default"
+msgstr ""
+
+#: includes/fields/class-field-checkbox.php:99
+msgid "Inline"
+msgstr ""
+
+#: includes/fields/class-field-checkbox.php:105
+msgid "Show this option in an inline list"
+msgstr ""
+
+#: includes/fields/class-field-date.php:87
+msgid "Date Format"
+msgstr ""
+
+#: includes/fields/class-field-date.php:91
+#: includes/fields/class-field-date.php:95
+msgid "m/d/Y - (Ex: 04/28/2018)"
+msgstr ""
+
+#: includes/fields/class-field-date.php:92
+msgid "m/d/Y - (Ex: 04/28/18)"
+msgstr ""
+
+#: includes/fields/class-field-date.php:93
+msgid "m/d/Y - (Ex: 28/04/2018)"
+msgstr ""
+
+#: includes/fields/class-field-date.php:94
+msgid "d.m.Y - (Ex: 28.04.2018)"
+msgstr ""
+
+#: includes/fields/class-field-date.php:96
+msgid "y/m/d - (Ex: 28/04/18)"
+msgstr ""
+
+#: includes/fields/class-field-date.php:97
+msgid "d-m-y - (Ex: 28-04-18)"
+msgstr ""
+
+#: includes/fields/class-field-date.php:98
+msgid "h:i K - (Ex: 08:55 PM)"
+msgstr ""
+
+#: includes/fields/class-field-date.php:99
+msgid "H:i - (Ex: 20:55 )"
+msgstr ""
+
+#: includes/fields/class-field-date.php:100
+msgid "d.m.Y H:i K- (Ex: 28.04.2018 20:55 PM)"
+msgstr ""
+
+#: includes/fields/class-field-date.php:101
+msgid "d/m/Y H:i K- (Ex: 28/04/2018 20:55 PM)"
+msgstr ""
+
+#: includes/fields/class-field-date.php:102
+msgid "d.m.Y H:i - (Ex: 28.04.2018 20:55)"
+msgstr ""
+
+#: includes/fields/class-field-date.php:103
+msgid "d/m/Y H:i - (Ex: 28/04/2018 20:55)"
+msgstr ""
+
+#: includes/fields/class-field-date.php:104
+msgid "H:i - (Ex: 28-04-18 )"
+msgstr ""
+
+#: includes/fields/class-field-date.php:108
+msgid "The date format"
+msgstr ""
+
+#: includes/fields/class-field-dropdown.php:25
+msgid "DropDown"
+msgstr ""
+
+#: includes/fields/class-field-dropdown.php:84
+msgid "Select Text"
+msgstr ""
+
+#: includes/fields/class-field-dropdown.php:119
+#: includes/fields/class-field-multidropdown.php:104
+msgid "— Select —"
+msgstr ""
+
+#: includes/fields/class-field-email.php:26
+msgid "Email"
+msgstr ""
+
+#: includes/fields/class-field-email.php:95
+#: includes/fields/class-field-text.php:82
+msgid "Unique Values Only"
+msgstr ""
+
+#: includes/fields/class-field-email.php:100
+#: includes/fields/class-field-text.php:87
+msgid ""
+"Select this option to limit user input to unique values only. This will "
+"require that a value entered in a field does not currently exist in the "
+"entry database for that field."
+msgstr ""
+
+#: includes/fields/class-field-email.php:108
+msgid "Auto-populate Email"
+msgstr ""
+
+#: includes/fields/class-field-email.php:113
+msgid ""
+"If a user is logged into the site, this email field will be auto-populated "
+"with his email. And form's email field will be hidden."
+msgstr ""
+
+#: includes/fields/class-field-file.php:23
+msgid "File"
+msgstr ""
+
+#: includes/fields/class-field-file.php:54
+msgid "Select File(s)"
+msgstr ""
+
+#: includes/fields/class-field-file.php:95
+#: includes/fields/class-field-image.php:97
+msgid "Max. file size"
+msgstr ""
+
+#: includes/fields/class-field-file.php:100
+#: includes/fields/class-field-image.php:101
+msgid "Enter maximum upload size limit in KB"
+msgstr ""
+
+#: includes/fields/class-field-file.php:105
+#: includes/fields/class-field-image.php:106
+msgid "Max. files"
+msgstr ""
+
+#: includes/fields/class-field-file.php:110
+#: includes/fields/class-field-image.php:110
+msgid "Number of images can be uploaded"
+msgstr ""
+
+#: includes/fields/class-field-file.php:118
+msgid "Images (jpg, jpeg, gif, png, bmp)"
+msgstr ""
+
+#: includes/fields/class-field-file.php:119
+msgid "Audio (mp3, wav, ogg, wma, mka, m4a, ra, mid, midi)"
+msgstr ""
+
+#: includes/fields/class-field-file.php:120
+msgid "Videos (avi, divx, flv, mov, ogv, mkv, mp4, m4v, divx, mpg, mpeg, mpe)"
+msgstr ""
+
+#: includes/fields/class-field-hidden.php:23
+msgid "Hidden"
+msgstr ""
+
+#: includes/fields/class-field-hidden.php:64
+msgid "Meta Value"
+msgstr ""
+
+#: includes/fields/class-field-hidden.php:68
+msgid "Enter the meta value"
+msgstr ""
+
+#: includes/fields/class-field-hidden.php:76
+msgid ""
+"Check this option to allow field to be populated dynamically using "
+"hooks/query string/shortcode"
+msgstr ""
+
+#: includes/fields/class-field-html.php:23
+msgid "Html"
+msgstr ""
+
+#: includes/fields/class-field-html.php:53
+msgid "Html Codes"
+msgstr ""
+
+#: includes/fields/class-field-html.php:57
+msgid "Paste your HTML codes, WordPress shortcodes will also work here"
+msgstr ""
+
+#: includes/fields/class-field-html.php:89
+msgid "HTML Section"
+msgstr ""
+
+#: includes/fields/class-field-image.php:23
+msgid "Image"
+msgstr ""
+
+#: includes/fields/class-field-image.php:114
+msgid "Button Label"
+msgstr ""
+
+#: includes/fields/class-field-image.php:116
+#: includes/fields/class-field-image.php:153
+msgid "Select Image"
+msgstr ""
+
+#: includes/fields/class-field-image.php:119
+msgid "Enter a label for the Select button"
+msgstr ""
+
+#: includes/fields/class-field-image.php:124
+msgid "Allowed Images"
+msgstr ""
+
+#: includes/fields/class-field-image.php:128
+msgid "JPG"
+msgstr ""
+
+#: includes/fields/class-field-image.php:129
+msgid "JPEG"
+msgstr ""
+
+#: includes/fields/class-field-image.php:130
+msgid "PNG"
+msgstr ""
+
+#: includes/fields/class-field-image.php:131
+msgid "GIF"
+msgstr ""
+
+#: includes/fields/class-field-image.php:132
+msgid "BMP"
+msgstr ""
+
+#: includes/fields/class-field-multidropdown.php:23
+msgid "Multi Select"
+msgstr ""
+
+#: includes/fields/class-field-number.php:23
+msgid "Numeric"
+msgstr ""
+
+#: includes/fields/class-field-number.php:86
+msgid "Step"
+msgstr ""
+
+#: includes/fields/class-field-number.php:96
+msgid "Min Value"
+msgstr ""
+
+#: includes/fields/class-field-number.php:106
+msgid "Max Value"
+msgstr ""
+
+#: includes/fields/class-field-radio.php:25
+msgid "Radio"
+msgstr ""
+
+#: includes/fields/class-field-sectionbreak.php:23
+msgid "Section Break"
+msgstr ""
+
+#: includes/fields/class-field-sectionbreak.php:58
+msgid "Title"
+msgstr ""
+
+#: includes/fields/class-field-sectionbreak.php:62
+msgid "Title of the section"
+msgstr ""
+
+#: includes/fields/class-field-sectionbreak.php:76
+msgid "Description"
+msgstr ""
+
+#: includes/fields/class-field-sectionbreak.php:80
+msgid "Some details text about the section"
+msgstr ""
+
+#: includes/fields/class-field-sectionbreak.php:96
+msgid "Some description about this section"
+msgstr ""
+
+#: includes/fields/class-field-text.php:27
+msgid "Text"
+msgstr ""
+
+#: includes/fields/class-field-textarea.php:26
+msgid "Textarea"
+msgstr ""
+
+#: includes/fields/field-trait.php:17 includes/fields/field-trait.php:112
+msgid "Placeholder text"
+msgstr ""
+
+#: includes/fields/field-trait.php:22 includes/fields/field-trait.php:116
+msgid "Text for HTML5 placeholder attribute"
+msgstr ""
+
+#: includes/fields/field-trait.php:27 includes/fields/field-trait.php:124
+msgid "Default value"
+msgstr ""
+
+#: includes/fields/field-trait.php:32 includes/fields/field-trait.php:128
+msgid "The default value this field will have"
+msgstr ""
+
+#: includes/fields/field-trait.php:37
+msgid "Size"
+msgstr ""
+
+#: includes/fields/field-trait.php:42
+msgid "Size of this input field"
+msgstr ""
+
+#: includes/fields/field-trait.php:49
+msgid "Word Restriction"
+msgstr ""
+
+#: includes/fields/field-trait.php:53
+msgid "Numebr of words the author to be restricted in"
+msgstr ""
+
+#: includes/fields/field-trait.php:73
+msgid "Options"
+msgstr ""
+
+#: includes/fields/field-trait.php:78
+msgid "Add options for the form field"
+msgstr ""
+
+#: includes/fields/field-trait.php:94
+msgid "Rows"
+msgstr ""
+
+#: includes/fields/field-trait.php:98
+msgid "Number of rows in textarea"
+msgstr ""
+
+#: includes/fields/field-trait.php:103
+msgid "Columns"
+msgstr ""
+
+#: includes/fields/field-trait.php:107
+msgid "Number of columns in textarea"
+msgstr ""
+
+#: includes/functions.php:31
+msgid "Thanks for contact us! We will get in touch with you shortly."
+msgstr ""
+
+#: includes/functions.php:35
+msgid "Submit Query"
+msgstr ""
+
+#: includes/functions.php:39
+msgid "Form submission hasn't been started yet"
+msgstr ""
+
+#: includes/functions.php:40
+msgid "Form submission is now closed."
+msgstr ""
+
+#: includes/functions.php:42
+msgid "You need to login to submit a query."
+msgstr ""
+
+#: includes/functions.php:45
+msgid "Sorry, we have reached the maximum number of submissions."
+msgstr ""
+
+#: includes/functions.php:1115
+msgid "Images"
+msgstr ""
+
+#: includes/functions.php:1119
+msgid "Audio"
+msgstr ""
+
+#: includes/functions.php:1123
+msgid "Videos"
+msgstr ""
+
+#: includes/functions.php:1127
+msgid "PDF"
+msgstr ""
+
+#: includes/functions.php:1131
+msgid "Office Documents"
+msgstr ""
+
+#: includes/functions.php:1135
+msgid "Zip Archives"
+msgstr ""
+
+#: includes/functions.php:1139
+msgid "Executable Files"
+msgstr ""
+
+#: includes/functions.php:1143
+msgid "CSV"
+msgstr ""
+
+#: includes/html/form-list-view.php:23
+msgid "Search Forms"
+msgstr ""
+
+#: includes/html/modal.php:12
+msgid "Modal window. Press escape to close."
+msgstr ""
+
+#: includes/html/modal.php:13
+msgid "Close modal window"
+msgstr ""
+
+#: includes/html/modal.php:15
+msgid "Select a Template"
+msgstr ""
+
+#: includes/html/modal.php:42
+msgid "This integration is not installed."
+msgstr ""
+
+#: includes/html/modal.php:59
+msgid "Create Form"
+msgstr ""
+
+#: includes/templates/class-template-blank.php:24
+msgid "Blank Form"
+msgstr ""
+
+#: includes/templates/class-template-blank.php:25
+msgid "Create a simple Blank form."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Product Addon Extra Field For Woocommerce"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Woocommerce Product Extra Field Plugin"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Md Kamrul islam"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://profiles.wordpress.org/rajib00002/"
+msgstr ""

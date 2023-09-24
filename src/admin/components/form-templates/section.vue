@@ -1,5 +1,5 @@
 <template>
-  <div class="contactum-fields">
+  <div class="wcprafe-fields">
     <div>{{ field.description }}</div>
   </div>
 </template>
@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style>
-	.section_break > .contactum-fields {
+	.section_break > .wcprafe-fields {
 	  border-bottom: 1px solid #ccc;
 	}
 </style>

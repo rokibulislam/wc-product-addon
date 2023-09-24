@@ -1,23 +1,17 @@
 <template>
   <div class="panel-field">
-    <label class="contactum-label">
+    <label class="wcprafe-label">
       {{ field.title }}
       <el-input type="text" v-model="value" @focusout="onfocusout" @keyup="onkeyup"> </el-input>
       <!-- <input type="text" v-model="value" @focusout="onfocusout" @keyup="onkeyup" /> -->
     </label>
-    <merge_tags :filter="field.tag_filter" @insert="insertValue"/>
   </div>
 </template>
 <script>
 import option_field from "../../mixin/option-field.js";
-import merge_tags from "../merge-tags/index.vue";
 export default {
   name: "field_text_with_tag",
   mixins: [option_field],
-  components: {
-    merge_tags
-  },
-
   computed: {
     value: {
       get: function() {

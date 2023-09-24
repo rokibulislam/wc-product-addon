@@ -2,8 +2,8 @@
 /**
  * Form Template
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF;
@@ -13,7 +13,7 @@ use WP_Error;
 /**
  * Form class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Form {
 
@@ -159,7 +159,7 @@ class Form {
 			$values[ $field['name'] ] = array_merge( $field, $value );
 		}
 
-		return apply_filters( 'contactum_get_field_values', $values );
+		return apply_filters( 'wcprafe_get_field_values', $values );
 	}
 
 	/**
@@ -169,7 +169,7 @@ class Form {
 	 */
 	public function getSettings() {
 		$settings = get_post_meta( $this->id, 'form_settings', true );
-		$default  = contactum_get_default_form_settings();
+		$default  = wcprafe_get_default_form_settings();
 
 		return array_merge( $default, $settings );
 	}
@@ -182,7 +182,7 @@ class Form {
 	 * @return array
 	 */
 	public function prepare_entries( $post_data = array() ) {
-		$fields       = contactum()->fields->getFields();
+		$fields       = wc_product_addon_extra_field()->fields->getFields();
 		$form_fields  = $this->getFields();
 		$entry_fields = array();
 

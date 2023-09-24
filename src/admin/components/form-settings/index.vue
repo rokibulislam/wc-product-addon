@@ -3,7 +3,7 @@
         <table class="form-table">
             <tbody>
 
-                <tr class="contactum-label-position">
+                <tr class="wcprafe-label-position">
                     <th> Label Position </th>
                     <td>
                         <el-select v-model="settings.label_position">
@@ -19,12 +19,12 @@
                     </td>
                 </tr>
 
-                <tr class="contactum-use-theme-css">
+                <tr class="wcprafe-use-theme-css">
                     <th> Use Theme CSS'</th>
                     <td>
                         <select v-model="settings.use_theme_css">
-                            <option value="contactum-theme-style"> Yes </option>
-                            <option value="contactum-style"> No </option>
+                            <option value="wcprafe-theme-style"> Yes </option>
+                            <option value="wcprafe-style"> No </option>
                         </select>
                         <p class="description"> Selecting <strong>Yes</strong> will use your theme's style for form fields. </p>
                     </td>

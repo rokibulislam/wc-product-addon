@@ -1,6 +1,6 @@
 <template>
   <div class="panel-field">
-    <label class="contactum-label">
+    <label class="wcprafe-label">
       {{ field.title }}
       <!-- <input type="text" v-model="value" @focusout="onfocusout" @keyup="onkeyup" /> -->
     </label>

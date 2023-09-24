@@ -2,8 +2,8 @@
 /**
  * Field Image
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF\Fields;
@@ -13,14 +13,14 @@ use WCPRAEF\Fields\Base_Field;
 /**
  * Field Image class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Field_Image extends Base_Field {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Image', 'wc-product-addon-custom-field' );
+		$this->name       = __( 'Image', 'product-addon-custom-field' );
 		$this->input_type = 'image_field';
 		$this->icon       = 'file-image-o';
 	}
@@ -47,7 +47,7 @@ class Field_Image extends Base_Field {
 		?>
 		<li <?php $this->print_list_attributes( $field_settings ); ?>>
 			<?php $this->print_label( $field_settings, $form_id ); ?>
-			<div class="contactum-fields">
+			<div class="wcprafe-fields">
 				<div id="<?php echo esc_attr( $unique_id ); ?>-upload-container">
 					<div class="attachment-upload-filelist" data-type="file" data-required="<?php echo esc_attr( $field_settings['required'] ); ?>">
 						<a type="button" id="<?php echo esc_attr( $unique_id ); ?>-pickfiles" data-form_id="<?php echo esc_attr( $form_id ); ?>"
@@ -80,7 +80,7 @@ class Field_Image extends Base_Field {
 			});
 		})(jQuery);";
 
-		wp_add_inline_script( 'contactum-upload', $script );
+		wp_add_inline_script( 'wcprafe-upload', $script );
 	}
 
 	/**
@@ -94,42 +94,42 @@ class Field_Image extends Base_Field {
 		$settings = array(
 			array(
 				'name'      => 'max_size',
-				'title'     => __( 'Max. file size', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Max. file size', 'product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'advanced',
 				'priority'  => 20,
-				'help_text' => __( 'Enter maximum upload size limit in KB', 'wc-product-addon-custom-field' ),
+				'help_text' => __( 'Enter maximum upload size limit in KB', 'product-addon-custom-field' ),
 			),
 
 			array(
 				'name'      => 'count',
-				'title'     => __( 'Max. files', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Max. files', 'product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'advanced',
 				'priority'  => 21,
-				'help_text' => __( 'Number of images can be uploaded', 'wc-product-addon-custom-field' ),
+				'help_text' => __( 'Number of images can be uploaded', 'product-addon-custom-field' ),
 			),
 			array(
 				'name'      => 'button_label',
-				'title'     => __( 'Button Label', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Button Label', 'product-addon-custom-field' ),
 				'type'      => 'text',
-				'default'   => __( 'Select Image', 'wc-product-addon-custom-field' ),
+				'default'   => __( 'Select Image', 'product-addon-custom-field' ),
 				'section'   => 'basic',
 				'priority'  => 22,
-				'help_text' => __( 'Enter a label for the Select button', 'wc-product-addon-custom-field' ),
+				'help_text' => __( 'Enter a label for the Select button', 'product-addon-custom-field' ),
 			),
 
 			array(
 				'name'        => 'extension',
-				'title'       => __( 'Allowed Images', 'wc-product-addon-custom-field' ),
+				'title'       => __( 'Allowed Images', 'product-addon-custom-field' ),
 				'title_class' => 'label-hr',
 				'type'        => 'checkbox',
 				'options'     => array(
-					'jpg'  => __( 'JPG', 'wc-product-addon-custom-field' ),
-					'jpeg' => __( 'JPEG', 'wc-product-addon-custom-field' ),
-					'png'  => __( 'PNG', 'wc-product-addon-custom-field' ),
-					'gif'  => __( 'GIF', 'wc-product-addon-custom-field' ),
-					'bmp'  => __( 'BMP', 'wc-product-addon-custom-field' ),
+					'jpg'  => __( 'JPG', 'product-addon-custom-field' ),
+					'jpeg' => __( 'JPEG', 'product-addon-custom-field' ),
+					'png'  => __( 'PNG', 'product-addon-custom-field' ),
+					'gif'  => __( 'GIF', 'product-addon-custom-field' ),
+					'bmp'  => __( 'BMP', 'product-addon-custom-field' ),
 				),
 				'section'     => 'advanced',
 				'priority'    => 22,
@@ -150,7 +150,7 @@ class Field_Image extends Base_Field {
 		$props    = array(
 			'max_size'     => '1024',
 			'count'        => '1',
-			'button_label' => __( 'Select Image', 'wc-product-addon-custom-field' ),
+			'button_label' => __( 'Select Image', 'product-addon-custom-field' ),
 			'extension'    => array( 'jpg', 'jpeg', 'png', 'gif', 'bmp' ),
 		);
 

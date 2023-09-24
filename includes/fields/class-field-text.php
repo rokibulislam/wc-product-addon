@@ -2,8 +2,8 @@
 /**
  * Field Text Doc Comment
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF\Fields;
@@ -14,8 +14,8 @@ use WCPRAEF\Fields\Traits\Textoption;
 /**
  * Field Text class
  *
- * @package MultiStoreX
- * @author  Kamrul
+ * @package WC_Product_Addon_Extra_Field
+ * @author  Rokibul
  */
 class Field_Text extends Base_Field {
 	use Textoption;
@@ -24,7 +24,7 @@ class Field_Text extends Base_Field {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Text', 'wc-product-addon-custom-field' );
+		$this->name       = __( 'Text', 'product-addon-custom-field' );
 		$this->input_type = 'text_field';
 		$this->icon       = 'text-width';
 	}
@@ -45,8 +45,8 @@ class Field_Text extends Base_Field {
 
 				printf(
 					'
-					<div class="contactum-fields">
-						<input type="text" name="%s" class="contactum-el-form-control %s" id="%s" placeholder="%s" data-required="%s" data-type="text" value="%s" size="%s" data-errormessage="%s" /> 
+					<div class="wcprafe-fields">
+						<input type="text" name="%s" class="wcprafe-el-form-control %s" id="%s" placeholder="%s" data-required="%s" data-type="text" value="%s" size="%s" data-errormessage="%s" /> 
 					</div> ',
 					esc_attr( $field_settings['name'] ),
 					esc_attr( $field_settings['name'] ) . '_' . esc_attr( $form_id ),
@@ -72,23 +72,7 @@ class Field_Text extends Base_Field {
 	public function get_options_settings() {
 		$default_options      = $this->get_default_option_settings();
 		$default_text_options = $this->get_default_text_option_settings( false );
-		$check_duplicate      = array(
-			array(
-				'name'          => 'duplicate',
-				'title'         => 'No Duplicates',
-				'type'          => 'checkbox',
-				'is_single_opt' => true,
-				'options'       => array(
-					'no' => __( 'Unique Values Only', 'wc-product-addon-custom-field' ),
-				),
-				'default'       => '',
-				'section'       => 'advanced',
-				'priority'      => 23,
-				'help_text'     => __( 'Select this option to limit user input to unique values only. This will require that a value entered in a field does not currently exist in the entry database for that field.', 'wc-product-addon-custom-field' ),
-			),
-		);
-
-		return array_merge( $default_options, $default_text_options, $check_duplicate );
+		return array_merge( $default_options, $default_text_options );
 	}
 
 	/**

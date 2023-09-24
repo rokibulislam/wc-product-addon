@@ -1,5 +1,5 @@
 <template>
-  <div class="contactum-fields">
+  <div class="wcprafe-fields">
     <p> key: {{ field.name }} </p>
     <p> value: {{ field.meta_value }} </p>
     <span v-if="field.help" v-html="field.help" />

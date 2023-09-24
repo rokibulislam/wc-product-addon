@@ -2,8 +2,8 @@
 /**
  * Field Textarea Doc Comment
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF\Fields;
@@ -14,7 +14,7 @@ use WCPRAEF\Fields\Traits\TextareaOption;
 /**
  * Field Textarea class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Field_Textarea extends Base_Field {
 	use TextareaOption;
@@ -23,7 +23,7 @@ class Field_Textarea extends Base_Field {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Textarea', 'wc-product-addon-custom-field' );
+		$this->name       = __( 'Textarea', 'product-addon-custom-field' );
 		$this->input_type = 'textarea_field';
 		$this->icon       = 'paragraph';
 	}
@@ -40,9 +40,9 @@ class Field_Textarea extends Base_Field {
 		$value = $field_settings['default'];?>
 		<li <?php $this->print_list_attributes( $field_settings ); ?>>
 			<?php $this->print_label( $field_settings, $form_id ); ?>
-			<div class="contactum-fields">
+			<div class="wcprafe-fields">
 				<textarea
-					class="textareafield contactum-el-form-control <?php echo esc_attr( $field_settings['name'] ) . '_' . esc_attr( $form_id ); ?>"
+					class="textareafield wcprafe-el-form-control <?php echo esc_attr( $field_settings['name'] ) . '_' . esc_attr( $form_id ); ?>"
 					id="<?php echo esc_attr( $field_settings['name'] ) . '_' . esc_attr( $form_id ); ?>"
 					name="<?php echo esc_attr( $field_settings['name'] ); ?>"
 					placeholder="<?php echo esc_attr( $field_settings['placeholder'] ); ?>"

@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-#contactum_slider {
+#wcprafe_slider {
 	position: relative;
 }
 
@@ -33,11 +33,11 @@
 	width:100%;
 }
 
-.contactum-form{
+.wcprafe-form{
 	margin-top : 15px;
 }
 
-.contactum-form input[type="text"] {
+.wcprafe-form input[type="text"] {
 	width: 70%;
 	margin: 5px 0px;
 	height: 25px;
@@ -47,14 +47,14 @@
 	border: 2px solid #ccc;
 }
 
-.contactum-form label {
+.wcprafe-form label {
 	display: block;
 	float: left;
 	width: 22%;
 	margin: 5px 0px 5px 10px;
 }
 
-.contactum-form textarea {
+.wcprafe-form textarea {
 	width: 70%;
 	height: 70px;
 	margin: 5px 0px;
@@ -64,12 +64,12 @@
 	border: 2px solid #ccc;
 }
 
-.contactum-submit{
+.wcprafe-submit{
 	width: 90%;
 	margin: auto;
 }
 
-.contactum-submit input[type="submit"]{
+.wcprafe-submit input[type="submit"]{
 	float: right;
 	-moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
@@ -107,14 +107,14 @@
 	padding: 0px;
 }
 
-.contactum-submit input[type="submit"]:hover {
+.wcprafe-submit input[type="submit"]:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
 	background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff');
 	background-color:#378de5;
 }
 
-.contactum-submit input[type="submit"]:active {
+.wcprafe-submit input[type="submit"]:active {
 	position:relative;
 	top:1px;
 }

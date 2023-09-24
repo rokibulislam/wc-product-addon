@@ -2,8 +2,8 @@
 /**
  * Field Section
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF\Fields;
@@ -13,14 +13,14 @@ use WCPRAEF\Fields\Base_Field;
 /**
  * Field SectionBreak class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Field_SectionBreak extends Base_Field {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Section Break', 'wc-product-addon-custom-field' );
+		$this->name       = __( 'Section Break', 'product-addon-custom-field' );
 		$this->input_type = 'section_break';
 		$this->icon       = 'text-width';
 	}
@@ -55,29 +55,29 @@ class Field_SectionBreak extends Base_Field {
 		$settings = array(
 			array(
 				'name'      => 'label',
-				'title'     => __( 'Title', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Title', 'product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'basic',
 				'priority'  => 10,
-				'help_text' => __( 'Title of the section', 'wc-product-addon-custom-field' ),
+				'help_text' => __( 'Title of the section', 'product-addon-custom-field' ),
 			),
 
 			array(
 				'name'      => 'name',
-				'title'     => __( 'Meta Key', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Meta Key', 'product-addon-custom-field' ),
 				'type'      => 'text_meta',
 				'section'   => 'basic',
 				'priority'  => 11,
-				'help_text' => __( 'Name of the meta key this field will save to', 'wc-product-addon-custom-field' ),
+				'help_text' => __( 'Name of the meta key this field will save to', 'product-addon-custom-field' ),
 			),
 
 			array(
 				'name'      => 'description',
-				'title'     => __( 'Description', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Description', 'product-addon-custom-field' ),
 				'type'      => 'textarea',
 				'section'   => 'basic',
 				'priority'  => 12,
-				'help_text' => __( 'Some details text about the section', 'wc-product-addon-custom-field' ),
+				'help_text' => __( 'Some details text about the section', 'product-addon-custom-field' ),
 			),
 		);
 
@@ -93,10 +93,10 @@ class Field_SectionBreak extends Base_Field {
 		$props = array(
 			'template'       => $this->get_type(),
 			'label'          => $this->get_name(),
-			'description'    => __( 'Some description about this section', 'wc-product-addon-custom-field' ),
+			'description'    => __( 'Some description about this section', 'product-addon-custom-field' ),
 			'id'             => 0,
 			'is_new'         => true,
-			'contactum_cond' => $this->default_conditional_prop(),
+			'wcprafe_cond' => $this->default_conditional_prop(),
 		);
 
 		return $props;

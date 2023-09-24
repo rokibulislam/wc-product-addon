@@ -2,8 +2,8 @@
 /**
  * Process
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF;
@@ -11,7 +11,7 @@ namespace WCPRAEF;
 /**
  * Process class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Process {
 	/**
@@ -38,7 +38,7 @@ class Process {
 		if ( isset( $post_data['form_id'] ) ) {
 			$id = $post_data['form_id'];
 
-			$form         = contactum()->forms->get( $id );
+			$form         = wc_product_addon_extra_field()->forms->get( $id );
 			$fields       = $form->getFields();
 			$entry_fields = $form->prepare_entries( $post_data );
 
@@ -71,7 +71,7 @@ class Process {
 
 			$id = $post_data['form_id'];
 
-			$form = contactum()->forms->get( $id );
+			$form = wc_product_addon_extra_field()->forms->get( $id );
 
 			$fields = $form->getFields();
 
@@ -79,7 +79,7 @@ class Process {
 				if ( 'yes' === $field['required'] ) {
 					if ( empty( $post_data[ $field['name'] ] ) ) {
 						$passed = false;
-						wc_add_notice( __( 'Please fill in the required ' . $field['name'] . ' field.', 'wc-product-addon-custom-field' ), 'error' );
+						wc_add_notice( __( 'Please fill in the required ' . $field['name'] . ' field.', 'product-addon-custom-field' ), 'error' );
 					}
 				}
 			}

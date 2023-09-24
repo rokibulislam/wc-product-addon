@@ -2,8 +2,8 @@
 /**
  * Form List Manager
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF;
@@ -17,7 +17,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 /**
  * Form List Table class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Forms_List_Table extends \WP_List_Table {
 	
@@ -29,8 +29,8 @@ class Forms_List_Table extends \WP_List_Table {
 
 		parent::__construct( 
 			array(
-				'singular' => 'contactum-form',
-				'plural'   => 'contactum-forms',
+				'singular' => 'product-addon-form',
+				'plural'   => 'product-addon-forms',
 				'ajax'     => false,
 		 	)
 		);
@@ -44,10 +44,9 @@ class Forms_List_Table extends \WP_List_Table {
 	public function get_columns() {
 		$columns = array(
 			'cb'        => '<input type="checkbox" />',
-			'name'      => __( 'Form Name', 'wc-product-addon-custom-field' ),
-			'shortcode' => __( 'Shortcode', 'wc-product-addon-custom-field' ),
-			'author'    => __( 'Author', 'wc-product-addon-custom-field' ),
-			'date'      => __( 'Date', 'wc-product-addon-custom-field' ),
+			'name'      => __( 'Form Name', 'product-addon-custom-field' ),
+			'author'    => __( 'Author', 'product-addon-custom-field' ),
+			'date'      => __( 'Date', 'product-addon-custom-field' ),
 		);
 
 		return $columns;
@@ -190,13 +189,13 @@ class Forms_List_Table extends \WP_List_Table {
 							'action' => 'duplicate',
 							'id'     => $item['ID'],
 						),
-						admin_url( 'admin.php?page=contactum' )
+						admin_url( 'admin.php?page=product_addon_custom_field' )
 					),
-					'bulk-contactum-forms'
+					'bulk-wcprafe-forms'
 				)
 			),
-			esc_attr__( 'Duplicate this form', 'wc-product-addon-custom-field' ),
-			esc_html__( 'Duplicate', 'wc-product-addon-custom-field' )
+			esc_attr__( 'Duplicate this form', 'product-addon-custom-field' ),
+			esc_html__( 'Duplicate', 'product-addon-custom-field' )
 		);
 
 		$actions['delete'] = sprintf(
@@ -208,13 +207,13 @@ class Forms_List_Table extends \WP_List_Table {
 							'action' => 'delete',
 							'id' 	 => $item['ID'],
 						),
-						admin_url( 'admin.php?page=contactum' )
+						admin_url( 'admin.php?page=product_addon_custom_field' )
 					),
-					'bulk-contactum-forms'
+					'bulk-wcprafe-forms'
 				)
 			),
-			esc_attr__( 'Delete this form', 'wc-product-addon-custom-field' ),
-			esc_html__( 'Delete', 'wc-product-addon-custom-field' )
+			esc_attr__( 'Delete this form', 'product-addon-custom-field' ),
+			esc_html__( 'Delete', 'product-addon-custom-field' )
 		);
 
 		return $title . $this->row_actions( $actions );
@@ -259,7 +258,7 @@ class Forms_List_Table extends \WP_List_Table {
 	 */
 	public function column_date( $item ) {
 		$t_time = mysql2date(
-			__( 'Y/m/d g:i:s A', 'contactum' ),
+			__( 'Y/m/d g:i:s A', 'product-addon-custom-field' ),
 			$item['date'],
 			true
 		);
@@ -271,11 +270,11 @@ class Forms_List_Table extends \WP_List_Table {
 		if ( $time_diff > 0 && $time_diff < 24 * 60 * 60 ) {
 			$h_time = sprintf(
 				/* translators: %s: Time */
-				__( '%s ago', 'contactum' ),
+				__( '%s ago', 'product-addon-custom-field' ),
 				human_time_diff( $time )
 			);
 		} else {
-			$h_time = mysql2date( __( 'Y/m/d', '' ), $m_time );
+			$h_time = mysql2date( __( 'Y/m/d', 'product-addon-custom-field' ), $m_time );
 		}
 
 		return '<abbr title="' . $t_time . '">' . $h_time . '</abbr>';
@@ -295,8 +294,6 @@ class Forms_List_Table extends \WP_List_Table {
 			case 'name':
 			case 'author':
 			   return $item[ $column_name ];
-			case 'shortcode':
-			   return '<code> [contactum id="' . $item['ID'] . '"] </code>';
 			default:
 				return $item;
 		}
@@ -327,7 +324,7 @@ class Forms_List_Table extends \WP_List_Table {
 				case 'duplicate':
 					if ( ! empty( $get_data['id'] ) ) {
 						$id                           = intval( $get_data['id'] );
-						$add_query_args['duplicated'] = contactum()->forms->duplicate( $id );
+						$add_query_args['duplicated'] = wc_product_addon_extra_field()->forms->duplicate( $id );
 					}
 					break;
 			}
@@ -367,7 +364,7 @@ class Forms_List_Table extends \WP_List_Table {
 	 * @return array
 	 */
 	public function get_bulk_actions() {
-		$actions['bulk-delete'] = __( 'Delete Permanently', 'wc-product-addon-custom-field' );
+		$actions['bulk-delete'] = __( 'Delete Permanently', 'product-addon-custom-field' );
 
 		return $actions;
 	}
@@ -380,8 +377,8 @@ class Forms_List_Table extends \WP_List_Table {
 	public function current_action() {
 		$get_data = wp_unslash( $_GET );
 
-		if ( isset( $get_data['contactum_form_search'] ) ) {
-			return 'contactum_form_search';
+		if ( isset( $get_data['wcprafe'] ) ) {
+			return 'wcprafe';
 		}
 
 		return parent::current_action();
@@ -420,7 +417,7 @@ class Forms_List_Table extends \WP_List_Table {
 		<p class="search-box">
 			<label class="screen-reader-text" for="<?php echo esc_attr( $input_id ); ?>"><?php echo esc_html( $text ); ?> : </label>
 			<input type="search" id="<?php echo esc_attr( $input_id ); ?>" name="s" value="<?php _admin_search_query(); ?>" />
-				<?php submit_button( $text, 'button', 'contactum_form_search', false, array( 'id' => 'search-submit' ) ); ?>
+				<?php submit_button( $text, 'button', 'wcprafe', false, array( 'id' => 'search-submit' ) ); ?>
 		</p>
 		<?php
 	}

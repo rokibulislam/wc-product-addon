@@ -2,8 +2,8 @@
 /**
  * Field Section
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF\Fields;
@@ -15,14 +15,14 @@ use WCPRAEF\Fields\Traits\DropDownOption;
 /**
  * Field Radio class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Field_Radio extends Field_Checkbox {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Radio', 'wc-product-addon-custom-field' );
+		$this->name       = __( 'Radio', 'product-addon-custom-field' );
 		$this->input_type = 'radio_field';
 		$this->icon       = 'dot-circle-o';
 		$this->multiple   = false;

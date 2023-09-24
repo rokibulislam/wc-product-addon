@@ -1,6 +1,6 @@
 <template>
   <div class="panel-field">
-    <label class="contactum-label"> {{ field.title }}
+    <label class="wcprafe-label"> {{ field.title }}
         <!-- <textarea :rows="field.rows || 5" v-model="value"></textarea> -->
     </label>
     <el-input

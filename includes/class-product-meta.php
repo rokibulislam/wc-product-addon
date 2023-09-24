@@ -2,8 +2,8 @@
 /**
  * Product Meta
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF;
@@ -11,7 +11,7 @@ namespace WCPRAEF;
 /**
  * ProductMeta class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class ProductMeta {
 	/**
@@ -32,7 +32,7 @@ class ProductMeta {
 	 */
 	public function add_my_custom_product_data_tab( $tabs ) {
 		$tabs['wcpa_product-meta-tab'] = array(
-			'label'    => __( 'Product Addons', 'wc-product-addon-custom-field' ),
+			'label'    => __( 'Product Addons', 'product-addon-custom-field' ),
 			'target'   => 'my_custom_product_data',
 			'priority' => 90,
 		);
@@ -47,7 +47,7 @@ class ProductMeta {
 	 */
 	public function add_my_custom_product_data_fields() {
 		global $woocommerce, $post;
-        $entries_forms = contactum_entries_forms();
+        $entries_forms = wcprafe_entries_forms();
 		$options = array();
 
 		foreach ( $entries_forms as $id => $form ) {
@@ -61,9 +61,9 @@ class ProductMeta {
 		woocommerce_wp_radio(
 			array(
 				'id'      => 'custom_form',
-				'label'   => __( 'Custom Form', 'wc-product-addon-custom-field' ),
+				'label'   => __( 'Custom Form', 'product-addon-custom-field' ),
 				'options' => $options,
-			),
+			)
 		);
 
 		echo '</div>';

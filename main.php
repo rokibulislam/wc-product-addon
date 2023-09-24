@@ -1,13 +1,13 @@
 <?php
 /*
-Plugin Name:  Product Addon Extra Field For Woocommerce
+Plugin Name:  Product Addon Custom Field For Woocommerce
 Description: Woocommerce Product Extra Field Plugin
 Version:     1.0
-Author:      Md Kamrul islam
+Author:      Md Rokibul islam
 Author URI:  https://profiles.wordpress.org/rajib00002/
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: wc-product-addon-custom-field
+Text Domain: product-addon-custom-field
 Domain Path: languages
 */
 
@@ -16,11 +16,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 // require_once __DIR__ . '/vendor/autoload.php';
 
 /**
- * MultiStoreX class
+ * WC_Product_Addon_Extra_Field class
  *
- * @class MultiStoreX The class that holds the entire MultiStoreX plugin
+ * @class WC_Product_Addon_Extra_Field The class that holds the entire WC_Product_Addon_Extra_Field plugin
  */
-final class Main {
+final class WC_Product_Addon_Extra_Field {
 	/**
 	 * Multistorex version.
 	 *
@@ -38,7 +38,7 @@ final class Main {
 	/**
 	 * The single instance of the class.
 	 *
-	 * @var MultiStoreX
+	 * @var WC_Product_Addon_Extra_Field
 	 */
 	private static $instance = null;
 
@@ -48,16 +48,18 @@ final class Main {
 	 */
 	public function __construct() {
 		$this->define_constants();
-		$this->includes();
-		$this->init_classes();
 		
 		register_activation_hook( __FILE__, array( $this, 'activate' ) );
 
-		add_action( 'plugins_loaded', array( $this, 'init_plugin' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_global_styles' ) );
+
+		add_action( 'admin_notices', array( $this, 'render_missing_woocommerce_notice' ) );
+
+		add_action( 'woocommerce_loaded', array( $this, 'init_plugin' ) );
 	}
 
 	/**
-	 * Initializes the MultiStoreX class
+	 * Initializes the WC_Product_Addon_Extra_Field class
 	 *
 	 * @return object
 	 */
@@ -103,14 +105,15 @@ final class Main {
 	 * @return void
 	 */
 	public function define_constants() {
-		define( 'CONTACTUM_VERSION', $this->version );
-		define( 'CONTACTUM_SEPARATOR', ' | ' );
-		define( 'CONTACTUM_FILE', __FILE__ );
-		define( 'CONTACTUM_ROOT', __DIR__ );
-		define( 'CONTACTUM_PATH', dirname( CONTACTUM_FILE ) );
-		define( 'CONTACTUM_INCLUDES', CONTACTUM_PATH . '/includes' );
-		define( 'CONTACTUM_URL', plugins_url( '', CONTACTUM_FILE ) );
-		define( 'CONTACTUM_ASSETS', CONTACTUM_URL . '/assets' );
+		define( 'WCPRAEF_VERSION', $this->version );
+		define( 'WCPRAEF_SEPARATOR', ' | ' );
+		define( 'WCPRAEF_FILE', __FILE__ );
+		define( 'WCPRAEF_ROOT', __DIR__ );
+		define( 'WCPRAEF_PATH', dirname( WCPRAEF_FILE ) );
+		define( 'WCPRAEF_INCLUDES', WCPRAEF_PATH . '/includes' );
+		define( 'WCPRAEF_URL', plugins_url( '', WCPRAEF_FILE ) );
+		define( 'WCPRAEF_ASSETS', WCPRAEF_URL . '/assets' );
+		define( 'WCPRAEF_TEMPLATES', WCPRAEF_PATH . '/templates' );
 	}
 
 	/**
@@ -119,8 +122,11 @@ final class Main {
 	 * @return void
 	 */
 	public function init_plugin() {
+		$this->includes();
+		$this->init_classes();
 		$this->init_hooks();
-		do_action( 'contactum_loaded' );
+
+		do_action( 'wcprafe_loaded' );
 	}
 
 	/**
@@ -131,46 +137,45 @@ final class Main {
 	public function includes() {
         
         //fields.
-		require_once CONTACTUM_INCLUDES . '/fields/field-trait.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-base-field.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-field-checkbox.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-field-date.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-field-dropdown.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-field-email.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-field-file.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-field-hidden.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-field-html.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-field-image.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-field-multidropdown.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-field-number.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-field-radio.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-field-sectionbreak.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-field-text.php';
-		require_once CONTACTUM_INCLUDES . '/fields/class-field-textarea.php';
+		require_once WCPRAEF_INCLUDES . '/fields/field-trait.php';
+		require_once WCPRAEF_INCLUDES . '/fields/class-base-field.php';
+		require_once WCPRAEF_INCLUDES . '/fields/class-field-checkbox.php';
+		require_once WCPRAEF_INCLUDES . '/fields/class-field-date.php';
+		require_once WCPRAEF_INCLUDES . '/fields/class-field-dropdown.php';
+		require_once WCPRAEF_INCLUDES . '/fields/class-field-email.php';
+		require_once WCPRAEF_INCLUDES . '/fields/class-field-hidden.php';
+		require_once WCPRAEF_INCLUDES . '/fields/class-field-html.php';
+		require_once WCPRAEF_INCLUDES . '/fields/class-field-image.php';
+		require_once WCPRAEF_INCLUDES . '/fields/class-field-multidropdown.php';
+		require_once WCPRAEF_INCLUDES . '/fields/class-field-number.php';
+		require_once WCPRAEF_INCLUDES . '/fields/class-field-radio.php';
+		require_once WCPRAEF_INCLUDES . '/fields/class-field-sectionbreak.php';
+		require_once WCPRAEF_INCLUDES . '/fields/class-field-text.php';
+		require_once WCPRAEF_INCLUDES . '/fields/class-field-textarea.php';
 		
         //template.
-        require_once CONTACTUM_INCLUDES . '/templates/class-base-template.php';
-        require_once CONTACTUM_INCLUDES . '/templates/class-template-blank.php';
+        require_once WCPRAEF_INCLUDES . '/templates/class-base-template.php';
+        require_once WCPRAEF_INCLUDES . '/templates/class-template-blank.php';
         
-        require_once CONTACTUM_INCLUDES . '/class-admin-form-handler.php';
-        require_once CONTACTUM_INCLUDES . '/class-admin-template.php';
-        require_once CONTACTUM_INCLUDES . '/class-admin.php';
-        require_once CONTACTUM_INCLUDES . '/class-ajax.php';
-        require_once CONTACTUM_INCLUDES . '/class-assets.php';
-        require_once CONTACTUM_INCLUDES . '/class-cart.php';
+        require_once WCPRAEF_INCLUDES . '/class-admin-form-handler.php';
+        require_once WCPRAEF_INCLUDES . '/class-admin-template.php';
+        require_once WCPRAEF_INCLUDES . '/class-admin.php';
+        require_once WCPRAEF_INCLUDES . '/class-ajax.php';
+        require_once WCPRAEF_INCLUDES . '/class-assets.php';
+        require_once WCPRAEF_INCLUDES . '/class-cart.php';
 
-        require_once CONTACTUM_INCLUDES . '/class-field-manager.php';
-        require_once CONTACTUM_INCLUDES . '/class-form-manager.php';
-        require_once CONTACTUM_INCLUDES . '/class-form.php';
-        require_once CONTACTUM_INCLUDES . '/class-frontend.php';
-        require_once CONTACTUM_INCLUDES . '/class-forms-list.php';
-		require_once CONTACTUM_INCLUDES . '/class-meta-display.php';
-		require_once CONTACTUM_INCLUDES . '/class-order.php';
-		require_once CONTACTUM_INCLUDES . '/class-process.php';
-		require_once CONTACTUM_INCLUDES . '/class-product-meta.php';
-		require_once CONTACTUM_INCLUDES . '/class-template-manager.php';
+        require_once WCPRAEF_INCLUDES . '/class-field-manager.php';
+        require_once WCPRAEF_INCLUDES . '/class-form-manager.php';
+        require_once WCPRAEF_INCLUDES . '/class-form.php';
+        require_once WCPRAEF_INCLUDES . '/class-frontend.php';
+        require_once WCPRAEF_INCLUDES . '/class-forms-list.php';
+		require_once WCPRAEF_INCLUDES . '/class-meta-display.php';
+		require_once WCPRAEF_INCLUDES . '/class-order.php';
+		require_once WCPRAEF_INCLUDES . '/class-process.php';
+		require_once WCPRAEF_INCLUDES . '/class-product-meta.php';
+		require_once WCPRAEF_INCLUDES . '/class-template-manager.php';
 
-		require_once CONTACTUM_INCLUDES . '/functions.php';
+		require_once WCPRAEF_INCLUDES . '/functions.php';
 	}
 
 	/**
@@ -180,25 +185,17 @@ final class Main {
 	 */
 	public function activate() {
 
-		if ( ! array_key_exists( 'fields', $this->container ) ) {
-			$this->container['fields'] = new WCPRAEF\FieldManager();
-		}
+		if ( ! $this->has_woocommerce() ) {
+            set_transient( 'dokan_wc_missing_notice', true );
+        }
 
-		if ( ! array_key_exists( 'forms', $this->container ) ) {
-			$this->container['forms'] = new WCPRAEF\FormManager();
-		}
-
-		if ( ! array_key_exists( 'templates', $this->container ) ) {
-			$this->container['templates'] = new WCPRAEF\TemplateManager();
-		}
-
-		$installed = get_option( 'contactum_installed' );
+		$installed = get_option( 'wcprafe_installed' );
 
 		if ( ! $installed ) {
-			update_option( 'contactum_installed', time() );
+			update_option( 'wcprafe_installed', time() );
 		}
 
-		update_option( 'contactum_version', CONTACTUM_VERSION );
+		update_option( 'wcprafe_version', WCPRAEF_VERSION );
 	}
 
 	/**
@@ -226,6 +223,49 @@ final class Main {
 	}
 
 	/**
+	 * Enqueue Global Scripts
+	 *
+	 * @return void
+	 */
+	public function enqueue_global_styles() {
+		wp_register_style( 'wcprafe-notice', WCPRAEF_ASSETS . '/css/notice.css', array(), WCPRAEF_VERSION );
+		wp_enqueue_style( 'wcprafe-notice' );
+	}
+
+	/**
+     * Missing WooCommerce notice
+     *
+     * @return void
+     */
+    public function render_missing_woocommerce_notice() {
+        
+        if ( ! self::has_woocommerce() && current_user_can( 'activate_plugins' ) ) {
+        	require_once WCPRAEF_TEMPLATES . '/admin-notice.php';
+        }
+    }
+
+    /**
+     * Check whether woocommerce is installed and active
+     * 
+     * @return bool
+     */
+    public function has_woocommerce() {
+        return class_exists( 'WooCommerce' );
+    }
+
+
+	/**
+     * Handles when WooCommerce is not active
+     *
+     * @return void
+     */
+    public function woocommerce_not_loaded() {
+        if ( did_action( 'woocommerce_loaded' ) || ! is_admin() ) {
+            return;
+        }
+    }
+
+	/**
 	 * Hook into actions and filters.
 	 *
 	 * @return void
@@ -240,7 +280,7 @@ final class Main {
 	 * @uses load_plugin_textdomain()
 	 */
 	public function localization_setup() {
-		load_plugin_textdomain( 'wc-product-addon-custom-field', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'product-addon-custom-field', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**
@@ -253,15 +293,15 @@ final class Main {
 	}
 }
 
-if ( ! function_exists( 'contactum' ) ) {
+if ( ! function_exists( 'wc_product_addon_extra_field' ) ) {
 	/**
-	 * Load Multistorx Plugin
+	 * Load WC_Product_Addon_Extra_Field Plugin
 	 *
-	 * @return MultiStoreX
+	 * @return WC_Product_Addon_Extra_Field
 	 */
-	function contactum() {
-		return Main::init();
+	function wc_product_addon_extra_field() {
+		return WC_Product_Addon_Extra_Field::init();
 	}
 }
 
-contactum();
+wc_product_addon_extra_field();

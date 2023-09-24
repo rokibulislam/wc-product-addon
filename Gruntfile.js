@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 
         addtextdomain: {
             options: {
-                textdomain: 'contactum',
+                textdomain: 'product-addon-custom-field',
             },
             update_all_domains: {
                 options: {
@@ -21,9 +21,9 @@ module.exports = function(grunt) {
             target: {
                 options: {
                     exclude: ['build/.*', 'node_modules/*', 'assets/*'],
-                    mainFile: 'wpum.php',
+                    mainFile: 'main.php',
                     domainPath: '/languages/',
-                    potFilename: 'contactum.pot',
+                    potFilename: 'product-addon-custom-field.pot',
                     type: 'wp-plugin',
                     updateTimestamp: true,
                     potHeaders: {
@@ -74,12 +74,12 @@ module.exports = function(grunt) {
             main: {
                 options: {
                     mode: 'zip',
-                    archive: './build/contactum-v'+pkg.version+'.zip'
+                    archive: './build/product-addon-custom-field-v'+pkg.version+'.zip'
                 },
                 expand: true,
                 cwd: 'build/',
                 src: ['**/*'],
-                dest: 'contactum'
+                dest: 'product-addon-custom-field'
             }
         },
     });

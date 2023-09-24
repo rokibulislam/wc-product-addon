@@ -2,8 +2,8 @@
 /**
  * Field Multidropdown
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF\Fields;
@@ -13,14 +13,14 @@ use WCPRAEF\Fields\Base_Field;
 /**
  * Field MultiDropdown class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Field_MultiDropdown extends Field_Dropdown {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Multi Select', 'wc-product-addon-custom-field' );
+		$this->name       = __( 'Multi Select', 'product-addon-custom-field' );
 		$this->input_type = 'multiple_select';
 		$this->icon       = 'list-ul';
 		$this->multiple   = false;
@@ -41,10 +41,10 @@ class Field_MultiDropdown extends Field_Dropdown {
 		?>
 		<li <?php $this->print_list_attributes( $field_settings ); ?>>
 			<?php $this->print_label( $field_settings, $form_id ); ?>
-				<div class="contactum-fields">
+				<div class="wcprafe-fields">
 
 					<select
-						class="multiselect contactum-el-form-control <?php echo esc_attr( $field_settings['name'] ) . '_' . esc_attr( $form_id ); ?>"
+						class="multiselect wcprafe-el-form-control <?php echo esc_attr( $field_settings['name'] ) . '_' . esc_attr( $form_id ); ?>"
 						id="<?php echo esc_attr( $field_settings['name'] ) . '_' . esc_attr( $form_id ); ?>"
 						name="<?php echo esc_attr( $name ); ?>"
 						multiple
@@ -71,7 +71,7 @@ class Field_MultiDropdown extends Field_Dropdown {
 					removeItemButton: true
 				});
 			});";
-			wp_add_inline_script( 'contactum-frontend', $script );
+			wp_add_inline_script( 'wcprafe-frontend', $script );
 	}
 
 	/**
@@ -101,7 +101,7 @@ class Field_MultiDropdown extends Field_Dropdown {
 					'photo' => '',
 				),
 			),
-			'first'    => __( '— Select —', 'contactum' ),
+			'first'    => __( '— Select —', 'product-addon-custom-field' ),
 		);
 
 		return array_merge( $defaults, $props );
@@ -116,6 +116,7 @@ class Field_MultiDropdown extends Field_Dropdown {
 	 * @return string
 	 */
 	public function prepare_entry( $field, $post_data = array() ) {
+		print_r($_POST);
 		$entry_value = ( is_array( $post_data[ $field['name'] ] ) && $post_data[ $field['name'] ] ) ? $post_data[ $field['name'] ] : array();
 
 		if ( $entry_value ) {
@@ -125,7 +126,7 @@ class Field_MultiDropdown extends Field_Dropdown {
 				$new_val[] = isset( $field['options'][ $option_key ] ) ? $field['options'][ $option_key ] : $option_key;
 			}
 
-			$entry_value = implode( CONTACTUM_SEPARATOR, $new_val );
+			$entry_value = implode( WCPRAEF_SEPARATOR, $new_val );
 		} else {
 			$entry_value = '';
 		}

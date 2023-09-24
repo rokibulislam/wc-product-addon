@@ -14,7 +14,7 @@
   border: 1px solid #ffb900;
   height: 50px;
 }
-.form-preview-stage .contactum-submit + .button + .form-preview-stage-dropzone,
+.form-preview-stage .wcprafe-submit + .button + .form-preview-stage-dropzone,
 .form-preview-stage .field-items.empty-list-item + .form-preview-stage-dropzone {
   display: none;
 }
@@ -121,7 +121,7 @@ input [type='text'], input [type='number'] {
 }
 
 
-.contactum-btn, .contactum-btn:hover {
+.wcprafe-btn, .wcprafe-btn:hover {
   border: 1px solid transparent;
   border-radius: 8px;
   padding: 10px 20px;
@@ -159,7 +159,7 @@ input [type='text'], input [type='number'] {
   text-decoration: none;
 }
 
-.contactum-label {
+.wcprafe-label {
   margin-bottom: 10px !important;
   /* display: inline-block; */
   display: block;
@@ -180,7 +180,7 @@ input [type='text'], input [type='number'] {
   background: #fff  !important;
 }
 
-.contactum-fields .first-name, .contactum-fields .last-name, .contactum-fields .middle-name {
+.wcprafe-fields .first-name, .wcprafe-fields .last-name, .wcprafe-fields .middle-name {
   flex: 1;
 }
 
@@ -191,7 +191,7 @@ input [type='text'], input [type='number'] {
   background-color: #DC2727  !important;
 }
 
-.form-field-name_field .contactum-fields {
+.form-field-name_field .wcprafe-fields {
   display: flex;
 }
 
@@ -217,7 +217,7 @@ input [type='text'], input [type='number'] {
 }
 
 
-.contactum-fields input[type="radio"], .contactum-fields input[type="checkbox"] {
+.wcprafe-fields input[type="radio"], .wcprafe-fields input[type="checkbox"] {
   position: absolute;
   opacity: 0;
   width: 0;

@@ -8,8 +8,8 @@
             var _this = this;
             _this.change();
             // events
-            // $(document).on('change', '.contactum-fields input, .contactum-fields textarea, .contactum-fields select', () => {
-            $(document).on('change', '.contactum-fields input, .contactum-fields textarea, .contactum-fields select', () => {
+            // $(document).on('change', '.wcprafe-fields input, .wcprafe-fields textarea, .wcprafe-fields select', () => {
+            $(document).on('change', '.wcprafe-fields input, .wcprafe-fields textarea, .wcprafe-fields select', () => {
                 _this.change();
             });
         },
@@ -18,13 +18,13 @@
 
             var cond_field_val = [],
                 all = [],
-                prefix = 'contactum_';
+                prefix = 'wcprafe_';
 
-            if (typeof contactum_conditional_items === 'undefined') {
+            if (typeof wcprafe_conditional_items === 'undefined') {
                 return;
             }
 
-            $.each(contactum_conditional_items, function (k, item) {
+            $.each(wcprafe_conditional_items, function (k, item) {
                 $.each(item.cond_field, function (key, value) {
                     var form_id = '_' + item.form_id,
                         // selector = '.' + prefix + value + form_id,
@@ -88,14 +88,14 @@
                     if (check != '-1') {
 
                         if (item.type == 'address') {
-                            $('li.contactum-el.' + item.name).show();
+                            $('li.wcprafe-el.' + item.name).show();
                         } else {
                             $(field_selector).closest('li').show();
                         }
                     } else {
 
                         if (item.type == 'address') {
-                            $('li.contactum-el.' + item.name).hide();
+                            $('li.wcprafe-el.' + item.name).hide();
                         } else {
                             $(field_selector).closest('li').hide();
                         }
@@ -105,13 +105,13 @@
 
                     if (check == '-1') {
                         if (item.type == 'address') {
-                            $('li.contactum-el.' + item.name).show();
+                            $('li.wcprafe-el.' + item.name).show();
                         } else {
                             $(field_selector).closest('li').show();
                         }
                     } else {
                         if (item.type == 'address') {
-                            $('li.contactum-el.' + item.name).hide();
+                            $('li.wcprafe-el.' + item.name).hide();
                         } else {
                             $(field_selector).closest('li').hide();
                         }

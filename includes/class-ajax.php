@@ -2,8 +2,8 @@
 /**
  * Ajax Template
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF;
@@ -11,7 +11,7 @@ namespace WCPRAEF;
 /**
  * Ajax class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Ajax {
 
@@ -19,7 +19,7 @@ class Ajax {
 	 * Constructor
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_save_contactum_form', array( $this, 'save_contactum_form' ) );
+		add_action( 'wp_ajax_save_wcprafe_form', array( $this, 'save_form' ) );
 
 		add_action( 'wp_ajax_upload_file', array( $this, 'upload_file' ) );
 		add_action( 'wp_ajax_nopriv_upload_file', array( $this, 'upload_file' ) );
@@ -33,19 +33,19 @@ class Ajax {
 	 *
 	 * @return void
 	 */
-	public function save_contactum_form() {
+	public function save_form() {
 		$post_data = wp_unslash( $_POST );
 
-		if ( ! wp_verify_nonce( $post_data['contactum_form_builder_nonce'], 'contactum-form-builder-nonce' ) ) {
-			wp_send_json_error( __( 'Unauthorized operation', 'wc-product-addon-custom-field' ) );
+		if ( ! wp_verify_nonce( $post_data['form_builder_nonce'], 'wcprafe-form-builder-nonce' ) ) {
+			wp_send_json_error( __( 'Unauthorized operation', 'product-addon-custom-field' ) );
 		}
 
 		if ( isset( $post_data['form_data'] ) ) {
 			parse_str( $post_data['form_data'], $form_data );
 		}
 
-		if ( empty( $form_data['contactum_form_id'] ) ) {
-			wp_send_json_error( __( 'Invalid form id', 'wc-product-addon-custom-field' ) );
+		if ( empty( $form_data['form_id'] ) ) {
+			wp_send_json_error( __( 'Invalid form id', 'product-addon-custom-field' ) );
 		}
 
 		$form_fields = isset( $post_data['form_fields'] ) ? $post_data['form_fields'] : '';
@@ -56,13 +56,13 @@ class Ajax {
 		}
 
 		$data = array(
-			'form_id'       => absint( $form_data['contactum_form_id'] ),
+			'form_id'       => absint( $form_data['form_id'] ),
 			'post_title'    => $form_data['post_title'],
 			'form_fields'   => $form_fields,
 			'form_settings' => $form_settings,
 		);
 
-		$form_fields = contactum()->forms->save( $data );
+		$form_fields = wc_product_addon_extra_field()->forms->save( $data );
         
         wp_send_json_success(
             array(
@@ -80,7 +80,7 @@ class Ajax {
 	public function upload_file() {
 		$nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['nonce'] ) ) : '';
 
-		if ( ! wp_verify_nonce( $nonce, 'contactum-upload-nonce' ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'wcprafe-upload-nonce' ) ) {
 			die( 'error' );
 		}
 
@@ -203,7 +203,7 @@ class Ajax {
 	 * @return void
 	 */
 	public function delete_file() {
-		check_ajax_referer( 'contactum_nonce', 'nonce' );
+		check_ajax_referer( 'wcprafe_nonce', 'nonce' );
 
 		$post_data  = wp_unslash( $_POST );
 		$attach_id  = isset( $post_data['attach_id'] ) ? intval( $post_data['attach_id'] ) : 0;

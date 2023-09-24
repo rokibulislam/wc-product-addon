@@ -2,8 +2,8 @@
 /**
  * Field Html
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF\Fields;
@@ -13,14 +13,14 @@ use WCPRAEF\Fields\Base_Field;
 /**
  * Field Html class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Field_Html extends Base_Field {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Html', 'wc-product-addon-custom-field' );
+		$this->name       = __( 'Html', 'product-addon-custom-field' );
 		$this->input_type = 'html_field';
 		$this->icon       = 'code';
 	}
@@ -50,23 +50,23 @@ class Field_Html extends Base_Field {
 		$settings = array(
 			array(
 				'name'      => 'html',
-				'title'     => __( 'Html Codes', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Html Codes', 'product-addon-custom-field' ),
 				'type'      => 'textarea',
 				'section'   => 'basic',
 				'priority'  => 11,
-				'help_text' => __( 'Paste your HTML codes, WordPress shortcodes will also work here', 'wc-product-addon-custom-field' ),
+				'help_text' => __( 'Paste your HTML codes, WordPress shortcodes will also work here', 'product-addon-custom-field' ),
 			),
 			array(
 				'name'      => 'name',
-				'title'     => __( 'Meta Key', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Meta Key', 'product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'basic',
 				'priority'  => 12,
-				'help_text' => __( 'Name of the meta key this field will save to', 'wc-product-addon-custom-field' ),
+				'help_text' => __( 'Name of the meta key this field will save to', 'product-addon-custom-field' ),
 			),
 			array(
-				'name'      => 'contactum_cond',
-				'title'     => __( 'Conditional Logic', 'wc-product-addon-custom-field' ),
+				'name'      => 'wcprafe_cond',
+				'title'     => __( 'Conditional Logic', 'product-addon-custom-field' ),
 				'type'      => 'conditional-logic',
 				'section'   => 'advanced',
 				'priority'  => 30,
@@ -86,10 +86,10 @@ class Field_Html extends Base_Field {
 		$props = array(
 			'template'       => $this->get_type(),
 			'label'          => $this->get_name(),
-			'html'           => sprintf( '%s', __( 'HTML Section', 'wc-product-addon-custom-field' ) ),
+			'html'           => sprintf( '%s', __( 'HTML Section', 'product-addon-custom-field' ) ),
 			'id'             => 0,
 			'is_new'         => true,
-			'contactum_cond' => $this->default_conditional_prop(),
+			'wcprafe_cond' => $this->default_conditional_prop(),
 		);
 
 		return $props;

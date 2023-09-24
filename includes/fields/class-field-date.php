@@ -2,8 +2,8 @@
 /**
  * Field Date
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF\Fields;
@@ -13,7 +13,7 @@ use WCPRAEF\Fields\Base_Field;
 /**
  * Field Date class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Field_Date extends Base_Field {
 
@@ -21,7 +21,7 @@ class Field_Date extends Base_Field {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Date', 'wc-product-addon-custom-field' );
+		$this->name       = __( 'Date', 'product-addon-custom-field' );
 		$this->input_type = 'date_field';
 		$this->icon       = 'calendar';
 	}
@@ -41,10 +41,10 @@ class Field_Date extends Base_Field {
 			<?php
 				$this->print_label( $field_settings );
 			printf(
-				'<div class="contactum-fields"> <input
-					id="contactum-date-%s"
+				'<div class="wcprafe-fields"> <input
+					id="wcprafe-date-%s"
 					type="text"
-					class="datepicker contactum-el-form-control %s"
+					class="datepicker wcprafe-el-form-control %s"
 					data-required="%s"
 					data-type="text"
 					name="%s"
@@ -65,12 +65,12 @@ class Field_Date extends Base_Field {
 		<?php
 			$name   = $field_settings['name'];
 			$format = $field_settings['format'];
-
-			$script = "jQuery('#contactum-date-{$name}').flatpickr({
+			
+			$script = "jQuery('#wcprafe-date-{$name}').flatpickr({
 				dateFormat: '{$format}'
 			});";
 
-			wp_add_inline_script( 'contactum-flatpickr', $script );
+			wp_add_inline_script( 'wcprafe-flatpickr', $script );
 	}
 
 	/**
@@ -84,28 +84,28 @@ class Field_Date extends Base_Field {
 		$settings = array(
 			array(
 				'name'          => 'format',
-				'title'         => __( 'Date Format', 'wc-product-addon-custom-field' ),
+				'title'         => __( 'Date Format', 'product-addon-custom-field' ),
 				'type'          => 'select',
 				'is_single_opt' => true,
 				'options'       => array(
-					'm/d/Y'       => __( 'm/d/Y - (Ex: 04/28/2018)', 'wc-product-addon-custom-field' ),
-					'm/d/y'       => __( 'm/d/Y - (Ex: 04/28/18)', 'wc-product-addon-custom-field' ),
-					'd/m/Y'       => __( 'm/d/Y - (Ex: 28/04/2018)', 'wc-product-addon-custom-field' ),
-					'd.m.Y'       => __( 'd.m.Y - (Ex: 28.04.2018)', 'wc-product-addon-custom-field' ),
-					'm/d/Y'       => __( 'm/d/Y - (Ex: 04/28/2018)', 'wc-product-addon-custom-field' ),
-					'y/m/d'       => __( 'y/m/d - (Ex: 28/04/18)', 'wc-product-addon-custom-field' ),
-					'd-m-y'       => __( 'd-m-y - (Ex: 28-04-18)', 'wc-product-addon-custom-field' ),
-					'h:i K'       => __( 'h:i K - (Ex: 08:55 PM)', 'wc-product-addon-custom-field' ),
-					'H:i'         => __( 'H:i - (Ex: 20:55 )', 'wc-product-addon-custom-field' ),
-					'd.m.Y H:i K' => __( 'd.m.Y H:i K- (Ex: 28.04.2018 20:55 PM)', 'wc-product-addon-custom-field' ),
-					'd/m/Y H:i K' => __( 'd/m/Y H:i K- (Ex: 28/04/2018 20:55 PM)', 'wc-product-addon-custom-field' ),
-					'd.m.Y H:i'   => __( 'd.m.Y H:i - (Ex: 28.04.2018 20:55)', 'wc-product-addon-custom-field' ),
-					'd/m/Y H:i'   => __( 'd/m/Y H:i - (Ex: 28/04/2018 20:55)', 'wc-product-addon-custom-field' ),
-					'H:i'         => __( 'H:i - (Ex: 28-04-18 )', 'wc-product-addon-custom-field' ),
+					'm/d/Y'       => __( 'm/d/Y - (Ex: 04/28/2018)', 'product-addon-custom-field' ),
+					'm/d/y'       => __( 'm/d/Y - (Ex: 04/28/18)', 'product-addon-custom-field' ),
+					'd/m/Y'       => __( 'm/d/Y - (Ex: 28/04/2018)', 'product-addon-custom-field' ),
+					'd.m.Y'       => __( 'd.m.Y - (Ex: 28.04.2018)', 'product-addon-custom-field' ),
+					'm/d/Y'       => __( 'm/d/Y - (Ex: 04/28/2018)', 'product-addon-custom-field' ),
+					'y/m/d'       => __( 'y/m/d - (Ex: 28/04/18)', 'product-addon-custom-field' ),
+					'd-m-y'       => __( 'd-m-y - (Ex: 28-04-18)', 'product-addon-custom-field' ),
+					'h:i K'       => __( 'h:i K - (Ex: 08:55 PM)', 'product-addon-custom-field' ),
+					'H:i'         => __( 'H:i - (Ex: 20:55 )', 'product-addon-custom-field' ),
+					'd.m.Y H:i K' => __( 'd.m.Y H:i K- (Ex: 28.04.2018 20:55 PM)', 'product-addon-custom-field' ),
+					'd/m/Y H:i K' => __( 'd/m/Y H:i K- (Ex: 28/04/2018 20:55 PM)', 'product-addon-custom-field' ),
+					'd.m.Y H:i'   => __( 'd.m.Y H:i - (Ex: 28.04.2018 20:55)', 'product-addon-custom-field' ),
+					'd/m/Y H:i'   => __( 'd/m/Y H:i - (Ex: 28/04/2018 20:55)', 'product-addon-custom-field' ),
+					'H:i'         => __( 'H:i - (Ex: 28-04-18 )', 'product-addon-custom-field' ),
 				),
 				'section'       => 'advanced',
 				'priority'      => 24,
-				'help_text'     => __( 'The date format', 'wc-product-addon-custom-field' ),
+				'help_text'     => __( 'The date format', 'product-addon-custom-field' ),
 			),
 		);
 
@@ -120,7 +120,7 @@ class Field_Date extends Base_Field {
 	public function get_field_props() {
 		$defaults = $this->default_attributes();
 		$props    = array(
-			'format' => 'dd/m/y',
+			'format' => 'd/m/y',
 		);
 
 		return array_merge( $defaults, $props );

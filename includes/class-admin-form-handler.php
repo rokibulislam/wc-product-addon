@@ -2,8 +2,8 @@
 /**
  * Admin Form Handler
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF;
@@ -11,7 +11,7 @@ namespace WCPRAEF;
 /**
  * Admin class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Admin_Form_Handler {
 
@@ -19,7 +19,7 @@ class Admin_Form_Handler {
 	 *  Constructor
 	 */
 	public function __construct() {
-		add_action( 'load-toplevel_page_contactum', array( $this, 'chi_forms_actions' ) );
+		add_action( 'load-toplevel_page_product_addon_custom_field', array( $this, 'forms_actions' ) );
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 	}
 
@@ -56,9 +56,9 @@ class Admin_Form_Handler {
 	 *
 	 * @return void
 	 */
-	public function chi_forms_actions() {
+	public function forms_actions() {
 		// Nonce validation.
-		if ( ! $this->verify_current_page_screen( 'contactum', 'bulk-contactum-forms' ) ) {
+		if ( ! $this->verify_current_page_screen( 'product_addon_custom_field', 'bulk-wcprafe-forms' ) ) {
 			return;
 		}
 
@@ -75,8 +75,8 @@ class Admin_Form_Handler {
 			$add_query_args    = array();
 
 			switch ( $action ) {
-				case 'contactum_form_search':
-					$redirect = remove_query_arg( array( 'contactum_form_search' ), $remove_query_args );
+				case 'wcprafe':
+					$redirect = remove_query_arg( array( 'wcprafe' ), $remove_query_args );
 					break;
 
 				case 'delete':
@@ -89,7 +89,7 @@ class Admin_Form_Handler {
 				case 'duplicate':
 					if ( ! empty( $get_data['id'] ) ) {
 						$id                           = intval( $get_data['id'] );
-						$add_query_args['duplicated'] = contactum()->forms->duplicate( $id );
+						$add_query_args['duplicated'] = wc_product_addon_extra_field()->forms->duplicate( $id );
 					}
 					break;
 			}
@@ -121,7 +121,7 @@ class Admin_Form_Handler {
 
 		if ( ! empty( $get_data['duplicated'] ) ) {
 			$duplicated = sanitize_text_field( $get_data['duplicated'] );
-			$notice     = sprintf( __( 'Form duplicated successfully', 'wc-product-addon-custom-field' ) );
+			$notice     = sprintf( __( 'Form duplicated successfully', 'product-addon-custom-field' ) );
 			$this->display_notice( $notice );
 		}
 	}

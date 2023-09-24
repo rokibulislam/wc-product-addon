@@ -2,8 +2,8 @@
 /**
  * Field Dropdown
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 namespace WCPRAEF\Fields;
 
@@ -13,7 +13,7 @@ use WCPRAEF\Fields\Traits\DropDownOption;
 /**
  * Field Dropdown class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Field_Dropdown extends Base_Field {
 	use DropDownOption;
@@ -22,7 +22,7 @@ class Field_Dropdown extends Base_Field {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'DropDown', 'wc-product-addon-custom-field' );
+		$this->name       = __( 'DropDown', 'product-addon-custom-field' );
 		$this->input_type = 'dropdown_field';
 		$this->icon       = 'caret-square-o-down';
 		$this->multiple   = false;
@@ -42,9 +42,9 @@ class Field_Dropdown extends Base_Field {
 		?>
 		<li <?php $this->print_list_attributes( $field_settings ); ?>>
 			<?php $this->print_label( $field_settings, $form_id ); ?>
-			<div class="contactum-fields">
+			<div class="wcprafe-fields">
 				<select
-					class="select contactum-el-form-control <?php echo esc_attr( $field_settings['name'] ) . '_' . esc_attr( $form_id ); ?>"
+					class="select wcprafe-el-form-control <?php echo esc_attr( $field_settings['name'] ) . '_' . esc_attr( $form_id ); ?>"
 					id="<?php echo esc_attr( $field_settings['name'] ) . '_' . esc_attr( $form_id ); ?>"
 					name="<?php echo esc_attr( $name ); ?>"
 					data-required="<?php echo esc_attr( $field_settings['required'] ); ?>"
@@ -81,11 +81,11 @@ class Field_Dropdown extends Base_Field {
 			$this->get_default_option_dropdown_settings( $this->multiple ),
 			array(
 				'name'      => 'first',
-				'title'     => __( 'Select Text', 'wc-product-addon-custom-field' ),
+				'title'     => __( 'Select Text', 'product-addon-custom-field' ),
 				'type'      => 'text',
 				'section'   => 'basic',
 				'priority'  => 13,
-				'help_text' => __( '', 'wc-product-addon-custom-field' ),
+				'help_text' => __( 'help', 'product-addon-custom-field' ),
 			),
 		);
 
@@ -116,7 +116,7 @@ class Field_Dropdown extends Base_Field {
 					'value' => 'option-3',
 				),
 			),
-			'first'    => __( '— Select —', 'wc-product-addon-custom-field' ),
+			'first'    => __( '— Select —', 'product-addon-custom-field' ),
 		);
 
 		return array_merge( $defaults, $props );

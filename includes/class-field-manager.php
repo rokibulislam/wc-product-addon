@@ -2,8 +2,8 @@
 /**
  * Field Manager Template
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF;
@@ -26,7 +26,7 @@ use WCPRAEF\Fields\Field_File;
 /**
  * FieldManager class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class FieldManager {
 
@@ -89,10 +89,9 @@ class FieldManager {
 			'html_field'      => new Field_Html(),
 			'section_break'   => new Field_SectionBreak(),
 			'hidden_field'    => new Field_Hidden(),
-			'file_field'      => new Field_File(),
 		);
 
-		$this->fields = apply_filters( 'contactum_form_fields', $fields );
+		$this->fields = apply_filters( 'wcprafe_form_fields', $fields );
 	}
 
 	/**
@@ -101,9 +100,9 @@ class FieldManager {
 	 * @return array
 	 */
 	public function get_field_groups() {
-		$before_custom_fields = apply_filters( 'contactum_form_fields_section_before', array() );
+		$before_custom_fields = apply_filters( 'wcprafe_form_fields_section_before', array() );
 		$groups               = array_merge( $before_custom_fields, $this->get_custom_fields() );
-		$after_custom_fields  = apply_filters( 'contactum_form_fields_section_after', array() );
+		$after_custom_fields  = apply_filters( 'wcprafe_form_fields_section_after', array() );
 		$groups               = array_merge( $groups, $after_custom_fields );
 
 		return $groups;
@@ -116,7 +115,7 @@ class FieldManager {
 	 */
 	private function get_custom_fields() {
 		$fields = apply_filters(
-			'contactum_form_fields_custom_fields',
+			'wcprafe_form_fields_custom_fields',
 			array(
 				'text_field',
 				'textarea_field',
@@ -129,7 +128,6 @@ class FieldManager {
 				'image_field',
 				'multiple_select',
 				'hidden_field',
-				'file_field',
 				'section_break',
 				'html_field',
 			)
@@ -137,7 +135,7 @@ class FieldManager {
 
 		return array(
 			array(
-				'title'  => __( 'Custom Fields', 'wc-product-addon-custom-field' ),
+				'title'  => __( 'Custom Fields', 'product-addon-custom-field' ),
 				'id'     => 'custom-fields',
 				'fields' => $fields,
 				'show'   => true,

@@ -43,32 +43,6 @@ Vue.mixin({
             return false;
         },
 
-         is_recaptcha_v2: function() {
-            return contactum.recaptcha_type === 'v2';
-        },
-
-        has_recaptcha_api_keys: function() {
-            return (contactum.recaptcha_public && contactum.recaptcha_secret ) ? true : false;;
-        },
-        settings_taxonomy: function (form_field) {
-            return this.$store.state.field_settings[form_field.name].settings;
-        },
-        has_gmap_api_key: function() {
-            return ( contactum.gmap_key != '' ) ? true : false;
-        },
-
-        isSingleInstance: function(field_name) {
-            var singleInstance = ['post_title', 'post_content', 'post_excerpt', 'featured_image',
-                'user_login', 'first_name', 'last_name', 'nickname', 'user_email', 'user_url',
-                'user_bio', 'password', 'user_avatar', 'taxonomy', 'humanpresence'];
-
-            if ( jQuery.inArray(field_name, singleInstance) >= 0 ) {
-                return true;
-            }
-
-            return false;
-        },
-
         get_random_id: function() {
             var min = 999999,
                 max = 9999999999;
@@ -80,7 +54,7 @@ Vue.mixin({
 
 /* eslint-disable no-new */
 new Vue({
-	el: '#contactum-admin-app',
+	el: '#wcprafe-admin-app',
 	store,
 	render: (h) => h(builder)
 });

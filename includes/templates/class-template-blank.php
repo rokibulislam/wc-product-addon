@@ -2,8 +2,8 @@
 /**
  * Template Blank
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF\Templates;
@@ -13,7 +13,7 @@ use WCPRAEF\Templates\Base_Form_Template;
 /**
  * Template Blank class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Template_Blank extends Base_Form_Template {
 	/**
@@ -21,8 +21,8 @@ class Template_Blank extends Base_Form_Template {
 	 */
 	public function __construct() {
 		$this->enabled     = true;
-		$this->title       = __( 'Blank Form', 'wc-product-addon-custom-field' );
-		$this->description = __( 'Create a simple Blank form.', 'wc-product-addon-custom-field' );
+		$this->title       = __( 'Blank Form', 'product-addon-custom-field' );
+		$this->description = __( 'Create a simple Blank form.', 'product-addon-custom-field' );
 		$this->image       = '';
 		$this->category    = 'default';
 	}

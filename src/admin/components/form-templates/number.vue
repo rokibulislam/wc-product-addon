@@ -1,5 +1,5 @@
 <template>
-  <div class="contactum-fields">
+  <div class="wcprafe-fields">
     <el-input
       type="number"
       :placeholder="field.placeholder"

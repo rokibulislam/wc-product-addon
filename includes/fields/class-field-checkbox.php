@@ -2,8 +2,8 @@
 /**
  * Field Checkbox
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF\Fields;
@@ -14,7 +14,7 @@ use WCPRAEF\Fields\Traits\DropDownOption;
 /**
  * Field Checkbox class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Field_Checkbox extends Base_Field {
 	use DropDownOption;
@@ -23,7 +23,7 @@ class Field_Checkbox extends Base_Field {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name       = __( 'Checkbox', 'contactum' );
+		$this->name       = __( 'Checkbox', 'product-addon-custom-field' );
 		$this->input_type = 'checkbox_field';
 		$this->icon       = 'check-square-o';
 		$this->multiple   = true;
@@ -44,11 +44,11 @@ class Field_Checkbox extends Base_Field {
 			<?php $this->print_label( $field_settings, $form_id ); ?>
 			<?php
 			$class = $field_settings['layout'] === 'inline' ? 'show-inline ' : 'show';
-			if ( $field_settings['photo_value'] ) {
+			if ( isset( $field_settings['photo_value'] ) ) {
 				$class .= 'list_type_image';
 			}
 			?>
-			<div class="contactum-fields">
+			<div class="wcprafe-fields">
 				<div class="<?php echo esc_attr( $class ); ?>"
 				data-required="<?php echo esc_attr( $field_settings['required'] ); ?>" data-type="radio">
 				<?php
@@ -92,17 +92,17 @@ class Field_Checkbox extends Base_Field {
 			$this->get_default_option_dropdown_settings( $this->multiple ),
 			array(
 				'name'      => 'layout',
-				'title'     => __( 'Layout', 'contactum' ),
+				'title'     => __( 'Layout', 'product-addon-custom-field' ),
 				'type'      => 'select',
 				'options'   => array(
-					'default' => __( 'Default', 'contactum' ),
-					'inline'  => __( 'Inline', 'contactum' ),
+					'default' => __( 'Default', 'product-addon-custom-field' ),
+					'inline'  => __( 'Inline', 'product-addon-custom-field' ),
 				),
 				'default'   => 'default',
 				'inline'    => true,
 				'section'   => 'advanced',
 				'priority'  => 23,
-				'help_text' => __( 'Show this option in an inline list', 'contactum' ),
+				'help_text' => __( 'Show this option in an inline list', 'product-addon-custom-field' ),
 			),
 		);
 
@@ -161,7 +161,7 @@ class Field_Checkbox extends Base_Field {
 				$new_val[] = isset( $field['options'][ $option_key ] ) ? $field['options'][ $option_key ] : $option_key;
 			}
 
-			$entry_value = implode( CONTACTUM_SEPARATOR, $new_val );
+			$entry_value = implode( WCPRAEF_SEPARATOR, $new_val );
 		} else {
 			$entry_value = '';
 		}

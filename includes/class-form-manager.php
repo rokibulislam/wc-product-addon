@@ -2,8 +2,8 @@
 /**
  * Form Manager Template
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF;
@@ -14,7 +14,7 @@ use WP_Query;
 /**
  * FormManager class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class FormManager {
 
@@ -174,7 +174,7 @@ class FormManager {
 					$field_id = $field['id'];
 				}
 
-				$field_id = contactum_insert_form_field( $data['form_id'], $field, $field_id, $order );
+				$field_id = wcprafe_insert_form_field( $data['form_id'], $field, $field_id, $order );
 
 				$new_fields[] = $field_id;
 
@@ -194,7 +194,7 @@ class FormManager {
 
 		update_post_meta( $data['form_id'], 'notifications', $data['notifications'] );
 		update_post_meta( $data['form_id'], 'form_settings', $data['form_settings'] );
-		update_post_meta( $data['form_id'], 'contactum_version', CONTACTUM_VERSION );
+		update_post_meta( $data['form_id'], 'wcprafe_version', WCPRAEF_VERSION );
 
 		return $saved_fields;
 	}

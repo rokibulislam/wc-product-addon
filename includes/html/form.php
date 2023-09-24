@@ -2,9 +2,9 @@
 /**
  * Form View
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 ?>
-<div id="contactum-admin-app"></div>
+<div id="wcprafe-admin-app"></div>

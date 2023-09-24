@@ -2,8 +2,8 @@
 /**
  * Frontend Manager
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF;
@@ -11,7 +11,7 @@ namespace WCPRAEF;
 /**
  * Frontend class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class Frontend {
 
@@ -84,10 +84,10 @@ class Frontend {
 		global $post;
 
 		$id   = get_post_meta( $post->ID, 'custom_form', true );
-		$form = contactum()->forms->get( $id );
+		$form = wc_product_addon_extra_field()->forms->get( $id );
 
 		if ( ! $form->id ) {
-			return $this->show_error( __( 'The form couldn\'t be found.', 'wc-product-addon-custom-field' ) );
+			return $this->show_error( __( 'The form couldn\'t be found.', 'product-addon-custom-field' ) );
 		}
 
 		$this->render_form( $form );
@@ -102,14 +102,14 @@ class Frontend {
 	 * @return void
 	 */
 	private function render_form( $form, $atts = array() ) {
-		contactum()->assets->register_frontend();
-		contactum()->assets->enqueue_frontend();
+		wc_product_addon_extra_field()->assets->register_frontend();
+		wc_product_addon_extra_field()->assets->enqueue_frontend();
 
 		$form_fields   = $form->getFields();
 		$form_settings = $form->getSettings();
 		?>
-		<ul class="contactum-form form-label-<?php echo esc_attr( $form_settings['label_position'] ); ?>">
-			<?php contactum()->fields->render_fields( $form_fields, $form->id, $atts ); ?>
+		<ul class="wcprafe-form form-label-<?php echo esc_attr( $form_settings['label_position'] ); ?>">
+			<?php wc_product_addon_extra_field()->fields->render_fields( $form_fields, $form->id, $atts ); ?>
 			<li>
 				<input type="hidden" name="form_id" value="<?php echo esc_attr( $form->id ); ?>">
 			</li>

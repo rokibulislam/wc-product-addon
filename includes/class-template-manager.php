@@ -2,8 +2,8 @@
 /**
  * Template Manager
  *
- * @author Kamrul
- * @package MultiStoreX
+ * @author Rokibul
+ * @package WC_Product_Addon_Extra_Field
  */
 
 namespace WCPRAEF;
@@ -13,7 +13,7 @@ use WCPRAEF\Templates\Template_Blank;
 /**
  * TemplateManager class
  *
- * @package MultiStoreX
+ * @package WC_Product_Addon_Extra_Field
  */
 class TemplateManager {
 	/**
@@ -65,7 +65,7 @@ class TemplateManager {
             'blank' => new Template_Blank(),
         );
 
-		$this->templates = apply_filters( 'contactum_form_templates', $templates );
+		$this->templates = apply_filters( 'wcprafe_form_templates', $templates );
 	}
 
 	/**
@@ -74,10 +74,10 @@ class TemplateManager {
 	 * @return array
 	 */
 	public function get_field_groups() {
-		$before_custom_templates = apply_filters( 'contactum_form_templates_section_before', array() );
+		$before_custom_templates = apply_filters( 'wcprafe_form_templates_section_before', array() );
 		$groups                  = array_merge( $before_custom_templates, $this->get_custom_templates() );
 		$groups                  = array_merge( $groups, $this->get_others_templates() );
-		$after_custom_templates  = apply_filters( 'contactum_form_templates_section_after', array() );
+		$after_custom_templates  = apply_filters( 'wcprafe_form_templates_section_after', array() );
 		$groups                  = array_merge( $groups, $after_custom_templates );
 
 		return $groups;
@@ -95,7 +95,7 @@ class TemplateManager {
 			return;
 		}
 
-		$form_id = contactum()->forms->create( $template->get_title(), $template->get_form_fields() );
+		$form_id = wc_product_addon_extra_field()->forms->create( $template->get_title(), $template->get_form_fields() );
 
 		if ( is_wp_error( $form_id ) ) {
 			return $form_id;
