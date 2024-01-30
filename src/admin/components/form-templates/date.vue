@@ -1,5 +1,5 @@
 <template>
-  <div class="panel-field panel-field-date wcprafe-fields">
+  <div class="panel-field panel-field-date prafe-fields">
     <el-input
       type="date"
       :placeholder="field.format"

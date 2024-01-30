@@ -1,19 +1,1 @@
 
-FILE: /Users/rokibulislam/Sites/wpcontact/wp-content/plugins/woocommerce-product-addon/includes/class-process.php
--------------------------------------------------------------------------------------------------------------------------------------------
-FOUND 3 ERRORS AFFECTING 3 LINES
--------------------------------------------------------------------------------------------------------------------------------------------
- 36 | ERROR | Processing form data without nonce verification.
- 68 | ERROR | Processing form data without nonce verification.
- 82 | ERROR | The $text parameter must be a single text string literal. Found: 'Please fill in the required ' . $field['name'] . ' field.'
--------------------------------------------------------------------------------------------------------------------------------------------
-
-
-FILE: /Users/rokibulislam/Sites/wpcontact/wp-content/plugins/woocommerce-product-addon/includes/class-product-meta.php
-----------------------------------------------------------------------------------------------------------------------
-FOUND 1 ERROR AFFECTING 1 LINE
-----------------------------------------------------------------------------------------------------------------------
- 80 | ERROR | Processing form data without nonce verification.
-----------------------------------------------------------------------------------------------------------------------
-
-

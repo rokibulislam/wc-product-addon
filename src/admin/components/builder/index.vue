@@ -3,8 +3,8 @@
     <form
       method="post"
       action
-      id="wcprafe-form-builder"
-      class="wcprafe-form-builde"
+      id="prafe-form-builder"
+      class="prafe-form-builde"
       v-on:submit.prevent="save_form_builder"
     >
       <div class="builder-header">
@@ -17,9 +17,9 @@
           {{ post.post_title }}
         </span>
         
-        <div class="wcprafe-nav">
+        <div class="prafe-nav">
           <!-- nav-tab-wrapper  'nav-tab' -->
-          <ul class="wcprafe-tabs">
+          <ul class="prafe-tabs">
             <li>
               <a
                 href="#form-builder-container"
@@ -93,7 +93,7 @@
           <div class="builder-body">
             <section class="form-field">
               <ul
-                :class="[ 'wcprafe-form', 'sortable-list', 'form-label-' + settings.label_position]"
+                :class="[ 'prafe-form', 'sortable-list', 'form-label-' + settings.label_position]"
               >
                 <li
                   v-for="(field, index) in form_fields"
@@ -104,7 +104,7 @@
                   :data-index="index"
                   data-source="stage"
                 >
-                  <div class="wcprafe-label">
+                  <div class="prafe-label">
                     <label v-if="!is_full_width(field.template) && ( field.template != 'submit_field' && field.template != 'name_field' ) ">
                       {{ field.label }}
                       <span
@@ -338,13 +338,13 @@ export default {
         this.loading = true;
         var self = this;
         jQuery.post(
-            wcprafe.ajaxurl,
+            prafe.ajaxurl,
         {
-          action: "save_wcprafe_form",
-          form_data: jQuery("#wcprafe-form-builder").serialize(),
+          action: "save_prafe_form",
+          form_data: jQuery("#prafe-form-builder").serialize(),
           form_fields: JSON.stringify(this.form_fields),
           settings: JSON.stringify(this.settings),
-          form_builder_nonce: wcprafe.nonce,
+          form_builder_nonce: prafe.nonce,
         },
         (response, textStatus, xhr) => {
             this.loading = false;
@@ -401,7 +401,7 @@ export default {
   mounted: function () {
     var self = this;
     // bind jquery ui sortable
-    jQuery(".form-preview-stage .wcprafe-form.sortable-list").sortable({
+    jQuery(".form-preview-stage .prafe-form.sortable-list").sortable({
       placeholder: "form-preview-stage-dropzone",
       items: ".field-items",
       handle: ".control-button .move",
@@ -460,10 +460,10 @@ $button-text-secondary-color: #545454;
         margin-bottom: 5px;
         background: $background-color;
         padding: 5px;
-        .wcprafe-nav {
+        .prafe-nav {
             display: flex;
             flex: 1;
-            .wcprafe-tabs {
+            .prafe-tabs {
                 flex: 1;
                 display: flex;
                 gap: 15px;
@@ -564,7 +564,7 @@ $button-text-secondary-color: #545454;
   padding: 10px;
 }
 
-form#wcprafe-form-builder {
+form#prafe-form-builder {
   width: 100%;
 }
 
@@ -636,29 +636,29 @@ form#wcprafe-form-builder {
       cursor: pointer;
     }
 }
-.wcprafe-fields {
+.prafe-fields {
     margin-bottom: 10px;
 }
 
-ul.wcprafe-form  {
+ul.prafe-form  {
     
     border: 1px dashed #cfcfcf;
     min-height: 70px;
     // margin: 0 10px;
     margin-left: 0px;
 
-    li.field-size-small .wcprafe-fields {
+    li.field-size-small .prafe-fields {
         width: 30%;
     }
-    li.field-size-medium .wcprafe-fields {
+    li.field-size-medium .prafe-fields {
         width: 65%;
     }
-    li.field-size-large .wcprafe-fields {
+    li.field-size-large .prafe-fields {
         width: 100%;
     }
 
     li.name {
-        .wcprafe-fields {
+        .prafe-fields {
             display: flex;
             justify-content: space-between;
             div {
@@ -668,13 +668,13 @@ ul.wcprafe-form  {
     }
 }
 
-ul.wcprafe-form.form-label-above li .wcprafe-label {
+ul.prafe-form.form-label-above li .prafe-label {
   display: block;
   width: 100%;
   margin-bottom: 10px;
 }
 
-ul.wcprafe-form.form-label-hidden li .wcprafe-label {
+ul.prafe-form.form-label-hidden li .prafe-label {
   display: none;
 }
 
@@ -714,21 +714,21 @@ ul.wcprafe-form.form-label-hidden li .wcprafe-label {
   color: #fff;
 }
 
-ul.wcprafe-form.form-label-left li,
-ul.wcprafe-form.form-label-right li {
+ul.prafe-form.form-label-left li,
+ul.prafe-form.form-label-right li {
   display: flex;
   justify-content: space-between;
 }
 
-ul.wcprafe-form.form-label-left li div.wcprafe-label,
-ul.wcprafe-form.form-label-right li div.wcprafe-label {
+ul.prafe-form.form-label-left li div.prafe-label,
+ul.prafe-form.form-label-right li div.prafe-label {
   flex-basis: 20%;
 }
 
-ul.wcprafe-form.form-label-right {
+ul.prafe-form.form-label-right {
     li {
         flex-direction: row-reverse;
-        div.wcprafe-fields {
+        div.prafe-fields {
             flex-basis: 75%;
         }
     }

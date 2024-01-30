@@ -1,5 +1,5 @@
 <template>
-  <div class="wcprafe-fields">
+  <div class="prafe-fields">
     <el-select :class="class_names('select')" disabled :style="{  'width': '100%' }">
       <el-option
         v-for="(option, key) in field.options"

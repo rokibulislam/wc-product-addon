@@ -1,5 +1,5 @@
 <template>
-  <div class="wcprafe-fields">
+  <div class="prafe-fields">
     <ul :class="['inline' === field.layout ? 'show-inline' : '']">
       <li v-for="option in field.options">
         <!-- <el-radio :label="option.value" :checked="is_selected(option.value)"> {{ option.label }} </el-radio> -->

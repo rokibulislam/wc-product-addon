@@ -1,6 +1,6 @@
 <template>
     <div v-if="hasvalidate(field)">
-      <label class="wcprafe-label">{{ field.title }}</label>
+      <label class="prafe-label">{{ field.title }}</label>
       <ul class="list-inline">
         <li v-for="(option, key) in field.options">
           <label>
@@ -9,7 +9,7 @@
         </li>
       </ul>
       <div v-if=" value === 'yes' "> 
-        <label class="wcprafe-label"> Error Message: </label>
+        <label class="prafe-label"> Error Message: </label>
         <el-input v-model="editfield.message"></el-input>
       </div>
     </div>

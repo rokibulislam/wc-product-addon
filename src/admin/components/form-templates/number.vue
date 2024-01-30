@@ -1,5 +1,5 @@
 <template>
-  <div class="wcprafe-fields">
+  <div class="prafe-fields">
     <el-input
       type="number"
       :placeholder="field.placeholder"

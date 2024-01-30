@@ -1,6 +1,6 @@
 <template>
   <div class="panel-field">
-    <label class="wcprafe-label">
+    <label class="prafe-label">
       {{ field.title }}
       <!-- <input type="text" v-model="value" @focusout="onfocusout" @keyup="onkeyup" /> -->
     </label>

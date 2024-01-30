@@ -29,7 +29,7 @@
     <rule ref="WordPress.WP.I18n">
         <properties>
             <!-- Value: replace the text domain used. -->
-            <property name="text-domain" type="array" value="wcprafe"/>
+            <property name="text-domain" type="array" value="prafe"/>
         </properties>
     </rule>
 </ruleset>

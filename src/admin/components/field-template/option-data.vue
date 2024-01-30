@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <label class="wcprafe-label">{{ field.name }}</label>
+      <label class="prafe-label">{{ field.name }}</label>
       <ul class="field-option-actions">
         <li>
           <el-checkbox v-model="editfield.show_value" :label="show_value"> {{ "Show values" }} </el-checkbox>

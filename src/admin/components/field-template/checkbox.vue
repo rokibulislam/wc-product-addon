@@ -1,6 +1,6 @@
 <template>
   <div class="panel-field">
-    <label class="wcprafe-label">{{ field.title }}</label>
+    <label class="prafe-label">{{ field.title }}</label>
     <ul>
       <li v-for="(option, key) in field.options">
           <el-checkbox v-model="value" :label="key"> {{ option }} </el-checkbox>

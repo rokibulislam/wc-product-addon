@@ -1,5 +1,5 @@
 <template>
-  <div class="wcprafe-fields">
+  <div class="prafe-fields">
       <a class="btn-image" href="#">
         <template v-if="field.button_label === ''">{{ 'Select Image' }}</template>
         <template v-else>{{ field.button_label }}</template>

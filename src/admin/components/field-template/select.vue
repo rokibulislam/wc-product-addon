@@ -1,6 +1,6 @@
 <template>
   <div class="panel-field-opt panel-field-opt-select">
-    <label class="wcprafe-label"> {{ field.title }} </label>
+    <label class="prafe-label"> {{ field.title }} </label>
     <el-select v-model="value" :style="{width: '100%'}">
       <el-option
         v-for="(option, key) in field.options"

@@ -1,24 +1,24 @@
 <template>
   <div class="panel-field">
-    <label class="wcprafe-label">Conditional Logic</label>
+    <label class="prafe-label">Conditional Logic</label>
 
     <ul class="list-inline">
       <li>
         <label>
-          <el-radio :label="1" v-model="wcprafe_cond.condition_status"> Yes </el-radio>
-          <!-- <input type="radio" value="yes" v-model="wcprafe_cond.condition_status" /> Yes -->
+          <el-radio :label="1" v-model="prafe_cond.condition_status"> Yes </el-radio>
+          <!-- <input type="radio" value="yes" v-model="prafe_cond.condition_status" /> Yes -->
         </label>
       </li>
 
       <li>
         <label>
-          <el-radio :label="0" v-model="wcprafe_cond.condition_status"> No </el-radio>
-          <!-- <input type="radio" value="no" v-model="wcprafe_cond.condition_status" /> No -->
+          <el-radio :label="0" v-model="prafe_cond.condition_status"> No </el-radio>
+          <!-- <input type="radio" value="no" v-model="prafe_cond.condition_status" /> No -->
         </label>
       </li>
     </ul>
 
-    <div v-if=" '1' == wcprafe_cond.condition_status">
+    <div v-if=" '1' == prafe_cond.condition_status">
       <ul>
         <li v-for="(condition, index) in conditions" class="conditional">
           <div class="conditional-field">
@@ -72,12 +72,12 @@
         </li>
       </ul>
         <p> Show this field if these rules are met
-            <!-- <select v-model="wcprafe_cond.cond_logic">
+            <!-- <select v-model="prafe_cond.cond_logic">
                 <option value="any"> any </option>
                 <option value="all"> all</option>
             </select> -->
               
-          <el-select v-model="wcprafe_cond.cond_logic" placeholder="Select" size="small">
+          <el-select v-model="prafe_cond.cond_logic" placeholder="Select" size="small">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -117,12 +117,12 @@ export default {
     };
   },
   computed: {
-    wcprafe_cond: function () {
-        return this.editfield.wcprafe_cond;
+    prafe_cond: function () {
+        return this.editfield.prafe_cond;
     },
 
     condition_supported_field: function() {
-        return window.wcprafe.wcprafe_cond_supported_fields;
+        return window.prafe.prafe_cond_supported_fields;
     },
 
     dependencies: function() {
@@ -134,14 +134,14 @@ export default {
 
   },
   created: function() {
-    let wcprafe_cond = { ...this.editfield.wcprafe_cond };
+    let prafe_cond = { ...this.editfield.prafe_cond };
 
-    for (var i = 0; i < wcprafe_cond.cond_field.length; i++) {
-        if (wcprafe_cond.cond_field[i] && wcprafe_cond.cond_operator[i]) {
+    for (var i = 0; i < prafe_cond.cond_field.length; i++) {
+        if (prafe_cond.cond_field[i] && prafe_cond.cond_operator[i]) {
             this.conditions.push({
-                name: wcprafe_cond.cond_field[i],
-                operator: wcprafe_cond.cond_operator[i],
-                option: wcprafe_cond.cond_option[i]
+                name: prafe_cond.cond_field[i],
+                operator: prafe_cond.cond_operator[i],
+                option: prafe_cond.cond_option[i]
             });
         }
     }
@@ -185,28 +185,28 @@ export default {
         conditions: {
             deep: true,
             handler: function (new_conditions) {
-                let new_wcprafe_cond = { ...this.wcprafe_cond };
-                if ( !this.wcprafe_cond ) {
-                    new_wcprafe_cond.condition_status = 'no';
-                    new_wcprafe_cond.cond_logic = 'all';
+                let new_prafe_cond = { ...this.prafe_cond };
+                if ( !this.prafe_cond ) {
+                    new_prafe_cond.condition_status = 'no';
+                    new_prafe_cond.cond_logic = 'all';
                 }
 
-                new_wcprafe_cond.cond_field       = [];
-                new_wcprafe_cond.cond_operator    = [];
-                new_wcprafe_cond.cond_option      = [];
+                new_prafe_cond.cond_field       = [];
+                new_prafe_cond.cond_operator    = [];
+                new_prafe_cond.cond_option      = [];
 
                 let i = 0;
 
                 for (i = 0; i < new_conditions.length; i++) {
-                    new_wcprafe_cond.cond_field.push(new_conditions[i].name);
-                    new_wcprafe_cond.cond_operator.push(new_conditions[i].operator);
-                    new_wcprafe_cond.cond_option.push(new_conditions[i].option);
+                    new_prafe_cond.cond_field.push(new_conditions[i].name);
+                    new_prafe_cond.cond_operator.push(new_conditions[i].operator);
+                    new_prafe_cond.cond_option.push(new_conditions[i].option);
                 }
 
                 this.$store.dispatch("update_editing_form_field", {
                   id: this.editfield.id,
-                  property: 'wcprafe_cond',
-                  value: new_wcprafe_cond
+                  property: 'prafe_cond',
+                  value: new_prafe_cond
                 });
             }
         }

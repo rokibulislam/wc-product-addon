@@ -1,6 +1,6 @@
 <template>
   <div v-if="hasvalidate(field)">
-    <label class="wcprafe-label">{{ field.title }} required </label>
+    <label class="prafe-label">{{ field.title }} required </label>
     <!-- {{ field }} -->
     <ul class="list-inline">
       <li v-for="(option, key) in field.options">

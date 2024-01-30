@@ -27,11 +27,11 @@ function is_element_in_viewport (el) {
 
 const store = new Vuex.Store({
 	state: {
-		field_settings: window.wcprafe.field_settings,
-		panel_sections: window.wcprafe.panel_sections,
-		form_fields: window.wcprafe.form_fields,
-		post: window.wcprafe.post,
-        settings: window.wcprafe.settings,
+		field_settings: window.prafe.field_settings,
+		panel_sections: window.prafe.panel_sections,
+		form_fields: window.prafe.form_fields,
+		post: window.prafe.post,
+        settings: window.prafe.settings,
 		current_panel: 'form_fields',
 		editfield: 0
 	},
@@ -212,7 +212,7 @@ const store = new Vuex.Store({
             }
             // bring newly added element into viewport
             Vue.nextTick(function () {
-                var el = jQuery('.form-preview-stage .wcprafe-form .field-items').eq( index );
+                var el = jQuery('.form-preview-stage .prafe-form .field-items').eq( index );
                 if (el && !is_element_in_viewport(el.get(0))) {
                     jQuery('.form-preview-stage section').scrollTo(el, 800, {offset: -200});
                 }

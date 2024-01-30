@@ -54,7 +54,7 @@ Vue.mixin({
 
 /* eslint-disable no-new */
 new Vue({
-	el: '#wcprafe-admin-app',
+	el: '#prafe-admin-app',
 	store,
 	render: (h) => h(builder)
 });

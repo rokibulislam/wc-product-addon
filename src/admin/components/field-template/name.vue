@@ -5,23 +5,23 @@
         <i class="fa fa-caret-down panel-right" @click="toggleNameFieldInputs"></i>
 
         <div class="name-option__settings">
-          <div class="wcprafe-label">
-            <label class="wcprafe-label">{{ 'First Name Label' }}</label>
+          <div class="prafe-label">
+            <label class="prafe-label">{{ 'First Name Label' }}</label>
             <el-input v-model="editfield.first_name.label"/>
           </div>
 
-          <div class="panel-field-first_name wcprafe-label">
-            <label class="wcprafe-label">{{ 'First Name Placeholder' }}</label>
+          <div class="panel-field-first_name prafe-label">
+            <label class="prafe-label">{{ 'First Name Placeholder' }}</label>
             <el-input v-model="editfield.first_name.placeholder" />
           </div>
           
-          <div class="wcprafe-label">
-            <label class="wcprafe-label">{{ 'First Name Default Value' }}</label>
+          <div class="prafe-label">
+            <label class="prafe-label">{{ 'First Name Default Value' }}</label>
             <el-input v-model="editfield.first_name.default" />
           </div>
 
-          <div class="wcprafe-label">
-            <label class="wcprafe-label">{{ 'Required' }}</label>
+          <div class="prafe-label">
+            <label class="prafe-label">{{ 'Required' }}</label>
             <el-radio-group v-model="editfield.first_name.required">
               <el-radio :label="true" > Yes </el-radio> 
               <el-radio :label="false"> No </el-radio>
@@ -29,7 +29,7 @@
           </div>
 
           <div v-if=" editfield.first_name.required == true "> 
-            <label class="wcprafe-label"> Error Message: </label>
+            <label class="prafe-label"> Error Message: </label>
             <el-input v-model="editfield.first_name.message"></el-input>
           </div>
 
@@ -42,23 +42,23 @@
 
         <div class="name-option__settings">
 
-            <div class="wcprafe-label">
-                <label class="wcprafe-label">{{ 'Middle Name Label' }}</label>
+            <div class="prafe-label">
+                <label class="prafe-label">{{ 'Middle Name Label' }}</label>
                 <el-input v-model="editfield.middle_name.label"/>
             </div>
 
-            <div class="panel-field-middle_name wcprafe-label">
-                <label class="wcprafe-label">{{ 'Middle Name Placeholder' }}</label>
+            <div class="panel-field-middle_name prafe-label">
+                <label class="prafe-label">{{ 'Middle Name Placeholder' }}</label>
                 <el-input v-model="editfield.middle_name.placeholder"/>
             </div>
 
-            <div class="wcprafe-label">
-              <label class="wcprafe-label">{{ 'Middle Name Default Value' }}</label>
+            <div class="prafe-label">
+              <label class="prafe-label">{{ 'Middle Name Default Value' }}</label>
               <el-input v-model="editfield.middle_name.default"/>
             </div>
         
-          <div class="wcprafe-label">
-            <label class="wcprafe-label">{{ 'Required' }}</label>
+          <div class="prafe-label">
+            <label class="prafe-label">{{ 'Required' }}</label>
             <el-radio-group v-model="editfield.middle_name.required">
               <el-radio :label="true" > Yes </el-radio> 
               <el-radio :label="false"> No </el-radio>
@@ -66,7 +66,7 @@
           </div>
 
           <div v-if=" editfield.middle_name.required == true "> 
-            <label class="wcprafe-label"> Error Message: </label>
+            <label class="prafe-label"> Error Message: </label>
             <el-input v-model="editfield.middle_name.message"></el-input>
           </div>
 
@@ -80,25 +80,25 @@
 
           <div class="name-option__settings">
 
-              <div class="wcprafe-label">
-                  <label class="wcprafe-label">{{ 'Last Name Label' }}</label>
+              <div class="prafe-label">
+                  <label class="prafe-label">{{ 'Last Name Label' }}</label>
                   <el-input v-model="editfield.last_name.label"/>
               </div>
 
-              <div class="panel-field-last_name wcprafe-label">
-                  <label class="wcprafe-label">{{ 'Last Name Placeholder' }}</label>
+              <div class="panel-field-last_name prafe-label">
+                  <label class="prafe-label">{{ 'Last Name Placeholder' }}</label>
                   <el-input type="text" v-model="editfield.last_name.placeholder"/>
               </div>
 
-              <div class="wcprafe-label">
-                <label class="wcprafe-label">{{ 'Last Name Default Value' }}</label>
+              <div class="prafe-label">
+                <label class="prafe-label">{{ 'Last Name Default Value' }}</label>
                 <!-- <input type="text" v-model="editfield.last_name.default"/> -->
                 <el-input type="text" v-model="editfield.last_name.default"/>
                 <!-- <merge_tags filter="no_fields" @insert="insertValue" :field="{name: 'last_name', type: 'default'}" /> -->
               </div>
 
-              <div class="wcprafe-label">
-                <label class="wcprafe-label">{{ 'Required' }}</label>
+              <div class="prafe-label">
+                <label class="prafe-label">{{ 'Required' }}</label>
                 <el-radio-group v-model="editfield.last_name.required">
                   <el-radio :label="true" > Yes </el-radio> 
                   <el-radio :label="false"> No </el-radio>
@@ -106,7 +106,7 @@
               </div>
 
               <div v-if=" editfield.last_name.required == true "> 
-                <label class="wcprafe-label"> Error Message: </label>
+                <label class="prafe-label"> Error Message: </label>
                 <el-input v-model="editfield.last_name.message"></el-input>
               </div>
   

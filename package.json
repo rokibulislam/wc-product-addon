@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack --watch --progress",
-    "dev-build": "webpack -d --mode development",
+    "dev-build": "webpack --mode=development",
     "build": "webpack --mode production"
   },
   "dependencies": {
